@@ -8,14 +8,11 @@ const Hero = (props) => {
  
 
   return (
-    <div className="relative h-dvh w-screen overflow-x-hidden min-h-screen">
+    <div className="flex h-[100vh] w-full relative">
         <div>
                        
-        <h1 className="special-font hero-heading absolute bottom-5">
-        FUTURE
-        </h1>
-
-        <div className="absolute left-0 top-0 z-40 size-full">
+        
+        <div className="size-full">
           <div className="mt-24 px-5 sm:px-10">
             <h1 className="h1_hero special-font hero-heading text-blue-100">
               DORD<b></b>OI
@@ -37,9 +34,13 @@ const Hero = (props) => {
 
     
       <div>
-        <video autoPlay loop muted  className="absolute left-0 top-0 size-full object-cover object-center">
+        <video autoPlay loop muted  className=" w-[50vw] object-cover object-center rounded-3xl">
           <source src={props.src} type="video/mp4"/>
         </video>
+        <h1 className="special-font hero-heading absolute bottom-5">
+        FUTURE
+        </h1>
+
       </div>
     </div>
   );
