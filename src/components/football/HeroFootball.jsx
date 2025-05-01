@@ -6,8 +6,9 @@ const Hero = (props) => {
  
 
   return (
+    <>
     <div className="flex h-[80vh] w-full justify-around ">
-        
+      
         
               <div className="mt-24 px-5 sm:px-10">
                 <h1 className="h1_hero special-font hero-heading text-blue-100 drop-shadow-md">
@@ -38,6 +39,7 @@ const Hero = (props) => {
 
           </div>
     </div>
+    </>
   );
 };
 

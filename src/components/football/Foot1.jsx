@@ -200,11 +200,7 @@ const MatchesPage = () => {
       </div>
 
       {/* Футер */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p>© {new Date().getFullYear()} Дордой FC. Все права защищены.</p>
-        </div>
-      </footer>
+     
     </div>
   );
 };
