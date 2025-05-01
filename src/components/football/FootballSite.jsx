@@ -1,58 +1,14 @@
 import React, { useState } from 'react';
+import logo from './assets/logo.png';
 import { motion } from 'framer-motion';
+import { newsData } from './ const';// Импорт данных новостей
+import { categories } from './ const';
 import { FaSearch, FaCalendarAlt, FaArrowRight, FaFilter, FaTimes, FaStar } from 'react-icons/fa';
 
 // Данные новостей
-const newsData = [
-  {
-    id: 1,
-    title: "Дордой FC разгромил соперника 4:0 в товарищеском матче",
-    date: "15 СЕН 2024",
-    category: "Матчи",
-    excerpt: "Хет-трик Азиза Исмаилова принес команде уверенную победу. Главный тренер доволен подготовкой к сезону.",
-    image: "https://scontent.ffru6-1.fna.fbcdn.net/v/t39.30808-6/488005836_1107666661382318_1528436289875417196_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=T9ofIpCP1yIQ7kNvwFsOKiB&_nc_oc=AdmsMmTYwls7QKmoNj79dvzjJjN2IPLJ7qwQYUdNTx2eVHEitXS_AK1JPjN72E4mgSk&_nc_zt=23&_nc_ht=scontent.ffru6-1.fna&_nc_gid=CW8XNzKYfsxN6FLYsJwYig&oh=00_AfFZF8HLWoG4442lqDu12_P_MKhTE3LFPHamxBP2RMdS0Q&oe=680A8B43",
-    featured: true
-  },
-  {
-    id: 2,
-    title: "Новый защитник подписал контракт на 2 года",
-    date: "12 СЕН 2024",
-    category: "Трансферы",
-    excerpt: "Бразилец Лукас Силва усилил оборонительную линию. Подробности сделки и первые слова игрока.",
-    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
-    featured: false
-  },
-  {
-    id: 3,
-    title: "Реконструкция стадиона завершена",
-    date: "8 СЕН 2024",
-    category: "Инфраструктура",
-    excerpt: "Вместимость арены увеличилась на 1500 мест. Установлены новые LED-экраны и комфортабельные сиденья.",
-    image: "https://images.unsplash.com/photo-1471295253337-3ceaaedca402?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
-    featured: true
-  },
-  {
-    id: 4,
-    title: "Молодежка выиграла турнир в Алматы",
-    date: "5 СЕН 2024",
-    category: "Академия",
-    excerpt: "Юные футболисты одержали 5 побед в 5 матчах. Лучшим игроком признан 17-летний полузащитник.",
-    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
-    featured: false
-  },
-  {
-    id: 5,
-    title: "Капитан команды получил вызов в сборную",
-    date: "3 СЕН 2024",
-    category: "Матчи",
-    excerpt: "Официальное заявление тренерского штаба национальной команды. Игрок пропустит два матча чемпионата.",
-    image: "https://images.unsplash.com/photo-1543357480-c60d400e7ef6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
-    featured: false
-  }
-];
+
 
 // Категории для фильтра
-const categories = ["Все", "Матчи", "Трансферы", "Академия", "Инфраструктура"];
 
 const NewsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -70,23 +26,24 @@ const NewsPage = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Шапка */}
-      <header className="bg-blue-900 text-white shadow-lg">
-        <div className="container mx-auto px-4 py-8 text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
+      <header className="bg-blue-900 text-white shadow-lg h-[13vh] flex items-center " >
+         
+        <div className="flex flex-col items-center justify-center w-full">
+          
+             
+          {/* <img src={logo} alt="Logo" className="h-16 "/> */}
+          <h1 
             className="text-3xl md:text-4xl font-bold mb-2"
           >
             Новости Дордой FC
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
+          </h1>
+          <p
             className="text-blue-200"
           >
             Будьте в курсе всех событий клуба
-          </motion.p>
+          </p>
+
+          
         </div>
       </header>
 

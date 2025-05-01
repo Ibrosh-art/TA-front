@@ -1,12 +1,12 @@
 import { TiLocationArrow } from "react-icons/ti";
 import React from 'react';
-import Button from "./Button";
+import Button from "../Button";
 
 const Hero = (props) => {
  
 
   return (
-    <div className="flex h-[100vh] w-full justify-around ">
+    <div className="flex h-[80vh] w-full justify-around ">
         
         
               <div className="mt-24 px-5 sm:px-10">
@@ -29,7 +29,7 @@ const Hero = (props) => {
 
     
           <div className="flex mt-20">
-            <video autoPlay loop muted  className="border-blue-500 border w-[55vw] object-cover object-center h-[60%] rounded-3xl">
+            <video autoPlay loop muted  className="border-blue-500 border w-[55vw] object-cover object-center h-[80%] rounded-3xl">
               <source src={props.src} type="video/mp4"/>
             </video>
             {/* <h1 className="special-font hero-heading drop-shadow-md">

@@ -1,70 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { matchesData } from './ const'; // Импорт данных матчей  
 import { FaCalendarAlt, FaTicketAlt, FaChevronDown, FaChevronUp, FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 
 // Данные матчей
-const matchesData = [
-  {
-    id: 1,
-    date: "15 СЕН 2024",
-    time: "18:00",
-    homeTeam: "Дордой FC",
-    awayTeam: "Абдыш-Ата",
-    competition: "Премьер-Лига",
-    venue: "Стадион Дордой",
-    ticketAvailable: true,
-    homeScore: null,
-    awayScore: null
-  },
-  {
-    id: 2,
-    date: "22 СЕН 2024",
-    time: "17:30",
-    homeTeam: "Дордой FC",
-    awayTeam: "Алга",
-    competition: "Кубок Кыргызстана",
-    venue: "Стадион Дордой",
-    ticketAvailable: true,
-    homeScore: null,
-    awayScore: null
-  },
-  {
-    id: 3,
-    date: "29 СЕН 2024",
-    time: "19:00",
-    homeTeam: "Нефтчи",
-    awayTeam: "Дордой FC",
-    competition: "Премьер-Лига",
-    venue: "Стадион Нефтчи",
-    ticketAvailable: false,
-    homeScore: null,
-    awayScore: null
-  },
-  {
-    id: 4,
-    date: "5 ОКТ 2024",
-    time: "16:00",
-    homeTeam: "Дордой FC",
-    awayTeam: "Алай",
-    competition: "Премьер-Лига",
-    venue: "Стадион Дордой",
-    ticketAvailable: true,
-    homeScore: null,
-    awayScore: null
-  },
-  {
-    id: 5,
-    date: "12 ОКТ 2024",
-    time: "15:00",
-    homeTeam: "Алга",
-    awayTeam: "Дордой FC",
-    competition: "Премьер-Лига",
-    venue: "Стадион Алга",
-    ticketAvailable: false,
-    homeScore: null,
-    awayScore: null
-  }
-];
+
 
 // Турниры для фильтрации
 const competitions = ["Все", "Премьер-Лига", "Кубок Кыргызстана", "Дружеские матчи"];
