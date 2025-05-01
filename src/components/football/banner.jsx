@@ -19,29 +19,28 @@ const Banner = () => {
 
   const currentSlide = banner[currentIndex];
 return (
-    <>
-            <div className='w-full h-[80vh] flex flex-col'>
-                    <div className='w-full h-[20vh] flex items-center bg-blue-600 justify-center gap-10 '>
-                            <h1 className='text-5xl font-bold text-white italic'>FC Dordoi </h1>
-                            <img src={logo} className='w-20' alt="" />
-                    </div>
+  <>
+    <div className="w-full h-[80vh] flex flex-col">
+      <div className="w-full h-[20vh] flex items-center bg-blue-600 justify-center gap-10">
+        <h1 className="text-5xl font-bold text-white italic">FC Dordoi</h1>
+        <img src={logo} className="w-20" alt="FC Dordoi Logo" />
+      </div>
 
-
-                    <div className='background w-full h-[80vh] flex items-center justify-between bg-black'
-                    ststyle={{ backgroundImage: `url(${currentSlide.image})` }}
-                    >
-
-                            <div className='h-[50vh] w-[2vw] bg-yellow-500 items-center justify-center flex'>
-                                
-                            </div>
-                            <i><p className='text-white'>{currentSlide.title}</p></i>
-                            <div className='h-[50vh] w-[2vw] bg-blue-600 items-center justify-center flex'>
-                             <TfiShiftRightAlt/>
-                            </div>
-                    </div>
-            </div>
-    </>
-)
+      <div
+        className="background w-full h-[80vh] flex items-center justify-between bg-black"
+        style={{ backgroundImage: `url(${currentSlide.image})` }}
+      >
+        <div className="h-[50vh] w-[2vw] bg-yellow-500 flex items-center justify-center"></div>
+        <i>
+          <p className="text-white">{currentSlide.title}</p>
+        </i>
+        <div className="h-[50vh] w-[2vw] bg-blue-600 flex items-center justify-center">
+          <TfiShiftRightAlt />
+        </div>
+      </div>
+    </div>
+  </>
+);
 }
 
 export default Banner
