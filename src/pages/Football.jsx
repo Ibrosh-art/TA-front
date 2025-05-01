@@ -1,13 +1,13 @@
 import React from 'react';
-import Hero from '../components/Hero';
-import Foot from '../components/FootballSite';
-import Foot1 from '../components/Foot1';
+import Foot from '../components/football/FootballSite';
+import Foot1 from '../components/football/Foot1';
+import HeroFootball from '../components/football/HeroFootball';
 
 const Football = () => {
   const video = '/videos/hero-3.mp4';
   return (
     <div>
-      <Hero src={video} />
+      <HeroFootball src={video} />
       <Foot />
       <Foot1 />
     </div>

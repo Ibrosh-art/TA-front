@@ -5,12 +5,6 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.news-title {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 15px;
-}
-
 .news-list {
     list-style-type: none;
     padding: 0;
