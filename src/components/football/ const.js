@@ -1,3 +1,5 @@
+import { title } from "framer-motion/client";
+
 export const matchesData = [
   {
     id: 1,
@@ -118,4 +120,30 @@ export const newsData = [
   }
 ];
 
+const competitions = ["Все", "Премьер-Лига", "Кубок Кыргызстана", "Дружеские матчи"];
+
 export const categories = ["Все", "Матчи", "Трансферы", "Академия", "Инфраструктура"];
+
+
+
+
+
+
+//banner 
+
+export const banner = [
+  {"photo": "hello world",
+    "title": "hello world",
+  },
+  
+  {"photo": "hello world",
+    "title": "salam",
+  },
+  
+  {"photo": "hello world",
+    "title": "aleykum",
+  },
+
+]
+
+

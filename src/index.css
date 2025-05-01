@@ -374,6 +374,7 @@ div::-webkit-scrollbar {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     color: rgb(223 223 240 / var(--tw-text-opacity));
 }
+
 .nav_text:hover{
 color: rgb(223, 223, 223);
 }.nav_text:active{

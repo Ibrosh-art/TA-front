@@ -40,7 +40,7 @@ const NewsPage = () => {
           <p
             className="text-blue-200"
           >
-            Будьте в курсе всех событий клуба
+            
           </p>
 
           
