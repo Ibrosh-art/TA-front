@@ -122,7 +122,7 @@ export const newsData = [
 
 const competitions = ["Все", "Премьер-Лига", "Кубок Кыргызстана", "Дружеские матчи"];
 
-export const categories = ["Все", "Матчи", "Трансферы", "Академия", "Инфраструктура"];
+
 
 
 
@@ -132,18 +132,33 @@ export const categories = ["Все", "Матчи", "Трансферы", "Ака
 //banner 
 
 export const banner = [
-  {"photo": "hello world",
+  {"image": "https://cdn.inflact.com/media/494775668_18405490759099823_2879945219797116414_n.jpg?url=https%3A%2F%2Fscontent.cdninstagram.com%2Fv%2Ft51.2885-15%2F494775668_18405490759099823_2879945219797116414_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh0.08_tt6%26_nc_ht%3Dscontent-del2-1.cdninstagram.com%26_nc_cat%3D111%26_nc_oc%3DQ6cZ2QGrFf4YcbW2o0K3f4cjO_7ENBx7TvuhRcBPlaLV51W7Iahb17bNByQDCU5cgNRtkaA%26_nc_ohc%3DF2FCmTldUKEQ7kNvwGMST8H%26_nc_gid%3DpgwYq9Spkx6xcUIQKGUbMg%26edm%3DANTKIIoBAAAA%26ccb%3D7-5%26oh%3D00_AfF1f41UOnSBFWfdLFZeiW-2SdLJP7E1d1XtHCOwzHf6_A%26oe%3D681E5FC4%26_nc_sid%3Dd885a2&time=1746435600&key=3236e45aba03184a13bb492526174d8b",
     "title": "hello world",
   },
   
-  {"photo": "hello world",
+  {"image": "https://cdn.inflact.com/media/494465574_18405477730099823_7771965464729150666_n.jpg?url=https%3A%2F%2Fscontent.cdninstagram.com%2Fv%2Ft51.2885-15%2F494465574_18405477730099823_7771965464729150666_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh0.08_tt6%26_nc_ht%3Dinstagram.fsgn24-2.fna.fbcdn.net%26_nc_cat%3D111%26_nc_oc%3DQ6cZ2QGTwgaMlaVL6TSc9yablO9L0cKDxbjw7p0ZJT15FQjzIzsPLJco4dq_O5eyDdHuIRw%26_nc_ohc%3DV4d3Km6L6kkQ7kNvwGXh3kw%26_nc_gid%3D--EUTenA6vah4BfRvZLVLQ%26edm%3DAOQ1c0wBAAAA%26ccb%3D7-5%26ig_cache_key%3DMzYyNDMxNzYzNDQ1OTM2ODUyNg%253D%253D.3-ccb7-5%26oh%3D00_AfGFpwo_eSO6lY_Xi0oDF3gjL-xTkA7G_8mf5skTT20lYg%26oe%3D681E546B%26_nc_sid%3D8b3546&time=1746435600&key=a7c9771fffce275c4c7a91d69ab854d0",
     "title": "salam",
   },
   
-  {"photo": "hello world",
+  {"image": "https://cdn.inflact.com/media/494793992_18405428674099823_166118805402991316_n.jpg?url=https%3A%2F%2Fscontent.cdninstagram.com%2Fv%2Ft51.2885-15%2F494793992_18405428674099823_166118805402991316_n.jpg%3Fstp%3Ddst-jpg_e35_p1080x1080_sh0.08_tt6%26_nc_ht%3Dinstagram.fsgn24-2.fna.fbcdn.net%26_nc_cat%3D111%26_nc_oc%3DQ6cZ2QGTwgaMlaVL6TSc9yablO9L0cKDxbjw7p0ZJT15FQjzIzsPLJco4dq_O5eyDdHuIRw%26_nc_ohc%3DGj5bLCzRcHYQ7kNvwEBTO2a%26_nc_gid%3D--EUTenA6vah4BfRvZLVLQ%26edm%3DAOQ1c0wBAAAA%26ccb%3D7-5%26ig_cache_key%3DMzYyNDA1ODIzNDc1MDU4MzUyNQ%253D%253D.3-ccb7-5%26oh%3D00_AfHu4OFOiH4Dz730iPR3ZwTkWZ7Iu7Rp6netSwyaiUcbkg%26oe%3D681E76D9%26_nc_sid%3D8b3546&time=1746435600&key=d68ba9e17717912f6994992486dd3fc9",
     "title": "aleykum",
   },
 
-]
+] 
+
+
+export const storyCategories = ["Все", "История клуба", "Легенды", "Стадион", "Фанаты", "Достижения", "Сообщество"];
+
+export const storiesData = [
+  {
+    id: 1,
+    title: "Основание FC Dordoi: История начинается",
+    excerpt: "В 1997 году был основан футбольный клуб Дордой, который стал одним из самых успешных в Кыргызстане.",
+    image: "https://via.placeholder.com/800x600?text=FC+Dordoi+Foundation",
+    category: "История клуба",
+    date: "1 января 2023"
+  },
+  // Add more stories...
+];
 
 

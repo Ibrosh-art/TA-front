@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { matchesData } from './ const'; // Импорт данных матчей  
+import { matchesData } from './const'; // Импорт данных матчей  
 import { FaCalendarAlt, FaTicketAlt, FaChevronDown, FaChevronUp, FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 
 // Данные матчей
