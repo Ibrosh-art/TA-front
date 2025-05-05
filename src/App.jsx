@@ -1,72 +1,311 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import Football from "./pages/Football";
 import Home from "./pages/Home";
 import University from "./pages/University";
 import Plaza from "./pages/Plaza";
-import '../src/components/Nav.css'
+import '../src/components/Nav.css';
+import NotFound from "./NotFound";
+
+
+const Navbar = () => {
+  const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    { path: "/", name: "Home", icon: "🏠" },
+    { path: "/football", name: "Football", icon: "⚽" },
+    { path: "/university", name: "University", icon: "🎓" },
+    { path: "/plaza", name: "Plaza", icon: "🛍️" }
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <motion.header 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-200/50' 
+          : 'bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-100/30'
+      }`}
+    >
+      <div className="container mx-auto flex justify-between items-center py-3 px-6">
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Link to="/" className="flex items-center">
+            <motion.img
+              src="/img/logo.png"
+              alt="logo"
+              className="w-12 h-12 rounded-full bg-black"
+              whileHover={{ rotate: 15 }}
+              transition={{ type: "spring" }}
+            />
+            <span className="ml-3 text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+              Dordoi
+            </span>
+          </Link>
+        </motion.div>
+        <nav className="hidden md:flex items-center space-x-1">
+          {navItems.map((item, index) => (
+            <motion.div
+              key={item.path}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 + 0.3 }}
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link 
+                to={item.path} 
+                className="relative px-5 py-3 font-medium flex items-center group"
+              >
+                <span className="mr-2 text-lg">{item.icon}</span>
+                <span className={`transition-colors ${
+                  location.pathname === item.path 
+                    ? 'text-blue-600 font-semibold' 
+                    : 'text-gray-600 hover:text-blue-500'
+                }`}>
+                  {item.name}
+                </span>
+                
+                {location.pathname === item.path && (
+                  <motion.div
+                    layoutId="navIndicator"
+                    className="absolute bottom-0 left-0 w-full h-1 bg-blue-600 rounded-full"
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+              </Link>
+            </motion.div>
+          ))}
+        </nav>
+
+        <motion.button 
+          className="md:hidden p-2 rounded-lg bg-gray-100 relative z-50"
+          whileHover={{ backgroundColor: "#E5E7EB" }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </motion.button>
+
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-white/95 backdrop-blur-lg pt-20 px-6 z-40 md:hidden"
+            >
+              <div className="flex flex-col space-y-4">
+                {navItems.map((item) => (
+                  <motion.div
+                    key={item.path}
+                    initial={{ x: 50, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ type: "spring" }}
+                  >
+                    <Link 
+                      to={item.path} 
+                      className="flex items-center py-4 px-6 text-xl rounded-lg transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <span className="mr-4 text-2xl">{item.icon}</span>
+                      <span className={`font-medium ${
+                        location.pathname === item.path 
+                          ? 'text-blue-600' 
+                          : 'text-gray-700'
+                      }`}>
+                        {item.name}
+                      </span>
+                      {location.pathname === item.path && (
+                        <motion.div
+                          layoutId="mobileNavIndicator"
+                          className="ml-auto w-2 h-2 bg-blue-600 rounded-full"
+                        />
+                      )}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.header>
+  );
+};
 
 function App() {
-  
   return (
     <main className="overflow-x-hidden min-h-screen relative">
       {/* Animated Background */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        {/* Large Circles */}
-        <div className="absolute top-20 left-20 w-64 h-64 bg-blue-900 rounded-full opacity-20 mix-blend-multiply animate-[float_15s_ease-in-out_infinite]"></div>
-        <div className="absolute bottom-20 right-20 w-72 h-72 bg-blue-900 rounded-full opacity-20 mix-blend-multiply animate-[float_18s_ease-in-out_infinite_reverse]"></div>
+      {/* Professional Dordoi Background */}
+<div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none bg-gradient-to-br from-gray-50 to-gray-100">
+  {/* Abstract Building Silhouettes */}
+  <div className="absolute bottom-0 left-0 right-0 h-1/3">
+    {/* University Building */}
+    <motion.div 
+      className="absolute left-5% bottom-0 w-20 h-2/3 bg-gradient-to-t from-blue-800 to-blue-600 opacity-10"
+      initial={{ height: 0 }}
+      animate={{ height: "60%" }}
+      transition={{ duration: 1.5, delay: 0.3 }}
+    />
+    
+    {/* Shopping Center */}
+    <motion.div 
+      className="absolute left-30% bottom-0 w-25 h-3/4 bg-gradient-to-t from-amber-700 to-amber-600 opacity-10"
+      initial={{ height: 0 }}
+      animate={{ height: "75%" }}
+      transition={{ duration: 1.5, delay: 0.5 }}
+    />
+    
+    {/* Stadium */}
+    <motion.div 
+      className="absolute left-55% bottom-0 w-30 h-1/2 rounded-t-full bg-gradient-to-t from-emerald-700 to-emerald-600 opacity-10"
+      initial={{ height: 0 }}
+      animate={{ height: "50%" }}
+      transition={{ duration: 1.5, delay: 0.7 }}
+    />
+    
+    {/* Market */}
+    <motion.div 
+      className="absolute left-80% bottom-0 w-25 h-4/5 bg-gradient-to-t from-red-700 to-red-600 opacity-10"
+      initial={{ height: 0 }}
+      animate={{ height: "80%" }}
+      transition={{ duration: 1.5, delay: 0.9 }}
+    />
+  </div>
 
-        {/* Medium Circles */}
-        <div className="absolute top-1/3 right-40 w-48 h-48 bg-blue-900 rounded-full opacity-25 mix-blend-multiply animate-[float_12s_ease-in-out_infinite]"></div>
-        <div className="absolute bottom-1/4 left-40 w-52 h-52 bg-yellow-900 rounded-full opacity-25 mix-blend-multiply animate-[float_14s_ease-in-out_infinite_reverse]"></div>
+  {/* Floating Activity Icons */}
+  {[
+    { icon: "🎓", color: "text-blue-600", size: "text-3xl", delay: 0.2 }, // University
+    { icon: "🛒", color: "text-amber-600", size: "text-4xl", delay: 0.4 }, // Plaza
+    { icon: "⚽", color: "text-emerald-600", size: "text-5xl", delay: 0.6 }, // Football
+    { icon: "🏪", color: "text-red-600", size: "text-3xl", delay: 0.8 }, // Market
+    { icon: "📚", color: "text-blue-500", size: "text-2xl", delay: 1.0 },
+    { icon: "👔", color: "text-gray-600", size: "text-3xl", delay: 1.2 }, // Business
+  ].map((item, i) => (
+    <motion.div
+      key={i}
+      className={`absolute ${item.color} ${item.size} opacity-30`}
+      style={{
+        left: `${15 + (i * 12)}%`,
+        top: `${20 + (i * 10)}%`,
+      }}
+      animate={{
+        y: [0, -20, 0],
+        rotate: [0, 10, -10, 0]
+      }}
+      transition={{
+        duration: 8 + i,
+        delay: item.delay,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "easeInOut"
+      }}
+    >
+      {item.icon}
+    </motion.div>
+  ))}
 
-        {/* Small Circles */}
-        <div className="absolute top-1/5 right-1/4 w-24 h-24 bg-blue-900 rounded-full opacity-30 mix-blend-multiply animate-[float_8s_ease-in-out_infinite]"></div>
-        <div className="absolute bottom-1/5 left-1/4 w-28 h-28 bg-blue-900 rounded-full opacity-30 mix-blend-multiply animate-[float_10s_ease-in-out_infinite_reverse]"></div>
+  {/* Subtle Grid */}
+  <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
-        {/* Abstract Shapes */}
-        <div className="absolute top-2/3 left-1/5 w-40 h-40 bg-blue-900 opacity-20 mix-blend-multiply animate-[float_11s_ease-in-out_infinite] rounded-[40%]"></div>
-        <div className="absolute top-1/4 right-1/5 w-36 h-36 bg-blue-900 opacity-20 mix-blend-multiply animate-[float_13s_ease-in-out_infinite_reverse] rounded-[30%]"></div>
+  {/* Pulsing Business Dots */}
+  {[...Array(30)].map((_, i) => {
+    const size = Math.random() * 6 + 2;
+    const duration = Math.random() * 5 + 3;
+    const delay = Math.random() * 2;
+    const xPos = Math.random() * 100;
+    const yPos = Math.random() * 100;
+    const colors = ["bg-blue-400", "bg-amber-400", "bg-emerald-400", "bg-red-400"];
+    const color = colors[i % colors.length];
+    
+    return (
+      <motion.div
+        key={i}
+        className={`absolute rounded-full ${color} opacity-30`}
+        style={{
+          width: `${size}px`,
+          height: `${size}px`,
+          left: `${xPos}%`,
+          top: `${yPos}%`,
+        }}
+        animate={{
+          scale: [1, 1.5, 1],
+          opacity: [0.3, 0.7, 0.3]
+        }}
+        transition={{
+          duration: duration,
+          delay: delay,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+    );
+  })}
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-blue-50 to-yellow-50"></div>
-      </div>
+  {/* Connection Lines (Animated) */}
+  <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+    {[...Array(8)].map((_, i) => {
+      const x1 = 10 + (i * 10);
+      const y1 = 30 + (i * 5);
+      const x2 = 50 + (i * 5);
+      const y2 = 70 - (i * 5);
+      
+      return (
+        <motion.line
+          key={i}
+          x1={`${x1}%`}
+          y1={`${y1}%`}
+          x2={`${x2}%`}
+          y2={`${y2}%`}
+          stroke="rgba(59, 130, 246, 0.1)"
+          strokeWidth="1"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{
+            duration: 2,
+            delay: i * 0.2,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut"
+          }}
+        />
+      );
+    })}
+  </svg>
+</div>
 
       <Router>
-        {/* Header */}
-        <header className="bg-white shadow-md fixed top-0 left-0 w-full z-50">
-          <div className="container mx-auto flex justify-between items-center py-4 px-6">
-            <Link to="/" className="flex items-center">
-              <img
-                src="/img/logo.png"
-                alt="logo"
-                className="w-12 h-12 rounded-full bg-black"
-              />
-              <span className="ml-3 text-xl font-bold text-gray-800">Dordoi</span>
-            </Link>
-            <nav className="flex space-x-6">
-              <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium">
-                Home
-              </Link>
-              <Link to="/football" className="text-gray-700 hover:text-blue-600 font-medium">
-                Football
-              </Link>
-              <Link to="/university" className="text-gray-700 hover:text-blue-600 font-medium">
-                University
-              </Link>
-              <Link to="/plaza" className="text-gray-700 hover:text-blue-600 font-medium">
-                Plaza
-              </Link>
-            </nav>
-          </div>
-        </header>
-
+        <Navbar />
+        
         {/* Hero Section */}
-        <div className="pt-20">
+        <div className="pt-24">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/university" element={<University />} />
             <Route path="/football" element={<Football />} />
             <Route path="/plaza" element={<Plaza />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Router>
