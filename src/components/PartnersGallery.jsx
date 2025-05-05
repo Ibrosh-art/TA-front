@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './PartnersGallery.css';
 import { FiExternalLink, FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import photo from '../../../dordoiSigma/public/img/partner.png'
 const PartnersGallery = () => {
   const [activeCard, setActiveCard] = useState(null);
   const [expanded, setExpanded] = useState(false);
