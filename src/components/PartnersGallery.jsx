@@ -7,7 +7,6 @@ const TeachersPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredTeacher, setHoveredTeacher] = useState(null);
 
-  // Данные преподавателей
   const departments = {
     it: {
       icon: <FaLaptopCode className="text-blue-500" />,
@@ -77,13 +76,11 @@ const TeachersPage = () => {
     }
   };
 
-  // Фильтрация
   const filteredTeachers = departments[activeDept].teachers.filter(teacher => 
     teacher.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     teacher.subject.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Анимация переключения кафедр
   const variants = {
     enter: { opacity: 0, y: 20 },
     center: { opacity: 1, y: 0 },
@@ -92,9 +89,7 @@ const TeachersPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Контент */}
       <div className="relative z-10">
-        {/* Шапка */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -109,10 +104,8 @@ const TeachersPage = () => {
           </p>
         </motion.div>
 
-        {/* Фильтры */}
         <div className="container mx-auto px-6 mb-12">
           <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-            {/* Поиск */}
             <motion.div
               whileHover={{ scale: 1.02 }}
               className="relative w-full md:w-96"
@@ -127,7 +120,6 @@ const TeachersPage = () => {
               <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
             </motion.div>
 
-            {/* Кафедры */}
             <div className="flex flex-wrap gap-2 justify-center">
               {Object.keys(departments).map((key) => (
                 <motion.button
@@ -145,7 +137,6 @@ const TeachersPage = () => {
           </div>
         </div>
 
-        {/* Список преподавателей */}
         <div className="container mx-auto px-6 pb-20">
           <AnimatePresence mode="wait">
             <motion.div
@@ -166,7 +157,6 @@ const TeachersPage = () => {
                   className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all"
                 >
                   <div className="relative h-48 bg-gradient-to-r from-blue-500 to-purple-600">
-                    {/* Анимированный фон */}
                     {hoveredTeacher === teacher.id && (
                       <motion.div 
                         initial={{ opacity: 0 }}
@@ -199,8 +189,6 @@ const TeachersPage = () => {
                         {teacher.exp} опыта
                       </span>
                     </div>
-                    
-                    {/* Достижения */}
                     <div className="mt-4">
                       <h4 className="font-semibold text-gray-500 text-sm mb-2">Ключевые достижения:</h4>
                       <ul className="space-y-2">
@@ -230,7 +218,6 @@ const TeachersPage = () => {
           )}
         </div>
 
-        {/* CTA секция (без кнопки записи) */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

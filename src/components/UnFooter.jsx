@@ -29,7 +29,6 @@ const UniversityFooter = () => {
 
   return (
     <footer className="bg-white text-gray-800 border-t border-blue-100 relative overflow-hidden">
-      {/* Анимированные элементы фона */}
       <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 0.05 }}
@@ -63,7 +62,6 @@ const UniversityFooter = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          {/* Лого и описание */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -80,7 +78,6 @@ const UniversityFooter = () => {
               Лидер современного образования в Кыргызстане. Международные стандарты, инновационные подходы.
             </p>
             
-            {/* Социальные сети с анимацией */}
             <div className="flex space-x-4 pt-2">
               {socialLinks.map((social, index) => (
                 <motion.a
@@ -97,7 +94,6 @@ const UniversityFooter = () => {
             </div>
           </motion.div>
 
-          {/* Быстрые ссылки */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -120,7 +116,6 @@ const UniversityFooter = () => {
             </ul>
           </motion.div>
 
-          {/* Контакты */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +138,6 @@ const UniversityFooter = () => {
             </ul>
           </motion.div>
 
-          {/* Подписка на рассылку */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -173,7 +167,6 @@ const UniversityFooter = () => {
           </motion.div>
         </div>
 
-        {/* Нижняя часть футера */}
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -191,7 +184,6 @@ const UniversityFooter = () => {
         </motion.div>
       </div>
 
-      {/* Анимированный элемент внизу */}
       <motion.div 
         animate={{
           backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']

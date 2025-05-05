@@ -6,7 +6,6 @@ const DynamicNewsPage = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   
-  // Главные новости для карусели
   const featuredNews = [
     {
       id: 1,
@@ -31,7 +30,6 @@ const DynamicNewsPage = () => {
     }
   ];
 
-  // Все новости для правой части
   const allNews = [
     {
       id: 4,
@@ -59,7 +57,6 @@ const DynamicNewsPage = () => {
     }
   ];
 
-  // Автопереключение карусели
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % featuredNews.length);
@@ -67,7 +64,6 @@ const DynamicNewsPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Фильтрация новостей
   const filteredNews = allNews.filter(news =>
     news.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     news.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
@@ -75,7 +71,6 @@ const DynamicNewsPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Шапка */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-12">
         <div className="container mx-auto px-6">
           <motion.h1 
@@ -97,7 +92,6 @@ const DynamicNewsPage = () => {
         </div>
       </div>
 
-      {/* Поиск */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -118,10 +112,8 @@ const DynamicNewsPage = () => {
         </div>
       </motion.div>
 
-      {/* Основной контент */}
       <div className="container mx-auto px-6 py-12">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Левая часть - Карусель главных новостей */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -163,7 +155,6 @@ const DynamicNewsPage = () => {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Навигация карусели */}
               <div className="absolute bottom-8 right-8 flex gap-2">
                 {featuredNews.map((_, index) => (
                   <button
@@ -174,7 +165,6 @@ const DynamicNewsPage = () => {
                 ))}
               </div>
 
-              {/* Кнопки переключения */}
               <button 
                 onClick={() => setActiveSlide((prev) => (prev - 1 + featuredNews.length) % featuredNews.length)}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 text-white p-3 rounded-full hover:bg-black/50 transition-colors"
@@ -190,7 +180,6 @@ const DynamicNewsPage = () => {
             </div>
           </motion.div>
 
-          {/* Правая часть - Список новостей */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -238,7 +227,6 @@ const DynamicNewsPage = () => {
         </div>
       </div>
 
-      {/* Подписка на новости */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

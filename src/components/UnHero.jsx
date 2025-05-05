@@ -3,16 +3,13 @@ import { useEffect, useState, useRef } from "react";
 import { FaCode, FaBriefcase, FaGraduationCap, FaCalendarAlt, FaArrowRight, FaShieldAlt, FaRocket } from "react-icons/fa";
 
 const UltimateHero = () => {
-  // 1. Параллакс-эффект от мыши
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-100, 100], [5, -5]);
   const rotateY = useTransform(x, [-100, 100], [-5, 5]);
 
-  // 2. Глитч-эффект
   const [glitch, setGlitch] = useState(false);
   
-  // 3. Анимация статистики
   const stats = [
     { icon: <FaBriefcase className="text-yellow-400" />, value: 98, label: "Получи опыт", suffix: "%" },
     { icon: <FaGraduationCap className="text-blue-400" />, value: 12, label: "Направлений", suffix: "+" },
@@ -21,26 +18,21 @@ const UltimateHero = () => {
   const [activeStat, setActiveStat] = useState(0);
   const statControls = useAnimation();
 
-  // 4. Эффект печатающегося текста
   const title = "Salymbekov University";
   const [displayedTitle, setDisplayedTitle] = useState("");
 
-  // Инициализация анимаций
   useEffect(() => {
-    // Параллакс
     const handleMouseMove = (e) => {
       x.set(e.clientX - window.innerWidth / 2);
       y.set(e.clientY - window.innerHeight / 2);
     };
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Глитч
     const glitchInterval = setInterval(() => {
       setGlitch(true);
       setTimeout(() => setGlitch(false), 200);
     }, 5000);
 
-    // Печатающийся текст
     let i = 0;
     const typing = setInterval(() => {
       if (i < title.length) {
@@ -51,7 +43,6 @@ const UltimateHero = () => {
       }
     }, 100);
 
-    // Статистика
     const statInterval = setInterval(() => {
       statControls.start({
         opacity: 0,
@@ -77,7 +68,6 @@ const UltimateHero = () => {
 
   return (
     <div className="relative h-screen bg-black overflow-hidden">
-      {/* Взрывной градиентный фон */}
       <motion.div 
         className="absolute inset-0"
         animate={{
@@ -94,7 +84,6 @@ const UltimateHero = () => {
         }}
       />
 
-      {/* Бинарный дождь */}
       {[...Array(30)].map((_, i) => (
         <motion.div
           key={i}
@@ -117,7 +106,6 @@ const UltimateHero = () => {
         </motion.div>
       ))}
 
-      {/* Парящие иконки направлений */}
       {[
         { icon: <FaCode className="text-purple-400" size={36} />, name: "IT" },
         { icon: <FaShieldAlt className="text-emerald-400" size={36} />, name: "Безопасность" },
@@ -148,12 +136,10 @@ const UltimateHero = () => {
         </motion.div>
       ))}
 
-      {/* Главный контент с параллаксом */}
       <motion.div 
         className="h-full flex flex-col justify-center items-center relative z-10 px-4"
         style={{ rotateX, rotateY }}
       >
-        {/* Заголовок с глитчем */}
         <motion.div className="relative">
           <motion.h1
             className="text-5xl md:text-8xl font-extrabold text-center mb-8"
@@ -192,7 +178,6 @@ const UltimateHero = () => {
           )}
         </motion.div>
 
-        {/* Подзаголовок */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -202,7 +187,6 @@ const UltimateHero = () => {
           Лидер в подготовке специалистов цифровой эпохи
         </motion.p>
 
-        {/* Анимированная статистика */}
         <div className="relative h-24 w-full max-w-lg mb-12">
           <AnimatePresence mode="wait">
             <motion.div
@@ -227,7 +211,6 @@ const UltimateHero = () => {
           </AnimatePresence>
         </div>
 
-        {/* Взрывные кнопки */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -254,7 +237,6 @@ const UltimateHero = () => {
       </motion.div>
 
       
-      {/* Анимированные волны */}
       <div className="absolute bottom-0 w-full">
         <svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
           <motion.path

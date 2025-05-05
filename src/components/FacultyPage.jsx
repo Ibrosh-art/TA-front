@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { FaGraduationCap, FaLaptopCode, FaChartLine, FaFlask, FaUserGraduate, FaGlobe } from "react-icons/fa";
 
 const ProgramsPage = () => {
-  // Направления обучения
   const programs = [
     {
       icon: <FaLaptopCode className="text-blue-500" size={32} />,
@@ -39,7 +38,6 @@ const ProgramsPage = () => {
     }
   ];
 
-  // Преимущества
   const benefits = [
     {
       icon: <FaUserGraduate className="text-yellow-400" size={24} />,
@@ -60,7 +58,6 @@ const ProgramsPage = () => {
 
   return (
     <div className="bg-gray-50">
-      {/* Герой-секция */}
       <div className="relative bg-gradient-to-r from-blue-900 to-gray-900 text-white overflow-hidden">
         <div className="container mx-auto px-6 py-24 relative z-10">
           <motion.h1 
@@ -81,7 +78,6 @@ const ProgramsPage = () => {
           </motion.p>
         </div>
         
-        {/* Анимированные элементы фона */}
         {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
@@ -106,7 +102,6 @@ const ProgramsPage = () => {
         ))}
       </div>
 
-      {/* Секция направлений */}
       <div className="container mx-auto px-6 py-20 -mt-20 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-[10px]">
           {programs.map((program, index) => (
@@ -144,7 +139,6 @@ const ProgramsPage = () => {
         </div>
       </div>
 
-      {/* Секция преимуществ */}
       <div className="bg-gray-100 py-20">
         <div className="container mx-auto px-6">
           <motion.h2
@@ -180,7 +174,6 @@ const ProgramsPage = () => {
         </div>
       </div>
 
-      {/* Секция отзывов */}
       <div className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
