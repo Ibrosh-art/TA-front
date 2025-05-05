@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import logo from './assets/logo.png';
 import { motion } from 'framer-motion';
-import { newsData } from './ const';// Импорт данных новостей
-import { categories } from './ const';
+import { newsData } from './const';// Импорт данных новостей
 import { FaSearch, FaCalendarAlt, FaArrowRight, FaFilter, FaTimes, FaStar } from 'react-icons/fa';
 
 // Данные новостей
 
 
 // Категории для фильтра
+export const categories = ["Все", "Матчи", "Трансферы", "Академия", "Инфраструктура"];
 
 const NewsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");

@@ -1,129 +1,224 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Facebook, Twitter, Instagram, Youtube, Linkedin, MapPin, Phone, Mail, ChevronRight } from 'lucide-react';
 
 const Footer = () => {
+    const [email, setEmail] = useState('');
+    const currentYear = new Date().getFullYear();
+    
+    const handleSubscribe = (e) => {
+        e.preventDefault();
+        // Handle subscription logic here
+        alert(`Спасибо за подписку: ${email}`);
+        setEmail('');
+    };
+
     return (
-        <div>
-            <div className="mb-12"></div>
-            <div className="relative bg-gray-900 text-white py-12">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-bold mb-4">Будьте в курсе событий!</h2>
-                    <p className="text-gray-400 mb-6">
-                        Подпишитесь на наши обновления и следите за новостями клуба.
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4 mt-8">
-                        {/* Соцсети */}
-                        <a
-                            href="https://facebook.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-4 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 hover:scale-105 hover:shadow-lg transition transform text-center"
-                        >
-                            <i className="fab fa-facebook-f text-2xl"></i>
-                            <p className="mt-2">Facebook</p>
-                        </a>
-                        <a
-                            href="https://twitter.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-4 rounded-lg bg-gradient-to-r from-blue-400 to-blue-600 hover:scale-105 hover:shadow-lg transition transform text-center"
-                        >
-                            <i className="fab fa-twitter text-2xl"></i>
-                            <p className="mt-2">Twitter</p>
-                        </a>
-                        <a
-                            href="https://instagram.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-4 rounded-lg bg-gradient-to-r from-pink-500 to-pink-700 hover:scale-105 hover:shadow-lg transition transform text-center"
-                        >
-                            <i className="fab fa-instagram text-2xl"></i>
-                            <p className="mt-2">Instagram</p>
-                        </a>
-                        <a
-                            href="https://youtube.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-4 rounded-lg bg-gradient-to-r from-red-500 to-red-700 hover:scale-105 hover:shadow-lg transition transform text-center"
-                        >
-                            <i className="fab fa-youtube text-2xl"></i>
-                            <p className="mt-2">YouTube</p>
-                        </a>
-                        <a
-                            href="https://linkedin.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-4 rounded-lg bg-gradient-to-r from-blue-600 to-blue-800 hover:scale-105 hover:shadow-lg transition transform text-center"
-                        >
-                            <i className="fab fa-linkedin-in text-2xl"></i>
-                            <p className="mt-2">LinkedIn</p>
-                        </a>
+        <div className="footer-wrapper">
+            {/* Pre-footer newsletter & social section */}
+            <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-12">
+                <div className="container mx-auto px-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        {/* Newsletter subscription */}
+                        <div className="space-y-4">
+                            <h2 className="text-3xl font-bold">Будьте в курсе событий!</h2>
+                            <p className="text-gray-300">
+                                Подпишитесь на наши обновления и следите за новостями клуба.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-2">
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Ваш email"
+                                    className="flex-grow p-3 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <button
+                                    onClick={handleSubscribe}
+                                    className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-md font-semibold transition-colors duration-200"
+                                >
+                                    Подписаться
+                                </button>
+                            </div>
+                        </div>
+                        
+                        {/* Social media links */}
+                        <div>
+                            <h3 className="text-xl font-semibold mb-4">Соцсети</h3>
+                            <div className="flex flex-wrap gap-4">
+                                <a
+                                    href="#"
+                                    className="bg-blue-700 hover:bg-blue-800 p-3 rounded-full transition-all duration-200 hover:scale-110"
+                                    aria-label="Facebook"
+                                >
+                                    <Facebook size={24} />
+                                </a>
+                                <a
+                                    href="#"
+                                    className="bg-blue-500 hover:bg-blue-600 p-3 rounded-full transition-all duration-200 hover:scale-110"
+                                    aria-label="Twitter"
+                                >
+                                    <Twitter size={24} />
+                                </a>
+                                <a
+                                    href="#"
+                                    className="bg-pink-600 hover:bg-pink-700 p-3 rounded-full transition-all duration-200 hover:scale-110"
+                                    aria-label="Instagram"
+                                >
+                                    <Instagram size={24} />
+                                </a>
+                                <a
+                                    href="#"
+                                    className="bg-red-600 hover:bg-red-700 p-3 rounded-full transition-all duration-200 hover:scale-110"
+                                    aria-label="YouTube"
+                                >
+                                    <Youtube size={24} />
+                                </a>
+                                <a
+                                    href="#"
+                                    className="bg-blue-800 hover:bg-blue-900 p-3 rounded-full transition-all duration-200 hover:scale-110"
+                                    aria-label="LinkedIn"
+                                >
+                                    <Linkedin size={24} />
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <footer className="bg-gray-900 text-white py-8">
-                <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* Навигация */}
-                    <div>
-                        <h3 className="text-lg font-semibold mb-4">Навигация</h3>
-                        <ul className="space-y-2">
-                            <li>
-                                <a href="/about" className="hover:underline">
-                                    О клубе
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/team" className="hover:underline">
-                                    Команда
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/schedule" className="hover:underline">
-                                    Расписание
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/contact" className="hover:underline">
-                                    Контакты
-                                </a>
-                            </li>
-                        </ul>
+            
+            {/* Main footer */}
+            <footer className="bg-gray-900 text-white">
+                <div className="container mx-auto px-4 py-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {/* Club Info */}
+                        <div className="space-y-4">
+                            <div className="mb-4">
+                                <img 
+                                    src="/api/placeholder/120/120" 
+                                    alt="FC Dordoi Logo" 
+                                    className="h-16 w-auto" 
+                                />
+                            </div>
+                            <p className="text-gray-400">
+                                ФК «Дордой» — один из ведущих футбольных клубов Кыргызстана,
+                                многократный чемпион страны и обладатель кубка.
+                            </p>
+                        </div>
+                        
+                        {/* Quick Links */}
+                        <div>
+                            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-700">О клубе</h3>
+                            <ul className="space-y-3">
+                                <li>
+                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                        <ChevronRight size={16} className="mr-2" />
+                                        <span>История</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                        <ChevronRight size={16} className="mr-2" />
+                                        <span>Команда</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                        <ChevronRight size={16} className="mr-2" />
+                                        <span>Расписание матчей</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                        <ChevronRight size={16} className="mr-2" />
+                                        <span>Новости</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                        <ChevronRight size={16} className="mr-2" />
+                                        <span>Стадион</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        {/* Fan Zone */}
+                        <div>
+                            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-700">Болельщикам</h3>
+                            <ul className="space-y-3">
+                                <li>
+                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                        <ChevronRight size={16} className="mr-2" />
+                                        <span>Билеты</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                        <ChevronRight size={16} className="mr-2" />
+                                        <span>Фан-шоп</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                        <ChevronRight size={16} className="mr-2" />
+                                        <span>Членство</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                        <ChevronRight size={16} className="mr-2" />
+                                        <span>Фотогалерея</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        {/* Contact Info */}
+                        <div>
+                            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-700">Контакты</h3>
+                            <ul className="space-y-4">
+                                <li className="flex items-start">
+                                    <MapPin size={20} className="mr-3 text-blue-500 flex-shrink-0 mt-1" />
+                                    <span className="text-gray-400">г. Бишкек, ул. Спортивная, 123</span>
+                                </li>
+                                <li className="flex items-center">
+                                    <Phone size={20} className="mr-3 text-blue-500 flex-shrink-0" />
+                                    <span className="text-gray-400">+996 (312) 123-456</span>
+                                </li>
+                                <li className="flex items-center">
+                                    <Mail size={20} className="mr-3 text-blue-500 flex-shrink-0" />
+                                    <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+                                        info@fcdordoi.kg
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-
-                    {/* Контакты */}
-                    <div>
-                        <h3 className="text-lg font-semibold mb-4">Контакты</h3>
-                        <p>г. Бишкек, ул. Спортивная, 123</p>
-                        <p>Телефон: +996 (312) 123-456</p>
-                        <p>Email: info@fcdordoi.kg</p>
-                    </div>
-
-                    {/* Подписка */}
-                    <div>
-                        <h3 className="text-lg font-semibold mb-4">Подписка на новости</h3>
-                        <p className="mb-4">
-                            Подпишитесь на нашу рассылку, чтобы получать последние новости и обновления.
-                        </p>
-                        <form>
-                            <input
-                                type="email"
-                                placeholder="Ваш email"
-                                className="w-full p-2 rounded mb-2 text-gray-900"
-                            />
-                            <button
-                                type="submit"
-                                className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
-                            >
-                                Подписаться
-                            </button>
-                        </form>
-                    </div>
+                    
+                    {/* Sponsors Section */}
+                    
                 </div>
-                <div className="text-center mt-8">
-                    <p>© {new Date().getFullYear()} Дордой FC. Все права защищены.</p>
+                
+                {/* Copyright Bar */}
+                <div className="bg-gray-950 py-4">
+                    <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                        <div>© {currentYear} ФК «Дордой». Все права защищены.</div>
+                        <div className="flex mt-4 md:mt-0 space-x-4">
+                            <a href="#" className="hover:text-white transition-colors duration-200">
+                                Политика конфиденциальности
+                            </a>
+                            <a href="#" className="hover:text-white transition-colors duration-200">
+                                Условия использования
+                            </a>
+                            <a href="#" className="hover:text-white transition-colors duration-200">
+                                Политика cookies
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </footer>
         </div>
-    )
-}
+    );
+};
 
-export default Footer
+export default Footer;

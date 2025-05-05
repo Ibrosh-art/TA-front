@@ -33,10 +33,7 @@ const Hero = (props) => {
             <video autoPlay loop muted  className="border-blue-500 border w-[55vw] object-cover object-center h-[80%] rounded-3xl">
               <source src={props.src} type="video/mp4"/>
             </video>
-            {/* <h1 className="special-font hero-heading drop-shadow-md">
-            FUTURE
-            </h1> */}
-
+            
           </div>
     </div>
     </>
