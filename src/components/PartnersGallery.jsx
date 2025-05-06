@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { FaChalkboardTeacher, FaSearch, FaGraduationCap, FaFlask, FaLaptopCode } from 'react-icons/fa';
+=======
+import React, { useState } from 'react';
+import './PartnersGallery.css';
+import { FiExternalLink, FiChevronDown, FiChevronUp } from 'react-icons/fi';
+const PartnersGallery = () => {
+  const [activeCard, setActiveCard] = useState(null);
+  const [expanded, setExpanded] = useState(false);
+>>>>>>> footballpageAdilhan
 
 const TeachersPage = () => {
   const [activeDept, setActiveDept] = useState('it');

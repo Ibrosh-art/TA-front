@@ -106,6 +106,7 @@ const Navbar = () => {
         </motion.button>
 
         <AnimatePresence>
+<<<<<<< HEAD
           {mobileMenuOpen && (
             <motion.div 
               initial={{ opacity: 0, y: -20 }}
@@ -148,6 +149,97 @@ const Navbar = () => {
             </motion.div>
           )}
         </AnimatePresence>
+=======
+  {mobileMenuOpen && (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-50 md:hidden"
+    >
+      {/* Темный полупрозрачный фон */}
+      <div className="absolute inset-0 bg-gray-900/90 backdrop-blur-sm" />
+      
+      {/* Контейнер меню с прокруткой */}
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: -20, opacity: 0 }}
+        transition={{ type: "spring", damping: 20 }}
+        className="relative h-full w-full flex flex-col"
+      >
+        {/* Шапка меню */}
+        <div className="flex justify-between items-center pt-6 pl-6 pr-6 pb-2 ">
+          <div className="flex items-center">
+            <img 
+              src="/img/logo.png" 
+              alt="Dordoi Logo"
+              className="w-10 h-10 mr-3 rounded-full"
+            />
+            <span className="text-xl font-bold bg-gradient-to-r from-white to-white/100  bg-clip-text text-transparent">Dordoi</span>
+          </div>
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="p-2 text-gray-300 hover:text-white transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Основное содержимое с прокруткой */}
+        <div className="flex-1 bg-gray-800 p-2 pb-4 pt-3 px-6">
+          <div className="space-y-2">
+            {navItems.map((item, index) => (
+              <motion.div
+                key={item.path}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ 
+                  opacity: 1, 
+                  x: 0,
+                  transition: { 
+                    delay: 0.1 + index * 0.05,
+                    type: "spring", 
+                    stiffness: 300
+                  }
+                }}
+              >
+                <Link 
+                  to={item.path}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`
+                    flex items-center py-3 px-4 rounded-lg
+                    text-lg font-medium transition-all
+                    ${location.pathname === item.path
+                      ? 'bg-blue-600/90 text-white shadow-md '
+                      : 'bg-gray-800/85 text-gray-200 hover:bg-gray-700/70 border-2 border-white'
+                    }
+                  `}
+                >
+                  <span className="mr-3 text-xl">{item.icon}</span>
+                  <span className="flex-1">{item.name}</span>
+                  {location.pathname === item.path && (
+                    <motion.span
+                      layoutId="mobileNavIndicator"
+                      className="w-2 h-2 bg-white rounded-full"
+                    />
+                  )}
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+         
+        </div>
+
+        
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+>>>>>>> footballpageAdilhan
       </div>
     </motion.header>
   );
