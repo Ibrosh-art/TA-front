@@ -105,8 +105,6 @@ const Navbar = () => {
           </svg>
         </motion.button>
 
-        <AnimatePresence>
-<<<<<<< HEAD
           {mobileMenuOpen && (
             <motion.div 
               initial={{ opacity: 0, y: -20 }}
@@ -148,8 +146,6 @@ const Navbar = () => {
               </div>
             </motion.div>
           )}
-        </AnimatePresence>
-=======
   {mobileMenuOpen && (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -238,8 +234,6 @@ const Navbar = () => {
       </motion.div>
     </motion.div>
   )}
-</AnimatePresence>
->>>>>>> footballpageAdilhan
       </div>
     </motion.header>
   );

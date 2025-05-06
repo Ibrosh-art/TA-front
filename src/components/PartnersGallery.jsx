@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
-import { FaChalkboardTeacher, FaSearch, FaGraduationCap, FaFlask, FaLaptopCode } from 'react-icons/fa';
-=======
 import React, { useState } from 'react';
-import './PartnersGallery.css';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaChalkboardTeacher, FaSearch, FaGraduationCap, FaFlask, FaLaptopCode } from 'react-icons/fa';
 import { FiExternalLink, FiChevronDown, FiChevronUp } from 'react-icons/fi';
-const PartnersGallery = () => {
-  const [activeCard, setActiveCard] = useState(null);
-  const [expanded, setExpanded] = useState(false);
->>>>>>> footballpageAdilhan
+import './PartnersGallery.css';
 
 const TeachersPage = () => {
   const [activeDept, setActiveDept] = useState('it');
@@ -21,11 +14,11 @@ const TeachersPage = () => {
       icon: <FaLaptopCode className="text-blue-500" />,
       title: "IT & Кибербезопасность",
       teachers: [
-        { 
-          id: 1, 
-          name: "Айгерим Садыкова", 
-          subject: "Data Science", 
-          specialty: "Машинное обучение, Python", 
+        {
+          id: 1,
+          name: "Айгерим Садыкова",
+          subject: "Data Science",
+          specialty: "Машинное обучение, Python",
           exp: "15 лет",
           achievements: [
             "Экс-руководитель отдела аналитики в Google",
@@ -33,11 +26,11 @@ const TeachersPage = () => {
             "Сертифицированный специалист TensorFlow"
           ]
         },
-        { 
-          id: 2, 
-          name: "Арман Жунусов", 
-          subject: "Кибербезопасность", 
-          specialty: "Ethical Hacking, Blockchain", 
+        {
+          id: 2,
+          name: "Арман Жунусов",
+          subject: "Кибербезопасность",
+          specialty: "Ethical Hacking, Blockchain",
           exp: "10 лет",
           achievements: [
             "Бывший пентестер в NASA",
@@ -51,11 +44,11 @@ const TeachersPage = () => {
       icon: <FaFlask className="text-emerald-500" />,
       title: "Наука",
       teachers: [
-        { 
-          id: 3, 
-          name: "Гульнара Асанова", 
-          subject: "Биотехнологии", 
-          specialty: "Генная инженерия", 
+        {
+          id: 3,
+          name: "Гульнара Асанова",
+          subject: "Биотехнологии",
+          specialty: "Генная инженерия",
           exp: "12 лет",
           achievements: [
             "Ведущий исследователь в Johns Hopkins",
@@ -69,11 +62,11 @@ const TeachersPage = () => {
       icon: <FaGraduationCap className="text-purple-500" />,
       title: "Бизнес",
       teachers: [
-        { 
-          id: 4, 
-          name: "Айнур Калиев", 
-          subject: "Маркетинг", 
-          specialty: "Digital Marketing, SMM", 
+        {
+          id: 4,
+          name: "Айнур Калиев",
+          subject: "Маркетинг",
+          specialty: "Digital Marketing, SMM",
           exp: "8 лет",
           achievements: [
             "Основатель маркетингового агентства",
@@ -85,7 +78,7 @@ const TeachersPage = () => {
     }
   };
 
-  const filteredTeachers = departments[activeDept].teachers.filter(teacher => 
+  const filteredTeachers = departments[activeDept].teachers.filter(teacher =>
     teacher.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     teacher.subject.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -99,7 +92,7 @@ const TeachersPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -167,7 +160,7 @@ const TeachersPage = () => {
                 >
                   <div className="relative h-48 bg-gradient-to-r from-blue-500 to-purple-600">
                     {hoveredTeacher === teacher.id && (
-                      <motion.div 
+                      <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500"
@@ -177,10 +170,10 @@ const TeachersPage = () => {
                       <FaChalkboardTeacher className="text-white/20" size={80} />
                     </div>
                     <div className="absolute bottom-0 left-0 p-6 text-white">
-                      <motion.h3 
+                      <motion.h3
                         className="text-xl font-bold mb-1"
-                        animate={{ 
-                          x: hoveredTeacher === teacher.id ? 5 : 0 
+                        animate={{
+                          x: hoveredTeacher === teacher.id ? 5 : 0
                         }}
                       >
                         {teacher.name}
