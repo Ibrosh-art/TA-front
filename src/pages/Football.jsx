@@ -23,7 +23,6 @@ const Football = () => {
       <News />
       <Foot1 />
       <Youtube/>
-      
       <Team/>
       <DordoiTrophies />
       <StadiumPage />
