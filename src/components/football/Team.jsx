@@ -5,26 +5,26 @@ const PlayerCard = ({ name, surname, position, image, bgColor = '#004d98' }) => 
   const defaultImage = "https://via.placeholder.com/250x200?text=No+Image";
   return (
     <motion.div
-      className="min-w-[250px] rounded-xl overflow-hidden transition-transform duration-300"
+      className="min-w-[250px] max-w-[300px] rounded-xl overflow-hidden transition-transform duration-300 shadow-lg hover:shadow-2xl"
       style={{ background: `linear-gradient(to top, rgba(0,0,0,0.8), transparent), ${bgColor}` }}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.3)" }}
+      whileHover={{ scale: 1.05 }}
     >
       <img
         src={image || defaultImage}
         alt={`${name} ${surname}`}
-        className="w-full h-[200px] object-cover text-center" 
+        className="w-full h-[220px] object-cover"
       />
-      <div className="p-4 text-white">
-        <div className="text-xl font-bold" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-          <span>{name}</span> <span>{surname}</span>
-        </div>
-        <p className="text-base mt-2" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+      <div className="p-4 text-white flex flex-col items-start space-y-2">
+        <h3 className="text-xl font-bold" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+          {name} {surname}
+        </h3>
+        <span className="px-3 py-1 rounded-full text-sm font-medium bg-yellow-400 text-blue-900 shadow-md">
           {position}
-        </p>
+        </span>
       </div>
     </motion.div>
   );
@@ -75,10 +75,17 @@ const Team = () => {
       position: "Defender",
       image: "https://via.placeholder.com/250x200?text=Valery+Kichin",
       bgColor: "#ffcc00"
+    },
+    {
+      name: "Pavel",
+      surname: "Matiash",
+      position: "Goalkeeper",
+      image: "https://via.placeholder.com/250x200?text=Pavel+Matiash",
+      bgColor: "#004d98"
     }
   ];
 
-  const filters = ["All", "Forward", "Midfielder", "Defender"];
+  const filters = ["All", "Forward", "Midfielder", "Defender", "Goalkeeper"];
 
   const filteredPlayers = activeFilter === "All"
     ? players
@@ -96,6 +103,7 @@ const Team = () => {
           </div>
         </div>
 
+        {/* Filters */}
         <div className="flex justify-center mb-8">
           <div className="flex gap-2 flex-wrap">
             {filters.map(filter => (
@@ -111,13 +119,20 @@ const Team = () => {
                 }`}
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                {filter === "All" ? "Все" : filter === "Forward" ? "Нападающие" : filter === "Midfielder" ? "Полузащитники" : "Защитники"}
+                {{
+                  All: "Все",
+                  Forward: "Нападающие",
+                  Midfielder: "Полузащитники",
+                  Defender: "Защитники",
+                  Goalkeeper: "Вратари"
+                }[filter]}
               </motion.button>
             ))}
           </div>
         </div>
 
-        <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide py-4 space-x-4">
+        {/* Cards */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide py-4 space-x-4 px-2 md:px-0">
           {filteredPlayers.length === 0 ? (
             <div className="w-full text-center text-gray-600 text-lg">
               Игроки не найдены

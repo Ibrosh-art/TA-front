@@ -160,5 +160,3 @@ export const storiesData = [
   },
   // Add more stories...
 ];
-
-

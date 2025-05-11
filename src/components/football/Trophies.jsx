@@ -96,5 +96,3 @@ const DordoiTrophies = () => {
 };
 
 export default DordoiTrophies;
-
-

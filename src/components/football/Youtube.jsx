@@ -3,7 +3,7 @@ import React from 'react'
 const Youtube = () => {
 return (
     <>
-        <div className='w-full h-[100vh] flex-col justify-around flex items-center justify-center bg-blue-900'>
+        <div className='w-full h-[100vh] flex-col justify-around flex items-center justify-center bg-blue-800'>
             <div>
                 <h1 className='text-white text-2xl font-bold'>Следите за нами в YouTube</h1>
             </div>

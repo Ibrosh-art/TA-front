@@ -32,7 +32,7 @@ const MatchesPage = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Шапка */}
-      <header className="bg-blue-900 text-white shadow-lg">
+      <header className="bg-blue-700 text-white shadow-lg">
         <div className="container mx-auto px-4 py-8 text-center">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
