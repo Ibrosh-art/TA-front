@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import logo from './assets/logo.png';
 import { motion } from 'framer-motion';
-import { newsData } from './const';// Импорт данных новостей
+import { newsData } from './const';
 import { FaSearch, FaCalendarAlt, FaArrowRight, FaFilter, FaTimes, FaStar } from 'react-icons/fa';
 
-// Данные новостей
-
-
-// Категории для фильтра
 export const categories = ["Все", "Матчи", "Трансферы", "Академия", "Инфраструктура"];
 
 const NewsPage = () => {
@@ -15,7 +11,6 @@ const NewsPage = () => {
   const [activeCategory, setActiveCategory] = useState("Все");
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
-  // Фильтрация новостей
   const filteredNews = newsData.filter(news => {
     const matchesSearch = news.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                          news.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
@@ -24,39 +19,34 @@ const NewsPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Шапка */}
-      <header className="bg-blue-900 text-white shadow-lg h-[13vh] flex items-center " >
-         
+    <>
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-gray-100"
+    >
+      <motion.header 
+        initial={{ y: -50, opacity: 0 }} 
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.1 }}
+        className="bg-blue-700 text-white shadow-lg h-[13vh] flex items-center"
+      >
         <div className="flex flex-col items-center justify-center w-full">
-          
-             
-          {/* <img src={logo} alt="Logo" className="h-16 "/> */}
-          <h1 
-            className="text-3xl md:text-4xl font-bold mb-2"
-          >
-            Новости Дордой FC
-          </h1>
-          <p
-            className="text-blue-200"
-          >
-            
-          </p>
-
-          
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">Новости Дордой FC</h1>
+          <p className="text-blue-200"></p>
         </div>
-      </header>
+      </motion.header>
 
-      {/* Поиск и фильтры */}
       <div className="container mx-auto px-4 py-8">
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="bg-white rounded-xl shadow-md p-6 mb-8"
         >
           <div className="flex flex-col md:flex-row md:items-center gap-4">
-            {/* Поле поиска */}
             <div className="relative flex-grow">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <FaSearch className="text-gray-400" />
@@ -70,7 +60,6 @@ const NewsPage = () => {
               />
             </div>
 
-            {/* Кнопка фильтров (мобильная) */}
             <button 
               onClick={() => setIsFiltersOpen(!isFiltersOpen)}
               className="md:hidden flex items-center justify-center gap-2 bg-blue-100 text-blue-900 px-4 py-2 rounded-lg"
@@ -79,13 +68,13 @@ const NewsPage = () => {
               <span>Фильтры</span>
             </button>
 
-            {/* Фильтры по категориям (десктоп) */}
             <div className="hidden md:flex gap-2">
               {categories.map(category => (
                 <motion.button
                   key={category}
                   onClick={() => setActiveCategory(category)}
                   whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   className={`px-4 py-2 rounded-lg transition ${activeCategory === category ? 'bg-blue-900 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
                 >
                   {category}
@@ -94,7 +83,6 @@ const NewsPage = () => {
             </div>
           </div>
 
-          {/* Мобильные фильтры (раскрывающиеся) */}
           {isFiltersOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
@@ -118,7 +106,6 @@ const NewsPage = () => {
           )}
         </motion.div>
 
-        {/* Главная новость (если есть featured) */}
         {filteredNews.some(news => news.featured) && (
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -172,14 +159,12 @@ const NewsPage = () => {
           </motion.div>
         )}
 
-        {/* Все новости */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
           <h2 className="text-2xl font-bold text-blue-900 mb-6">Последние новости</h2>
-          
           {filteredNews.length === 0 ? (
             <motion.div
               initial={{ opacity: 0 }}
@@ -231,36 +216,30 @@ const NewsPage = () => {
             </div>
           )}
         </motion.div>
-      </div>
 
-      {/* Пагинация */}
-      {filteredNews.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="container mx-auto px-4 py-8 flex justify-center"
-        >
-          <div className="flex gap-2">
-            <button className="px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition">
-              1
-            </button>
-            <button className="px-4 py-2 bg-white hover:bg-gray-100 rounded-lg transition">
-              2
-            </button>
-            <button className="px-4 py-2 bg-white hover:bg-gray-100 rounded-lg transition">
-              3
-            </button>
-            <motion.button
-              whileHover={{ x: 5 }}
-              className="px-4 py-2 bg-white hover:bg-gray-100 rounded-lg flex items-center transition"
-            >
-              Далее <FaArrowRight className="ml-2" />
-            </motion.button>
-          </div>
-        </motion.div>
-      )}
-    </div>
+        {filteredNews.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="container mx-auto px-4 py-8 flex justify-center"
+          >
+            <div className="flex gap-2">
+              <button className="px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition">1</button>
+              <button className="px-4 py-2 bg-white hover:bg-gray-100 rounded-lg transition">2</button>
+              <button className="px-4 py-2 bg-white hover:bg-gray-100 rounded-lg transition">3</button>
+              <motion.button
+                whileHover={{ x: 5 }}
+                className="px-4 py-2 bg-white hover:bg-gray-100 rounded-lg flex items-center transition"
+              >
+                Далее <FaArrowRight className="ml-2" />
+              </motion.button>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </motion.div>
+    </>
   );
 };
 

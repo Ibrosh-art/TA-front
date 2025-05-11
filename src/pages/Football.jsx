@@ -7,7 +7,10 @@ import Youtube from '../components/football/Youtube';
 import Team from '../components/football/Team';
 import Footer from '../components/football/Footer';
 import DordoiTrophies from '../components/football/Trophies';
-import StoriesPage from '../components/football/stories/StoriesPage.jsx';
+import StoriesPage from '../components/football/StoriesPage/index.js';
+import ClubHistory from '../components/football/histrory/ClubHistory.jsx';
+import StadiumPage from '../components/football/stadium/StadiumPage.jsx';
+
 
 
 const Football = () => {
@@ -16,12 +19,15 @@ const Football = () => {
     <div>
       {/* <HeroFootball src={video} /> */}
       <Banner />
-      <News />
       <StoriesPage/>
-      <Youtube/>
+      <News />
       <Foot1 />
+      <Youtube/>
+      
       <Team/>
       <DordoiTrophies />
+      <StadiumPage />
+      <ClubHistory />
       <Footer/>
     </div>
   );
