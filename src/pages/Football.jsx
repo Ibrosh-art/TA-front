@@ -1,5 +1,5 @@
 import React from 'react';
-import News from '../components/football/News.jsx';
+import News from '../components/football/FootballSite.jsx';
 import Banner from '../components/football/banner';
 import Foot1 from '../components/football/Foot1';
 import HeroFootball from '../components/football/HeroFootball';
