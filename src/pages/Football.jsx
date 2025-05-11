@@ -16,8 +16,9 @@ const Football = () => {
     <div>
       {/* <HeroFootball src={video} /> */}
       <Banner />
-      <News />
       <StoriesPage/>
+      <News />
+      
       <Youtube/>
       <Foot1 />
       <Team/>

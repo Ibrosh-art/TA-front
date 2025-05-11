@@ -26,7 +26,7 @@ const NewsPage = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Шапка */}
-      <header className="bg-blue-900 text-white shadow-lg h-[13vh] flex items-center " >
+      <header className="bg-blue-700 text-white shadow-lg h-[13vh] flex items-center " >
          
         <div className="flex flex-col items-center justify-center w-full">
           
