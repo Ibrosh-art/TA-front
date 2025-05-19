@@ -123,7 +123,7 @@ const Navbar = () => {
                   >
                     <Link 
                       to={item.path} 
-                      className="flex items-center py-4 px-6 text-xl rounded-lg transition-colors"
+                      className="flex items-center px-6 text-xl rounded-lg transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span className="mr-4 text-2xl">{item.icon}</span>
