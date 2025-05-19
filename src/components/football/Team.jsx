@@ -1,156 +1,136 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios';
 
-const PlayerCard = ({ name, surname, position, image, bgColor = '#004d98' }) => {
-  const defaultImage = "https://via.placeholder.com/250x200?text=No+Image";
+const PlayerCard = ({ player }) => {
   return (
     <motion.div
-      className="min-w-[250px] max-w-[300px] rounded-xl overflow-hidden transition-transform duration-300 shadow-lg hover:shadow-2xl"
-      style={{ background: `linear-gradient(to top, rgba(0,0,0,0.8), transparent), ${bgColor}` }}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      className="relative h-[500px] w-[350px] rounded-xl overflow-hidden bg-gray-900 shadow-2xl group"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.02 }}
     >
-      <img
-        src={image || defaultImage}
-        alt={`${name} ${surname}`}
-        className="w-full h-[220px] object-cover"
-      />
-      <div className="p-4 text-white flex flex-col items-start space-y-2">
-        <h3 className="text-xl font-bold" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-          {name} {surname}
-        </h3>
-        <span className="px-3 py-1 rounded-full text-sm font-medium bg-yellow-400 text-blue-900 shadow-md">
-          {position}
-        </span>
+      {/* Player Image */}
+      <div className="relative h-3/4 bg-gray-800">
+        <img
+          src={player.image || '/default-player.jpg'}
+          alt={player.full_name}
+          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+          onError={(e) => {
+            e.target.src = '/default-player.jpg';
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+      </div>
+
+      {/* Player Info */}
+      <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-10">
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <h3 className="text-3xl font-bold uppercase tracking-tighter">
+              {player.full_name}
+            </h3>
+            <p className="text-xl text-yellow-400 font-medium">
+              {player.position}
+            </p>
+          </div>
+          <span className="text-4xl font-bold text-yellow-400">
+            #{player.number}
+          </span>
+        </div>
+
+        {/* Career Details */}
+        <div className="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <p className="text-gray-400">Гражданство</p>
+            <p className="font-medium">{player.citizenship}</p>
+          </div>
+          <div>
+            <p className="text-gray-400">Контракт до</p>
+            <p className="font-medium">2025</p>
+          </div>
+        </div>
       </div>
     </motion.div>
   );
 };
 
 const Team = () => {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [players, setPlayers] = useState([]);
+  const [activeFilter, setActiveFilter] = useState('Все');
+  const [isLoading, setIsLoading] = useState(true);
 
-  const players = [
-    {
-      name: "Azamat",
-      surname: "Baimatov",
-      position: "Defender",
-      image: "https://via.placeholder.com/250x200?text=Azamat+Baimatov",
-      bgColor: "#004d98"
-    },
-    {
-      name: "Mirlan",
-      surname: "Murzaev",
-      position: "Forward",
-      image: "https://via.placeholder.com/250x200?text=Mirlan+Murzaev",
-      bgColor: "#ffcc00"
-    },
-    {
-      name: "Kairat",
-      surname: "Zhyrgalbek",
-      position: "Midfielder",
-      image: "https://via.placeholder.com/250x200?text=Kairat+Zhyrgalbek",
-      bgColor: "#004d98"
-    },
-    {
-      name: "Alimardon",
-      surname: "Shukurov",
-      position: "Midfielder",
-      image: "https://via.placeholder.com/250x200?text=Alimardon+Shukurov",
-      bgColor: "#ffcc00"
-    },
-    {
-      name: "Ernist",
-      surname: "Batyrkanov",
-      position: "Forward",
-      image: "https://via.placeholder.com/250x200?text=Ernist+Batyrkanov",
-      bgColor: "#004d98"
-    },
-    {
-      name: "Valery",
-      surname: "Kichin",
-      position: "Defender",
-      image: "https://via.placeholder.com/250x200?text=Valery+Kichin",
-      bgColor: "#ffcc00"
-    },
-    {
-      name: "Pavel",
-      surname: "Matiash",
-      position: "Goalkeeper",
-      image: "https://via.placeholder.com/250x200?text=Pavel+Matiash",
-      bgColor: "#004d98"
-    }
-  ];
+  const positions = ['Все', 'Нападающий', 'Полузащитник', 'Защитник', 'Вратарь'];
 
-  const filters = ["All", "Forward", "Midfielder", "Defender", "Goalkeeper"];
+  useEffect(() => {
+    const fetchPlayers = async () => {
+      try {
+        const { data } = await axios.get('http://127.0.0.1:8000/api/footballers');
+        setPlayers(data);
+      } catch (err) {
+        console.error('Ошибка загрузки:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchPlayers();
+  }, []);
 
-  const filteredPlayers = activeFilter === "All"
-    ? players
-    : players.filter(player => player.position === activeFilter);
-
-  return (
-    <section className="py-16 bg-gradient-to-b from-gray-100 to-blue-50">
+   return (
+    <section className="min-h-screen bg-blue-800 py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-            Наши Игроки
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-yellow-400 mb-8 uppercase tracking-wide">
+            Основной состав
           </h1>
-          <div className="flex justify-center">
-            <div className="w-32 h-2 bg-gradient-to-r from-blue-500 to-yellow-500 rounded-full"></div>
-          </div>
-        </div>
-
-        {/* Filters */}
-        <div className="flex justify-center mb-8">
-          <div className="flex gap-2 flex-wrap">
-            {filters.map(filter => (
-              <motion.button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-4 py-2 rounded-full font-medium transition duration-200 ${
-                  activeFilter === filter
-                    ? 'bg-blue-900 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          
+          {/* Filters */}
+          <div className="flex justify-center gap-3 flex-wrap">
+            {positions.map((position) => (
+              <button
+                key={position}
+                onClick={() => setActiveFilter(position)}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
+                  activeFilter === position 
+                    ? 'bg-yellow-400 text-blue-900' 
+                    : 'bg-blue-900/50 text-white hover:bg-blue-900'
                 }`}
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                {{
-                  All: "Все",
-                  Forward: "Нападающие",
-                  Midfielder: "Полузащитники",
-                  Defender: "Защитники",
-                  Goalkeeper: "Вратари"
-                }[filter]}
-              </motion.button>
+                {position}
+              </button>
             ))}
           </div>
         </div>
 
-        {/* Cards */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide py-4 space-x-4 px-2 md:px-0">
-          {filteredPlayers.length === 0 ? (
-            <div className="w-full text-center text-gray-600 text-lg">
-              Игроки не найдены
-            </div>
-          ) : (
-            filteredPlayers.map((player, index) => (
-              <PlayerCard
-                key={index}
-                name={player.name}
-                surname={player.surname}
-                position={player.position}
-                image={player.image}
-                bgColor={player.bgColor}
-              />
-            ))
-          )}
-        </div>
+        {/* Players Grid */}
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="h-[500px] w-[350px] bg-blue-900 rounded-xl animate-pulse" />
+            ))}
+          </div>
+        ) : (
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center"
+            layout
+          >
+            <AnimatePresence>
+              {players
+                .filter(p => activeFilter === 'Все' || p.position === activeFilter)
+                .map(player => (
+                  <PlayerCard 
+                    key={player.id}
+                    player={player}
+                  />
+                ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
       </div>
+      
     </section>
   );
 };
