@@ -1,246 +1,171 @@
-import React, { useState } from 'react';
-import logo from './assets/logo.png';
-import { motion } from 'framer-motion';
-import { newsData } from './const';
-import { FaSearch, FaCalendarAlt, FaArrowRight, FaFilter, FaTimes, FaStar } from 'react-icons/fa';
+import React from "react";
+import { motion } from "framer-motion";
 
-export const categories = ["Все", "Матчи", "Трансферы", "Академия", "Инфраструктура"];
+const FootballNewsSection = () => {
+  // Пример данных новостей с картинками
+  const news = [
+    {
+      id: 1,
+      title: "Дордой ФК разгромил соперника в дерби со счетом 3:1!",
+      date: "12 мая 2024",
+      excerpt: "Зрелищный матч, где наша команда показала мастерство во втором тайме.",
+      category: "Матчи",
+      image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      id: 2,
+      title: "Сенсационный трансфер: Дордой подписал бразильского вингера!",
+      date: "10 мая 2024",
+      excerpt: "Новый игрок уже назван фанатами «новой звездой лиги».",
+      category: "Трансферы",
+      image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      id: 3,
+      title: "Главный тренер: «Мы готовы к чемпионской гонке!»",
+      date: "8 мая 2024",
+      excerpt: "Эксклюзивное интервью о тактике и планах на сезон.",
+      category: "Интервью",
+      image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+    },
+  ];
 
-const NewsPage = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("Все");
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  // Список матчей
+  const upcomingMatches = [
+    { id: 1, opponent: "Алга БИШ", date: "15 мая 2024", time: "18:00", place: "Стадион Дордой" },
+    { id: 2, opponent: "Абдыш-Ата", date: "20 мая 2024", time: "17:30", place: "Стадион им. Кожомкула" },
+    { id: 3, opponent: "Нефтчи Кочкор-Ата", date: "25 мая 2024", time: "19:00", place: "Стадион Дордой" },
+  ];
 
-  const filteredNews = newsData.filter(news => {
-    const matchesSearch = news.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         news.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = activeCategory === "Все" || news.category === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
+  // Анимации
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   return (
-    <>
-    <motion.div 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-screen bg-gray-100"
-    >
-      <motion.header 
-        initial={{ y: -50, opacity: 0 }} 
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.1 }}
-        className="bg-blue-700 text-white shadow-lg h-[13vh] flex items-center"
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      {/* Заголовок с градиентом и эффектом */}
+      <motion.h1 
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        className="text-4xl md:text-5xl font-extrabold mb-10 text-center"
       >
-        <div className="flex flex-col items-center justify-center w-full">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Новости Дордой FC</h1>
-          <p className="text-blue-200"></p>
-        </div>
-      </motion.header>
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-yellow-400 to-blue-800">
+          Футбольные Новости
+        </span>
+        <span className="block text-2xl text-yellow-400 mt-2">Дордой ФК</span>
+      </motion.h1>
 
-      <div className="container mx-auto px-4 py-8">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white rounded-xl shadow-md p-6 mb-8"
-        >
-          <div className="flex flex-col md:flex-row md:items-center gap-4">
-            <div className="relative flex-grow">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FaSearch className="text-gray-400" />
-              </div>
-              <input
-                type="text"
-                placeholder="Поиск новостей..."
-                className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Левая часть - Крупные карточки новостей */}
+        <div className="lg:w-2/3 space-y-8">
+          {news.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial="hidden"
+              animate="visible"
+              variants={fadeIn}
+              transition={{ delay: index * 0.1 }}
+              className="relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-blue-900/30 transition-all duration-300"
+            >
+              {/* Затемненное изображение на фоне */}
+              <div className="absolute inset-0 bg-black/30 z-0" />
+              <img 
+                src={item.image} 
+                alt={item.title}
+                className="w-full h-80 object-cover"
               />
-            </div>
 
-            <button 
-              onClick={() => setIsFiltersOpen(!isFiltersOpen)}
-              className="md:hidden flex items-center justify-center gap-2 bg-blue-100 text-blue-900 px-4 py-2 rounded-lg"
-            >
-              {isFiltersOpen ? <FaTimes /> : <FaFilter />}
-              <span>Фильтры</span>
-            </button>
-
-            <div className="hidden md:flex gap-2">
-              {categories.map(category => (
-                <motion.button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`px-4 py-2 rounded-lg transition ${activeCategory === category ? 'bg-blue-900 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
-                >
-                  {category}
-                </motion.button>
-              ))}
-            </div>
-          </div>
-
-          {isFiltersOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="mt-4 grid grid-cols-2 gap-2 md:hidden"
-            >
-              {categories.map(category => (
-                <button
-                  key={category}
-                  onClick={() => {
-                    setActiveCategory(category);
-                    setIsFiltersOpen(false);
-                  }}
-                  className={`px-3 py-2 text-sm rounded-lg transition ${activeCategory === category ? 'bg-blue-900 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
-                >
-                  {category}
-                </button>
-              ))}
-            </motion.div>
-          )}
-        </motion.div>
-
-        {filteredNews.some(news => news.featured) && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-12"
-          >
-            <h2 className="text-2xl font-bold text-blue-900 mb-6 flex items-center gap-2">
-              <FaStar className="text-yellow-500" />
-              Главная новость
-            </h2>
-            {filteredNews.filter(news => news.featured).map(news => (
-              <motion.div
-                key={news.id}
-                whileHover={{ scale: 1.01 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden"
-              >
-                <div className="md:flex">
-                  <div className="md:w-2/3 h-64 md:h-96">
-                    <img 
-                      src={news.image} 
-                      alt={news.title}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-6 md:w-1/3 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center text-gray-500 text-sm">
-                          <FaCalendarAlt className="mr-2" />
-                          <span>{news.date}</span>
-                        </div>
-                        <span className="bg-blue-100 text-blue-900 px-2 py-1 rounded-full text-xs">
-                          {news.category}
-                        </span>
-                      </div>
-                      <h3 className="text-xl font-bold mb-3">{news.title}</h3>
-                      <p className="text-gray-600 mb-4">{news.excerpt}</p>
-                    </div>
-                    <motion.button
-                      whileHover={{ x: 5 }}
-                      className="text-blue-900 font-semibold flex items-center self-start"
-                    >
-                      Читать подробнее <FaArrowRight className="ml-2" />
-                    </motion.button>
-                  </div>
+              {/* Контент поверх картинки */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="bg-yellow-500 text-blue-900 font-bold px-3 py-1 rounded-full text-xs">
+                    {item.category}
+                  </span>
+                  <span className="text-gray-300 text-sm">{item.date}</span>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          <h2 className="text-2xl font-bold text-blue-900 mb-6">Последние новости</h2>
-          {filteredNews.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="bg-white rounded-xl shadow-md p-8 text-center"
-            >
-              <p className="text-gray-600">Новости не найдены. Попробуйте изменить параметры поиска.</p>
+                <h2 className="text-2xl font-bold text-white mb-3">{item.title}</h2>
+                <p className="text-gray-200 mb-4">{item.excerpt}</p>
+                <button className="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-6 rounded-full transition-all transform hover:scale-105">
+                  Читать далее →
+                </button>
+              </div>
             </motion.div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredNews.filter(news => !news.featured).map((news, index) => (
-                <motion.div
-                  key={news.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
-                >
-                  <div className="h-48 overflow-hidden">
-                    <img 
-                      src={news.image} 
-                      alt={news.title}
-                      className="w-full h-full object-cover hover:scale-105 transition duration-500"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center text-gray-500 text-sm">
-                        <FaCalendarAlt className="mr-2" />
-                        <span>{news.date}</span>
-                      </div>
-                      <span className="bg-blue-100 text-blue-900 px-2 py-1 rounded-full text-xs">
-                        {news.category}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold mb-2">{news.title}</h3>
-                    <p className="text-gray-600 mb-4 line-clamp-2">{news.excerpt}</p>
-                    <motion.button
-                      whileHover={{ x: 5 }}
-                      className="text-blue-900 font-semibold flex items-center text-sm"
-                    >
-                      Читать далее <FaArrowRight className="ml-2" />
-                    </motion.button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </motion.div>
+          ))}
+        </div>
 
-        {filteredNews.length > 0 && (
+        {/* Правая часть - Сайдбар */}
+        <div className="lg:w-1/3">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="container mx-auto px-4 py-8 flex justify-center"
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            transition={{ delay: 0.3 }}
+            className="bg-gradient-to-b from-blue-900 to-blue-800 rounded-2xl p-6 shadow-xl sticky top-4 border-l-4 border-yellow-500"
           >
-            <div className="flex gap-2">
-              <button className="px-4 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition">1</button>
-              <button className="px-4 py-2 bg-white hover:bg-gray-100 rounded-lg transition">2</button>
-              <button className="px-4 py-2 bg-white hover:bg-gray-100 rounded-lg transition">3</button>
-              <motion.button
-                whileHover={{ x: 5 }}
-                className="px-4 py-2 bg-white hover:bg-gray-100 rounded-lg flex items-center transition"
-              >
-                Далее <FaArrowRight className="ml-2" />
-              </motion.button>
+            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+              <span className="w-4 h-4 bg-yellow-500 rounded-full mr-2"></span>
+              Ближайшие матчи
+            </h2>
+
+            <ul className="space-y-4">
+              {upcomingMatches.map((match) => (
+                <motion.li 
+                  key={match.id}
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-blue-800/50 backdrop-blur-sm p-4 rounded-xl hover:bg-blue-700/70 transition-all cursor-pointer"
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="bg-yellow-500/20 p-2 rounded-lg">
+                      <span className="text-yellow-500 text-lg">⚽</span>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-white">{match.opponent}</h3>
+                      <div className="flex justify-between text-sm text-gray-300 mt-1">
+                        <span>📅 {match.date}</span>
+                        <span>⏰ {match.time}</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.li>
+              ))}
+            </ul>
+
+            {/* Турнирная таблица */}
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                <span className="w-4 h-4 bg-yellow-500 rounded-full mr-2"></span>
+                Топ-3 лиги
+              </h3>
+              <div className="space-y-3">
+                {[
+                  { team: "Дордой ФК", points: 25 },
+                  { team: "Алга БИШ", points: 22 },
+                  { team: "Абдыш-Ата", points: 20 }
+                ].map((item, index) => (
+                  <div key={index} className="flex justify-between items-center bg-blue-800/30 p-3 rounded-lg">
+                    <div className="flex items-center">
+                      <span className={`w-6 h-6 flex items-center justify-center rounded-full mr-3 
+                        ${index === 0 ? "bg-yellow-500 text-blue-900" : "bg-blue-700 text-white"}`}>
+                        {index + 1}
+                      </span>
+                      <span className="font-medium text-white">{item.team}</span>
+                    </div>
+                    <span className="bg-blue-900/50 px-2 py-1 rounded text-sm">{item.points} очков</span>
+                  </div>
+                ))}
+              </div>
+              <button className="mt-4 w-full bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-2 px-4 rounded-lg transition-all transform hover:scale-[1.02]">
+                Полная таблица
+              </button>
             </div>
           </motion.div>
-        )}
+        </div>
       </div>
-    </motion.div>
-    </>
+    </div>
   );
 };
 
-export default NewsPage;
+export default FootballNewsSection;

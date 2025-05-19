@@ -49,8 +49,8 @@ const cardVariants = {
 
 const DordoiTrophies = () => {
   return (
-    <section className="py-20 px-6 bg-gradient-to-br from-blue-900 via-blue-800 to-yellow-500">
-      <motion.h1
+<section className="py-20 px-6 bg-gradient-to-b from-blue-800 via-blue-900 to-yellow-500">
+<motion.h1
         className="text-5xl font-extrabold text-center text-white mb-16 drop-shadow-lg"
         initial={{ opacity: 0, y: -40 }}
         whileInView={{ opacity: 1, y: 0 }}
