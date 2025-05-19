@@ -700,8 +700,9 @@ const MapSection = () => {
           <p className="text-gray-700 mb-4">
             ул. Ибраимова 115, Бишкек, Кыргызстан
           </p>
+          
           <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105">
-            Построить маршрут
+            <a href="https://2gis.kg/bishkek/directions/points/%7C74.617938%2C42.873855%3B70000001019340049">Построить маршрут</a>
           </button>
         </div>
       </div>
@@ -734,27 +735,6 @@ export default function DordoiPlazaPage() {
 
   return (
     <div className="font-sans text-gray-800 bg-gray-50">
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: isScrolled ? 0 : -100 }}
-        transition={{ duration: 0.3 }}
-        className="fixed top-0 left-0 right-0 bg-white shadow-md z-50 py-3 px-6"
-      >
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-xl font-bold text-blue-800">Dordoi Plaza</div>
-          <div className="hidden md:flex gap-6">
-            <a href="#stores" className="hover:text-blue-600 transition">Магазины</a>
-            <a href="#events" className="hover:text-blue-600 transition">События</a>
-            <a href="#promotions" className="hover:text-blue-600 transition">Акции</a>
-            <a href="#restaurants" className="hover:text-blue-600 transition">Рестораны</a>
-            <a href="#contacts" className="hover:text-blue-600 transition">Контакты</a>
-          </div>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition">
-            Мобильное приложение
-          </button>
-        </div>
-      </motion.nav>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
         <HeroSlider slides={slides} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} />
 
@@ -979,50 +959,49 @@ export default function DordoiPlazaPage() {
             </div>
           </motion.div>
         </section>
-
-        <footer className="bg-blue-900 text-white py-12 rounded-t-3xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-              <div>
-                <h4 className="text-xl font-bold mb-4">Dordoi Plaza</h4>
-                <p className="text-blue-200">
-                  Современный торгово-развлекательный центр в сердце Бишкека
-                </p>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Магазины</h4>
-                <ul className="space-y-2 text-blue-200">
-                  <li><a href="#" className="hover:text-white transition">Все магазины</a></li>
-                  <li><a href="#" className="hover:text-white transition">Новые магазины</a></li>
-                  <li><a href="#" className="hover:text-white transition">Арендаторам</a></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Посетителям</h4>
-                <ul className="space-y-2 text-blue-200">
-                  <li><a href="#" className="hover:text-white transition">События</a></li>
-                  <li><a href="#" className="hover:text-white transition">Акции</a></li>
-                  <li><a href="#" className="hover:text-white transition">Карта ТЦ</a></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Контакты</h4>
-                <ul className="space-y-2 text-blue-200">
-                  <li className="flex items-center gap-2"><FiMapPin /> ул. Ибраимова 115</li>
-                  <li className="flex items-center gap-2"><FiPhone /> +996 770 901 212</li>
-                  <li className="flex items-center gap-2"><FiMail /> info@dordoiplaza.kg</li>
-                </ul>
-              </div>
-            </div>
-            <div className="border-t border-blue-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-              <p>© 2025 Dordoi Plaza, Бишкек. Все права защищены.</p>
-              <div className="flex gap-4 mt-4 md:mt-0">
-                <a href="#" className="text-blue-200 hover:text-white transition">Политика конфиденциальности</a>
-                <a href="#" className="text-blue-200 hover:text-white transition">Условия использования</a>
-              </div>
-            </div>
-          </div>
-        </footer>
+    <footer className="bg-[#1e2a38] text-white py-12 rounded-t-3xl">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+      <div>
+        <h4 className="text-xl font-bold mb-4 text-[#5dade2]">Dordoi Plaza</h4>
+        <p className="text-[#a9cce3]">
+          Современный торгово-развлекательный центр в сердце Бишкека
+        </p>
+      </div>
+      <div>
+        <h4 className="text-lg font-semibold mb-4 text-[#5dade2]">Магазины</h4>
+        <ul className="space-y-2 text-[#7fb3d5]">
+          <li><a href="#" className="hover:text-[#85c1e9] transition">Все магазины</a></li>
+          <li><a href="#" className="hover:text-[#85c1e9] transition">Новые магазины</a></li>
+          <li><a href="#" className="hover:text-[#85c1e9] transition">Арендаторам</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 className="text-lg font-semibold mb-4 text-[#5dade2]">Посетителям</h4>
+        <ul className="space-y-2 text-[#7fb3d5]">
+          <li><a href="#" className="hover:text-[#85c1e9] transition">События</a></li>
+          <li><a href="#" className="hover:text-[#85c1e9] transition">Акции</a></li>
+          <li><a href="#" className="hover:text-[#85c1e9] transition">Карта ТЦ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 className="text-lg font-semibold mb-4 text-[#5dade2]">Контакты</h4>
+        <ul className="space-y-2 text-[#7fb3d5]">
+          <li className="flex items-center gap-2"><FiMapPin className="text-[#85c1e9]" /> ул. Ибраимова 115</li>
+          <li className="flex items-center gap-2"><FiPhone className="text-[#85c1e9]" /><a href="tel:+996770901212" className="hover:text-[#85c1e9] transition">+996 770 901 212</a></li>
+          <li className="flex items-center gap-2"><FiMail className="text-[#85c1e9]" /><a href="mailto:info@dordoiplaza.kg" className="hover:text-[#85c1e9] transition">info@dordoiplaza.kg</a></li>
+        </ul>
+      </div>
+    </div>
+    <div className="border-t border-[#3a5f8a] pt-8 flex flex-col md:flex-row justify-between items-center">
+      <p className="text-[#a9cce3]">© 2025 Dordoi Plaza, Бишкек. Все права защищены.</p>
+      <div className="flex gap-4 mt-4 md:mt-0">
+        <a href="#" className="text-[#7fb3d5] hover:text-[#85c1e9] transition">Политика конфиденциальности</a>
+        <a href="#" className="text-[#7fb3d5] hover:text-[#85c1e9] transition">Условия использования</a>
+      </div>
+    </div>
+  </div>
+</footer>
       </div>
     </div>
   );

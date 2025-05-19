@@ -109,9 +109,13 @@
         width: 230px;
         border-radius: 15px;
     }
-
+    .card-container .card .img-box img {
+        width: 90%;
+        height: 90%;
+        margin: 0 0 0 10px;
+    }
     .card-container .card .img-box {
-        width: 185px;
+        width: 220px;
         border-radius: 10px;
     }
 

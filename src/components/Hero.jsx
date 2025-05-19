@@ -92,8 +92,8 @@ const Hero = ({ src }) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
           >
-            Discover the future with <span className="font-bold text-blue-500">Dordoi Association</span> - 
-            where education, commerce, and sports unite in harmony.
+            Откройте для себя будущее с <span className="font-bold text-blue-500">Ассоциацией «Дордой»</span> - 
+            где образование, торговля и спорт гармонично сочетаются
           </motion.p>
 
           <motion.div
@@ -163,7 +163,7 @@ const Hero = ({ src }) => {
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center"
         >
-          <span className="mb-3 text-sm font-semibold tracking-widest text-blue-500 [text-shadow:_0_1px_5px_rgba(0,0,0,0.3)]">EXPLORE MORE</span>
+          <span className="mb-3 text-sm font-semibold tracking-widest text-blue-500 [text-shadow:_0_1px_5px_rgba(0,0,0,0.3)]">Исследуй</span>
           <motion.div
             animate={{ y: [0, 20, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

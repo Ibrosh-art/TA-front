@@ -40,7 +40,7 @@ const Contact = () => {
         <div className="flex flex-col items-center text-center">
 
           <AnimatedTitle
-            title="build y<b>o</b>ur <br /> future <br /> with us"
+            title="Построй т<b>в</b>ое <br /> будущее <br /> с нами"
             className="special-font !md:text-[6.2rem] w-full font-zentry !text-5xl !font-black !leading-[.9]"
           />
 
