@@ -9,7 +9,7 @@ const slides = [
     title: 'Весенние скидки до 50%!',
     description: 'Только в Dordoi Plaza с 1 по 30 мая',
     cta: 'Узнать больше',
-    ctaLink: '#promotions'
+    ctaLink: 'https://dordoiplaza.kg/shops'
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const slides = [
     title: 'Новый кинотеатр в Dordoi Plaza',
     description: 'Смотрите новинки кино с комфортом',
     cta: 'Расписание сеансов',
-    ctaLink: '#events'
+    ctaLink: 'https://cinematica.kg/'
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const slides = [
     title: 'Фудкорт с новыми ресторанами',
     description: 'Попробуйте блюда разных кухонь мира',
     cta: 'Посмотреть меню',
-    ctaLink: '#restaurants'
+    ctaLink: 'https://dordoiplaza.kg/foodcort'
   },
 ];
 

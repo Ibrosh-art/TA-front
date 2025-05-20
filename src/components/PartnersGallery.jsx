@@ -16,10 +16,10 @@ const TeachersPage = () => {
       teachers: [
         {
           id: 1,
-          name: "Айгерим Садыкова",
+          name: "Адилхан Сатымкулов",
           subject: "Data Science",
           specialty: "Машинное обучение, Python",
-          exp: "15 лет",
+          exp: "5 лет",
           achievements: [
             "Экс-руководитель отдела аналитики в Google",
             "Автор 30+ научных работ",
@@ -28,10 +28,22 @@ const TeachersPage = () => {
         },
         {
           id: 2,
-          name: "Арман Жунусов",
+          name: "Ибро Абдраимов",
+          subject: "Кибербезопасность",
+          specialty: "Application Security, Cloud Security",
+          exp: "10 лет",
+          achievements: [
+            "CEO VixrumTech",
+            "Бывший руководитель в Facebook",
+            "Автор курса по кибербезопасности",
+          ]
+        },
+        {
+          id: 3,
+          name: "Илияр Мидинов",
           subject: "Кибербезопасность",
           specialty: "Ethical Hacking, Blockchain",
-          exp: "10 лет",
+          exp: "5 лет",
           achievements: [
             "Бывший пентестер в NASA",
             "Сертифицированный этичный хакер (CEH)",
@@ -46,7 +58,7 @@ const TeachersPage = () => {
       teachers: [
         {
           id: 3,
-          name: "Гульнара Асанова",
+          name: "Валентина Сидорова",
           subject: "Биотехнологии",
           specialty: "Генная инженерия",
           exp: "12 лет",
@@ -64,7 +76,7 @@ const TeachersPage = () => {
       teachers: [
         {
           id: 4,
-          name: "Айнур Калиев",
+          name: "Дмитрий Петров",
           subject: "Маркетинг",
           specialty: "Digital Marketing, SMM",
           exp: "8 лет",

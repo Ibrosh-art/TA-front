@@ -1,7 +1,11 @@
-import { motion } from "framer-motion";
-import { FaGraduationCap, FaLaptopCode, FaChartLine, FaFlask, FaUserGraduate, FaGlobe } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaGraduationCap, FaLaptopCode, FaChartLine, FaFlask, FaUserGraduate, FaGlobe, FaTimes } from "react-icons/fa";
+import { useState } from "react";
 
 const ProgramsPage = () => {
+  const [selectedProgram, setSelectedProgram] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const programs = [
     {
       icon: <FaLaptopCode className="text-blue-500" size={32} />,
@@ -12,7 +16,10 @@ const ProgramsPage = () => {
         "Кибербезопасность",
         "Data Science"
       ],
-      color: "from-blue-500 to-blue-700"
+      color: "from-blue-500 to-blue-700",
+      description: "Наша IT-программа готовит специалистов мирового уровня. Обучение включает в себя не только теорию, но и множество практических заданий, хакатоны и стажировки в ведущих компаниях. Выпускники работают в таких компаниях как Google, Amazon и местных IT-гигантах.",
+      duration: "3,5 года",
+      price: "от $3500 в год"
     },
     {
       icon: <FaChartLine className="text-purple-500" size={32} />,
@@ -23,7 +30,10 @@ const ProgramsPage = () => {
         "Управление проектами",
         "Международный бизнес"
       ],
-      color: "from-purple-500 to-purple-700"
+      color: "from-purple-500 to-purple-700",
+      description: "Программа разработана совместно с ведущими бизнес-школами Европы и Азии. Студенты учатся на реальных кейсах, участвуют в бизнес-симуляциях и имеют возможность пройти стажировку за рубежом. Наши выпускники становятся руководителями и предпринимателями.",
+      duration: "4 года",
+      price: "$5000 в год"
     },
     {
       icon: <FaFlask className="text-emerald-500" size={32} />,
@@ -34,7 +44,10 @@ const ProgramsPage = () => {
         "Фармацевтика",
         "Лабораторная диагностика"
       ],
-      color: "from-emerald-500 to-emerald-700"
+      color: "from-emerald-500 to-emerald-700",
+      description: "Современное медицинское образование с использованием новейшего оборудования и технологий. Программа включает практику в лучших клиниках страны, исследования в современных лабораториях и возможность участия в международных медицинских проектах.",
+      duration: "6 лет",
+      price: "@800 в год"
     }
   ];
 
@@ -55,6 +68,16 @@ const ProgramsPage = () => {
       description: "Партнерская сеть из нескольких компаний"
     }
   ];
+
+  const openModal = (program) => {
+    setSelectedProgram(program);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedProgram(null), 300); // Даем время для анимации
+  };
 
   return (
     <div className="bg-gray-50">
@@ -130,7 +153,10 @@ const ProgramsPage = () => {
                     </li>
                   ))}
                 </ul>
-                <button className={`w-full py-3 bg-gradient-to-r ${program.color} text-white rounded-lg font-bold hover:opacity-90 transition-opacity`}>
+                <button 
+                  onClick={() => openModal(program)}
+                  className={`w-full py-3 bg-gradient-to-r ${program.color} text-white rounded-lg font-bold hover:opacity-90 transition-opacity`}
+                >
                   Подробнее
                 </button>
               </div>
@@ -138,6 +164,85 @@ const ProgramsPage = () => {
           ))}
         </div>
       </div>
+
+      {/* Модальное окно */}
+      <AnimatePresence>
+        {isModalOpen && selectedProgram && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+            onClick={closeModal}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 50 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 50 }}
+              className={`relative bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className={`bg-gradient-to-r ${selectedProgram.color} h-2`}></div>
+              <div className="p-8">
+                <button 
+                  onClick={closeModal}
+                  className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+                >
+                  <FaTimes size={24} />
+                </button>
+                
+                <div className="flex items-start mb-6">
+                  <div className="p-3 bg-white rounded-lg shadow-md mr-4">
+                    {selectedProgram.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">{selectedProgram.title}</h3>
+                    <div className="flex flex-wrap gap-4 mt-2">
+                      <span className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+                        {selectedProgram.duration}
+                      </span>
+                      <span className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">
+                        {selectedProgram.price}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-2">Описание программы</h4>
+                  <p className="text-gray-700">{selectedProgram.description}</p>
+                </div>
+                
+                <div className="mb-6">
+                  <h4 className="text-lg font-semibold mb-2">Специализации</h4>
+                  <ul className="space-y-2">
+                    {selectedProgram.specialties.map((item, i) => (
+                      <li key={i} className="flex items-start">
+                        <span className="text-blue-500 mr-2">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="bg-blue-50 p-4 rounded-lg mb-6">
+                  <h4 className="text-lg font-semibold mb-2 text-blue-800">Как поступить?</h4>
+                  <ol className="list-decimal list-inside space-y-1 text-gray-700">
+                    <li>Подайте заявку онлайн или в приемной комиссии</li>
+                    <li>Пройдите вступительное тестирование</li>
+                    <li>Предоставьте документы об образовании</li>
+                    <li>Заключите договор и оплатите обучение</li>
+                  </ol>
+                </div>
+                <a href="https://forms.gle/7R3HRwzHMfttDcDC7">
+                <button className={`w-full py-3 bg-gradient-to-r ${selectedProgram.color} text-white rounded-lg font-bold hover:opacity-90 transition-opacity`}>
+                  Подать заявку </button></a>
+                
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="bg-gray-100 py-20">
         <div className="container mx-auto px-6">
@@ -191,7 +296,7 @@ const ProgramsPage = () => {
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 rounded-full bg-blue-500 mr-4"></div>
                 <div>
-                  <h4 className="font-bold">Айгерим Садыкова</h4>
+                  <h4 className="font-bold">Айдай</h4>
                   <p className="text-gray-500">Выпускница 2024, Computer Science</p>
                 </div>
               </div>
@@ -210,7 +315,7 @@ const ProgramsPage = () => {
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 rounded-full bg-purple-500 mr-4"></div>
                 <div>
-                  <h4 className="font-bold">Артем Иванов</h4>
+                  <h4 className="font-bold">Адил</h4>
                   <p className="text-gray-500">Студент, Кибербезопасность</p>
                 </div>
               </div>
@@ -221,8 +326,6 @@ const ProgramsPage = () => {
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 };
