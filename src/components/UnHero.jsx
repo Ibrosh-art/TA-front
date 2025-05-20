@@ -223,7 +223,7 @@ const UltimateHero = () => {
             className="relative px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full font-bold text-white overflow-hidden group"
           >
             <span className="relative z-10 flex items-center gap-2">
-              Подать заявку <FaArrowRight />
+             <a href="https://forms.gle/7R3HRwzHMfttDcDC7">Подать заявку</a> <FaArrowRight />
             </span>
             <motion.span
               className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20"

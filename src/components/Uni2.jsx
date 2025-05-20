@@ -9,7 +9,7 @@ const DepartmentsCards = () => {
       subtitle: "Колледж",
       icon: <FaLaptop className="text-blue-500" size={30} />,
       description: "Срок обучения 3 года на базе 9-11 классов",
-      highlight: "1,5 года — обучение в Малайзии",
+      highlight: "1,5 года в Малайзии", 
       color: "from-blue-500 to-blue-700",
       animation: {
         hover: { y: -5 }
