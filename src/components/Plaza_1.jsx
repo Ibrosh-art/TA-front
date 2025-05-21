@@ -971,9 +971,8 @@ export default function DordoiPlazaPage() {
       <div>
         <h4 className="text-lg font-semibold mb-4 text-[#5dade2]">Магазины</h4>
         <ul className="space-y-2 text-[#7fb3d5]">
-          <li><a href="#" className="hover:text-[#85c1e9] transition">Все магазины</a></li>
-          <li><a href="#" className="hover:text-[#85c1e9] transition">Новые магазины</a></li>
-          <li><a href="#" className="hover:text-[#85c1e9] transition">Арендаторам</a></li>
+          <li><a href="https://dordoiplaza.kg/shops" className="hover:text-[#85c1e9] transition">Все магазины</a></li>
+          <li><a href="https://dordoiplaza.kg/for_rent" className="hover:text-[#85c1e9] transition">Арендаторам</a></li>
         </ul>
       </div>
       <div>
@@ -981,7 +980,6 @@ export default function DordoiPlazaPage() {
         <ul className="space-y-2 text-[#7fb3d5]">
           <li><a href="#" className="hover:text-[#85c1e9] transition">События</a></li>
           <li><a href="#" className="hover:text-[#85c1e9] transition">Акции</a></li>
-          <li><a href="#" className="hover:text-[#85c1e9] transition">Карта ТЦ</a></li>
         </ul>
       </div>
       <div>

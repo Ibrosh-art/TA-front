@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaChalkboardTeacher, FaSearch, FaGraduationCap, FaFlask, FaLaptopCode } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaSearch, FaGraduationCap, FaFlask, FaLaptopCode, FaTimes } from 'react-icons/fa';
 import { FiExternalLink, FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import './PartnersGallery.css';
 
@@ -8,6 +8,7 @@ const TeachersPage = () => {
   const [activeDept, setActiveDept] = useState('it');
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredTeacher, setHoveredTeacher] = useState(null);
+  const [showProgramsModal, setShowProgramsModal] = useState(false);
 
   const departments = {
     it: {
@@ -90,9 +91,48 @@ const TeachersPage = () => {
     }
   };
 
+  const programs = [
+    {
+      id: 1,
+      title: "Data Science Professional",
+      duration: "12 месяцев",
+      format: "Онлайн",
+      description: "Полный курс по машинному обучению и анализу данных с нуля до профессионального уровня",
+      department: "it"
+    },
+    {
+      id: 2,
+      title: "Кибербезопасность и Ethical Hacking",
+      duration: "10 месяцев",
+      format: "Онлайн + Оффлайн",
+      description: "Обучение методам защиты информации и тестирования на проникновение",
+      department: "it"
+    },
+    {
+      id: 3,
+      title: "Генная инженерия и биотехнологии",
+      duration: "14 месяцев",
+      format: "Онлайн",
+      description: "Современные методы генетических исследований и их применение в медицине",
+      department: "science"
+    },
+    {
+      id: 4,
+      title: "Digital Marketing Pro",
+      duration: "8 месяцев",
+      format: "Онлайн",
+      description: "Полный курс по цифровому маркетингу, SMM и аналитике",
+      department: "business"
+    }
+  ];
+
   const filteredTeachers = departments[activeDept].teachers.filter(teacher =>
     teacher.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     teacher.subject.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredPrograms = programs.filter(program => 
+    program.department === activeDept
   );
 
   const variants = {
@@ -248,6 +288,7 @@ const TeachersPage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => setShowProgramsModal(true)}
               className="px-8 py-4 border-2 border-white text-white rounded-xl font-bold hover:bg-white/10 transition-all"
             >
               Посмотреть программы обучения
@@ -255,6 +296,85 @@ const TeachersPage = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Модальное окно программ обучения */}
+      <AnimatePresence>
+        {showProgramsModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+            onClick={() => setShowProgramsModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 50 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 50 }}
+              className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowProgramsModal(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              >
+                <FaTimes size={24} />
+              </button>
+
+              <div className="p-8">
+                <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">
+                  Программы обучения - {departments[activeDept].title}
+                </h2>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  {filteredPrograms.map(program => (
+                    <motion.div
+                      key={program.id}
+                      whileHover={{ scale: 1.02 }}
+                      className="bg-gray-50 rounded-lg p-6 border border-gray-200"
+                    >
+                      <h3 className="text-xl font-bold mb-2 text-blue-800">{program.title}</h3>
+                      <div className="flex items-center text-sm text-gray-600 mb-3">
+                        <span className="mr-4">⏱ {program.duration}</span>
+                        <span>📌 {program.format}</span>
+                      </div>
+                      <p className="text-gray-700 mb-4">{program.description}</p>
+                      <button className="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                        Подробнее <FiExternalLink className="ml-1" />
+                      </button>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {filteredPrograms.length === 0 && (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">Программы для этого направления пока не добавлены</p>
+                  </div>
+                )}
+
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <h3 className="text-xl font-bold mb-4">Хотите индивидуальную консультацию?</h3>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <input
+                      type="text"
+                      placeholder="Ваше имя"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    />
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                      Отправить заявку
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
