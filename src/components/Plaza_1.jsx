@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiChevronRight, FiChevronLeft, FiMapPin, FiPhone, FiMail, FiClock, FiShoppingBag, FiCoffee, FiFilm, FiMusic, FiGift } from 'react-icons/fi';
+import { FiChevronRight, FiChevronLeft, FiMapPin, FiPhone, FiMail, FiClock, FiShoppingBag, FiCoffee, FiFilm, FiMusic, FiGift, FiX } from 'react-icons/fi';
 
 const slides = [
   {
@@ -485,67 +485,146 @@ const PromotionCard = ({ promotion }) => {
 };
 
 const RestaurantCard = ({ restaurant }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <motion.div 
-      whileHover={{ scale: 1.02 }}
-      className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
-    >
-      <div className="relative h-48 overflow-hidden">
-        <img 
-          src={restaurant.image} 
-          alt={restaurant.name} 
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-        />
-        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow">
-          <span className="text-yellow-500 font-bold">{restaurant.rating}</span>
-          <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-        </div>
-      </div>
-      <div className="p-6">
-        <h4 className="text-xl font-bold text-gray-900 mb-2">{restaurant.name}</h4>
-        <p className="text-gray-600 mb-4">{restaurant.description}</p>
-        
-        <div className="flex flex-wrap gap-3 mb-4">
-          <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-            {restaurant.cuisine}
-          </span>
-          <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-            {restaurant.priceRange}
-          </span>
-        </div>
-        
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-          <FiClock className="text-blue-500" />
-          <span>{restaurant.hours}</span>
-        </div>
-        <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-          <FiMapPin className="text-blue-500" />
-          <span>{restaurant.location}</span>
-        </div>
-        
-        <div className="mb-4">
-          <h5 className="font-medium text-gray-900 mb-2">Популярные блюда:</h5>
-          <div className="flex flex-wrap gap-2">
-            {restaurant.menu.slice(0, 4).map((item, i) => (
-              <span key={i} className="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                {item}
-              </span>
-            ))}
-            {restaurant.menu.length > 4 && (
-              <span className="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                +{restaurant.menu.length - 4} ещё
-              </span>
-            )}
+    <>
+      <motion.div 
+        whileHover={{ scale: 1.02 }}
+        className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+      >
+        {/* Карточка ресторана (осталось без изменений) */}
+        <div className="relative h-48 overflow-hidden">
+          <img 
+            src={restaurant.image} 
+            alt={restaurant.name} 
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+          />
+          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1 shadow">
+            <span className="text-yellow-500 font-bold">{restaurant.rating}</span>
+            <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
           </div>
         </div>
-        
-        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.01]">
-          Посмотреть меню
-        </button>
-      </div>
-    </motion.div>
+        <div className="p-6">
+          <h4 className="text-xl font-bold text-gray-900 mb-2">{restaurant.name}</h4>
+          <p className="text-gray-600 mb-4">{restaurant.description}</p>
+          
+          <div className="flex flex-wrap gap-3 mb-4">
+            <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+              {restaurant.cuisine}
+            </span>
+            <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+              {restaurant.priceRange}
+            </span>
+          </div>
+          
+          <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+            <FiClock className="text-blue-500" />
+            <span>{restaurant.hours}</span>
+          </div>
+          <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+            <FiMapPin className="text-blue-500" />
+            <span>{restaurant.location}</span>
+          </div>
+          
+          <div className="mb-4">
+            <h5 className="font-medium text-gray-900 mb-2">Популярные блюда:</h5>
+            <div className="flex flex-wrap gap-2">
+              {restaurant.menu.slice(0, 4).map((item, i) => (
+                <span key={i} className="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                  {item}
+                </span>
+              ))}
+              {restaurant.menu.length > 4 && (
+                <span className="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                  +{restaurant.menu.length - 4} ещё
+                </span>
+              )}
+            </div>
+          </div>
+          
+          <button 
+            onClick={() => setIsMenuOpen(true)}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.01]"
+          >
+            Посмотреть меню
+          </button>
+        </div>
+      </motion.div>
+
+      {/* Модальное окно с меню */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="sticky top-0 bg-white p-4 border-b flex justify-between items-center">
+                <h3 className="text-2xl font-bold text-gray-900">{restaurant.name} - Меню</h3>
+                <button 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <FiX size={24} />
+                </button>
+              </div>
+              
+              <div className="p-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-xl font-semibold mb-4 text-gray-800">Основные блюда</h4>
+                    <ul className="space-y-3">
+                      {restaurant.menu.map((item, index) => (
+                        <li key={index} className="flex justify-between py-2 border-b border-gray-100">
+                          <span className="text-gray-700">{item}</span>
+                          <span className="text-gray-500">450 сом</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-xl font-semibold mb-4 text-gray-800">Напитки</h4>
+                    <ul className="space-y-3">
+                      <li className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-700">Чай</span>
+                        <span className="text-gray-500">80 сом</span>
+                      </li>
+                      <li className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-700">Кофе</span>
+                        <span className="text-gray-500">120 сом</span>
+                      </li>
+                      <li className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-700">Морс</span>
+                        <span className="text-gray-500">150 сом</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div className="mt-8 bg-blue-50 p-4 rounded-lg">
+                  <h4 className="font-semibold text-blue-800 mb-2">Контакты</h4>
+                  <p className="text-gray-700">{restaurant.location}</p>
+                  <p className="text-gray-700 mt-1">{restaurant.hours}</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
@@ -694,17 +773,30 @@ const ContactForm = () => {
 const MapSection = () => {
   return (
     <div className="relative h-96 rounded-2xl overflow-hidden shadow-xl mb-16">
-      <div className="absolute inset-0 bg-blue-100 flex items-center justify-center">
-        <div className="text-center p-6 max-w-md">
-          <h3 className="text-2xl font-bold text-blue-900 mb-4">Мы находимся здесь</h3>
-          <p className="text-gray-700 mb-4">
-            ул. Ибраимова 115, Бишкек, Кыргызстан
-          </p>
-          
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105">
-            <a href="https://2gis.kg/bishkek/directions/points/%7C74.617938%2C42.873855%3B70000001019340049">Построить маршрут</a>
-          </button>
-        </div>
+      {/* Карта Google Maps */}
+      <iframe
+        className="absolute inset-0 w-full h-full border-0"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.027806400744!2d74.6157483154665!3d42.87385497915578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb7d56687f36f%3A0x29e7f2b7b14a6e1b!2zMTE1INGD0LvQuNGG0LjQsNC70YzQvdCw0Y8g0LjQsdGA0LDQt9C-0LLQsCwg0JHQuNGI0LrQtdC6!5e0!3m2!1sru!2skg!4v1620000000000!5m2!1sru!2skg"
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
+
+      {/* Блок с адресом и кнопкой (поверх карты) */}
+      <div className="absolute bottom-6 left-6 right-6 sm:left-auto sm:right-6 sm:bottom-auto sm:top-6 bg-white bg-opacity-90 rounded-xl p-6 max-w-md shadow-lg">
+        <h3 className="text-2xl font-bold text-blue-900 mb-4">Мы находимся здесь</h3>
+        <p className="text-gray-700 mb-4">
+          ул. Ибраимова 115, Бишкек, Кыргызстан
+        </p>
+        <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105">
+          <a
+            href="https://2gis.kg/bishkek/directions/points/%7C74.617938%2C42.873855%3B70000001019340049"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Построить маршрут
+          </a>
+        </button>
       </div>
     </div>
   );
@@ -714,7 +806,7 @@ export default function DordoiPlazaPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [storeFilter, setStoreFilter] = useState('Все');
   const [activeFAQ, setActiveFAQ] = useState(null);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -888,8 +980,8 @@ export default function DordoiPlazaPage() {
                 <FAQItem 
                   key={item.id} 
                   item={item} 
-                  isActive={activeFAQ === item.id} 
-                  onClick={setActiveFAQ} 
+                  isActive={activeFAQ === item.id}
+                  onClick={() => setActiveFAQ(activeFAQ === item.id ? null : item.id)}
                 />
               ))}
             </div>

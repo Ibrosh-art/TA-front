@@ -66,13 +66,24 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
 
   useEffect(() => {
     if (videoRef.current) {
-      // На мобильных уменьшаем качество видео для производительности
-      videoRef.current.playbackRate = isMobile ? 0.7 : 0.8;
-      if (isMobile) {
-        videoRef.current.playsInline = true;
+      // Оптимизация для мобильных устройств
+      videoRef.current.playbackRate = isMobile ? 0.8 : 1.0;
+      videoRef.current.playsInline = true;
+      videoRef.current.muted = true;
+      
+      // Попытка автоматического воспроизведения
+      const playPromise = videoRef.current.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          // Автовоспроизведение не сработало, пробуем другие методы
+          videoRef.current.setAttribute('muted', '');
+          videoRef.current.muted = true;
+          videoRef.current.play();
+        });
       }
     }
-  }, [isMobile]);
+  }, [isMobile, src]);
 
   const handleMouseMove = (event) => {
     if (!hoverButtonRef.current || isMobile || prefersReducedMotion) return;
@@ -104,7 +115,7 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
     setHoverOpacity(0);
     setIsHovered(false);
     if (videoRef.current) {
-      videoRef.current.playbackRate = isMobile ? 0.7 : 0.8;
+      videoRef.current.playbackRate = isMobile ? 0.8 : 1.0;
       videoRef.current.style.transform = "translate(0, 0) scale(1)";
     }
   };
@@ -124,7 +135,7 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
 
   return (
     <div 
-      className="relative size-full overflow-hidden"
+      className="relative size-full overflow-hidden rounded-xl"
       onMouseMove={!isMobile ? handleMouseMove : undefined}
       onMouseEnter={!isMobile ? handleMouseEnter : undefined}
       onMouseLeave={!isMobile ? handleMouseLeave : undefined}
@@ -132,16 +143,18 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
     >
       <video
         ref={videoRef}
-        src={isMobile ? src.replace('.mp4', '-mobile.mp4') || src : src}
+        src={src}
         loop
         muted
         autoPlay
         playsInline
         className="absolute left-0 top-0 size-full object-cover object-center transition-transform duration-500"
+        disablePictureInPicture
+        preload="auto"
       />
       
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/70" />
+      {/* Gradient overlay - сделаем менее интенсивным для лучшей видимости видео */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/50" />
       
       <div className="relative z-10 flex size-full flex-col justify-between p-4 md:p-5 text-blue-50">
         <div>
@@ -155,7 +168,7 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
           </motion.h1>
           {description && (
             <motion.p 
-              className="mt-2 md:mt-3 max-w-64 text-xs md:text-base"
+              className="mt-2 md:mt-3 max-w-64 text-xs md:text-base font-medium"
               initial={{ opacity: isMobile ? 1 : 0.7 }}
               animate={{ opacity: isHovered || isMobile ? 1 : 0.7 }}
               transition={{ duration: 0.3 }}
@@ -212,7 +225,6 @@ const Features = () => {
     {
       id: 1,
       src: "videos/feature-22.mp4",
-      mobileSrc: "videos/feature-22-mobile.mp4",
       title: <>F<b>oo</b>tball</>,
       description: "Инновационные технологии для футбольных клубов",
       className: "bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2",
@@ -221,7 +233,6 @@ const Features = () => {
     {
       id: 2,
       src: "videos/feature-3.mp4",
-      mobileSrc: "videos/feature-3-mobile.mp4",
       title: <>uni<b>v</b>ersity</>,
       description: "Образовательные решения нового поколения",
       className: "bento-tilt_1 row-span-1 md:col-span-1",
@@ -230,7 +241,6 @@ const Features = () => {
     {
       id: 3,
       src: "videos/feature-4.mp4",
-      mobileSrc: "videos/feature-4-mobile.mp4",
       title: <>pl<b>a</b>za</>,
       description: "Торговые пространства будущего",
       className: "bento-tilt_1 md:col-span-1",
@@ -250,7 +260,7 @@ const Features = () => {
 
   return (
     <section className="relative pb-10 md:pb-22 overflow-hidden">
-      {/* Упрощенный фон для мобильных */}
+      {/* Упрощенный фон */}
       {!isMobile && !prefersReducedMotion && (
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 from-blue-50/10 via-white to-purple-50/10"></div>
@@ -280,7 +290,6 @@ const Features = () => {
       )}
       
       <div className="relative container mx-auto px-4 md:px-8">
-        
         <div className={`grid ${isMobile ? 'grid-cols-1 gap-4' : 'grid-cols-2 gap-7'} h-auto md:h-[135vh]`}>
           {bentoItems.map((item, index) => (
             <BentoTilt 
@@ -289,7 +298,7 @@ const Features = () => {
               intensity={isMobile ? 0 : item.intensity}
             >
               <BentoCard
-                src={isMobile ? item.mobileSrc || item.src : item.src}
+                src={item.src}
                 title={item.title}
                 description={item.description}
                 isComingSoon={true}
@@ -297,7 +306,6 @@ const Features = () => {
             </BentoTilt>
           ))}
         </div>
-        
       </div>
     </section>
   );

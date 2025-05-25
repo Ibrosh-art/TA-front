@@ -11,7 +11,9 @@ export const matchesData = [
     venue: "Стадион Дордой",
     ticketAvailable: true,
     homeScore: null,
-    awayScore: null
+    awayScore: null,
+    homeLogo: "https://upload.wikimedia.org/wikipedia/ru/0/01/%D0%A4%D0%9A_%D0%94%D0%BE%D1%80%D0%B4%D0%BE%D0%B9.png",
+    awayLogo: "/images/logos/abdysh-ata.png"
   },
   {
     id: 2,
@@ -23,7 +25,9 @@ export const matchesData = [
     venue: "Стадион Дордой",
     ticketAvailable: true,
     homeScore: null,
-    awayScore: null
+    awayScore: null,
+    homeLogo: "/images/logos/dordoi.png",
+    awayLogo: "/images/logos/alga.png"
   },
   {
     id: 3,
@@ -35,7 +39,9 @@ export const matchesData = [
     venue: "Стадион Нефтчи",
     ticketAvailable: false,
     homeScore: null,
-    awayScore: null
+    awayScore: null,
+    homeLogo: "/images/logos/neftchi.png",
+    awayLogo: "/images/logos/dordoi.png"
   },
   {
     id: 4,
@@ -47,7 +53,9 @@ export const matchesData = [
     venue: "Стадион Дордой",
     ticketAvailable: true,
     homeScore: null,
-    awayScore: null
+    awayScore: null,
+    homeLogo: "/images/logos/dordoi.png",
+    awayLogo: "/images/logos/alay.png"
   },
   {
     id: 5,
@@ -59,9 +67,12 @@ export const matchesData = [
     venue: "Стадион Алга",
     ticketAvailable: false,
     homeScore: null,
-    awayScore: null
+    awayScore: null,
+    homeLogo: "/images/logos/alga.png",
+    awayLogo: "/images/logos/dordoi.png"
   }
 ];
+
 
 export const newsArticles = [
     { title: "Спасибо Бектур и Марлен", date: "18.01.2025", link: "#" },
