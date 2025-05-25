@@ -52,10 +52,9 @@ const Navbar = () => {
               className="w-12 h-12 rounded-full bg-black"
               whileHover={{ rotate: 15 }}
               transition={{ type: "spring" }}
-            />
-            <span className="ml-3 text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-              Dordoi
-            </span>
+            /><span className="ml-3 text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent hidden md:inline">
+  Dordoi
+</span>
           </Link>
         </motion.div>
         <nav className="hidden md:flex items-center space-x-1">
@@ -173,7 +172,6 @@ const Navbar = () => {
               alt="Dordoi Logo"
               className="w-10 h-10 mr-3 rounded-full"
             />
-            <span className="text-xl font-bold bg-gradient-to-r from-white to-white/100  bg-clip-text text-transparent">Dordoi</span>
           </div>
           <button
             onClick={() => setMobileMenuOpen(false)}

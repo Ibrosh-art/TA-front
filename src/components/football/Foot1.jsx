@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { matchesData } from './const';
 import { 
   FaCalendarAlt, FaTicketAlt, FaChevronDown, FaChevronUp, 
-  FaSearch, FaMapMarkerAlt, FaFilter, FaStar, FaShareAlt 
+  FaSearch, FaMapMarkerAlt, FaFilter, FaStar, FaShareAlt, FaFire
 } from 'react-icons/fa';
 import { IoMdNotificationsOutline, IoMdNotifications } from 'react-icons/io';
-import { BsClockHistory, BsTrophy } from 'react-icons/bs';
+import { BsClockHistory, BsTrophy, BsGraphUp } from 'react-icons/bs';
+import { GiSoccerBall, GiSoccerKick } from 'react-icons/gi';
 
 const competitions = ["Все", "Премьер-Лига", "Кубок Кыргызстана", "Дружеские матчи"];
 const matchStatuses = ["Все", "Предстоящие", "Завершенные", "Отмененные"];
@@ -20,6 +21,7 @@ const MatchesPage = () => {
   const [favorites, setFavorites] = useState([]);
   const [activeTab, setActiveTab] = useState("matches");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(null);
 
   // Load favorites from localStorage
   useEffect(() => {
@@ -69,7 +71,6 @@ const MatchesPage = () => {
       [matchId]: !prev[matchId]
     }));
     
-    // Here you would typically send this to your backend
     console.log(`Notifications ${notifications[matchId] ? 'disabled' : 'enabled'} for match ${matchId}`);
   };
 
@@ -91,7 +92,6 @@ const MatchesPage = () => {
         url: window.location.href
       }).catch(err => console.log('Error sharing:', err));
     } else {
-      // Fallback for browsers that don't support Web Share API
       alert(shareText);
     }
   };
@@ -99,11 +99,35 @@ const MatchesPage = () => {
   const getMatchStatusBadge = (status) => {
     switch(status) {
       case 'upcoming': 
-        return <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Предстоящий</span>;
+        return (
+          <motion.span 
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs px-3 py-1 rounded-full shadow-md flex items-center"
+          >
+            <FaFire className="mr-1" /> Предстоящий
+          </motion.span>
+        );
       case 'completed':
-        return <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Завершен</span>;
+        return (
+          <motion.span 
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            className="bg-gradient-to-r from-green-500 to-green-600 text-white text-xs px-3 py-1 rounded-full shadow-md"
+          >
+            Завершен
+          </motion.span>
+        );
       case 'canceled':
-        return <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Отменен</span>;
+        return (
+          <motion.span 
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            className="bg-gradient-to-r from-red-500 to-red-600 text-white text-xs px-3 py-1 rounded-full shadow-md"
+          >
+            Отменен
+          </motion.span>
+        );
       default:
         return null;
     }
@@ -111,178 +135,354 @@ const MatchesPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Header */}
-      <header className="bg-gradient-to-r from-blue-800 to-blue-600 text-white shadow-lg relative overflow-hidden">
-        <div className="absolute inset-0 bg-stadium-pattern opacity-10"></div>
-        <div className="container mx-auto px-4 py-12 text-center relative">
+      {/* Epic Header with Parallax Effect */}
+      <motion.header 
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative overflow-hidden bg-gray-900 text-white shadow-2xl"
+      >
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-blue-900 opacity-90"></div>
+          <div className="absolute inset-0 bg-stadium-pattern opacity-20"></div>
+          <motion.div 
+            animate={{
+              x: [0, 10, 0],
+              y: [0, 5, 0],
+              transition: { duration: 15, repeat: Infinity, ease: "linear" }
+            }}
+            className="absolute inset-0 bg-soccer-pattern opacity-10"
+          ></motion.div>
+        </div>
+        
+        <div className="container mx-auto px-4 py-20 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="inline-block mb-6"
+          >
+            <GiSoccerKick className="text-5xl text-yellow-400" />
+          </motion.div>
+          
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold mb-4"
+            transition={{ delay: 0.3 }}
+            className="text-5xl md:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-200"
           >
-            Календарь матчей
+            КАЛЕНДАРЬ МАТЧЕЙ
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-blue-100 max-w-2xl mx-auto"
+          
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="mt-8"
           >
-            Полное расписание всех игр ФК Дордой. Не пропустите важные матчи!
-          </motion.p>
+            <GiSoccerBall className="inline-block text-4xl text-yellow-400 animate-spin-slow" />
+          </motion.div>
         </div>
-      </header>
+      </motion.header>
 
-      {/* Navigation Tabs */}
-      <div className="container mx-auto px-4 -mt-6">
-        <div className="flex border-b border-gray-200">
+      {/* Navigation Tabs with Glow Effect */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+        className="container mx-auto px-4 -mt-8 relative z-20"
+      >
+        <div className="flex bg-white rounded-t-xl overflow-hidden shadow-lg">
           <button
             onClick={() => setActiveTab("matches")}
-            className={`px-6 py-3 font-medium ${activeTab === "matches" ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'}`}
+            className={`px-8 py-4 font-bold text-sm uppercase tracking-wider relative overflow-hidden ${activeTab === "matches" ? 
+              'text-white bg-gradient-to-r from-blue-600 to-blue-800 shadow-blue' : 
+              'text-gray-600 hover:text-blue-600 transition-colors'}`}
           >
-            Матчи
+            {activeTab === "matches" && (
+              <motion.span 
+                layoutId="tabIndicator"
+                className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800"
+                initial={false}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
+            <span className="relative z-10 flex items-center">
+              <GiSoccerBall className="mr-2" /> Все матчи
+            </span>
           </button>
+          
           <button
             onClick={() => setActiveTab("favorites")}
-            className={`px-6 py-3 font-medium ${activeTab === "favorites" ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'}`}
+            className={`px-8 py-4 font-bold text-sm uppercase tracking-wider relative overflow-hidden ${activeTab === "favorites" ? 
+              'text-white bg-gradient-to-r from-yellow-500 to-yellow-600 shadow-yellow' : 
+              'text-gray-600 hover:text-yellow-600 transition-colors'}`}
           >
-            Избранное ({favorites.length})
+            {activeTab === "favorites" && (
+              <motion.span 
+                layoutId="tabIndicator"
+                className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-600"
+                initial={false}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
+            <span className="relative z-10 flex items-center">
+              <FaStar className="mr-2" /> Избранное ({favorites.length})
+            </span>
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 relative z-10">
         {/* Filters Section */}
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white rounded-xl shadow-md p-6 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9 }}
+          className="bg-white rounded-xl shadow-xl p-6 mb-8 border border-gray-200"
         >
           <div className="flex flex-col md:flex-row gap-4 items-end">
-            {/* Search Field */}
+            {/* Search Field with Glow */}
             <div className="relative flex-grow w-full">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FaSearch className="text-gray-400" />
-              </div>
-              <input
-                type="text"
-                placeholder="Поиск по командам, стадиону или дате..."
-                className="pl-10 pr-4 py-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
+              <motion.div
+                whileHover={{ scale: 1.01 }}
+                whileFocus={{ scale: 1.01 }}
+                className="relative"
+              >
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-blue-500">
+                  <FaSearch className="text-lg" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Поиск по командам, стадиону или дате..."
+                  className="pl-12 pr-6 py-3 w-full border-2 border-blue-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 transition-all"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </motion.div>
             </div>
 
             {/* Filter Button (Mobile) */}
-            <button 
+            <motion.button 
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="md:hidden bg-blue-600 text-white px-4 py-3 rounded-lg flex items-center"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="md:hidden bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 py-3 rounded-xl shadow-lg flex items-center"
             >
               <FaFilter className="mr-2" />
               Фильтры
-            </button>
+            </motion.button>
 
             {/* Filter Controls (Desktop) */}
             <div className="hidden md:flex gap-4 w-full md:w-auto">
-              <div className="w-full md:w-48">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Турнир</label>
+              <motion.div 
+                whileHover={{ y: -2 }}
+                className="w-full md:w-56"
+              >
                 <div className="relative">
-                  <BsTrophy className="absolute left-3 top-3 text-gray-400" />
+                  <div className="absolute left-3 top-3 text-blue-500">
+                    <BsTrophy />
+                  </div>
                   <select
                     value={activeCompetition}
                     onChange={(e) => setActiveCompetition(e.target.value)}
-                    className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="pl-12 pr-6 py-3 w-full border-2 border-blue-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 appearance-none bg-white"
                   >
                     {competitions.map(comp => (
                       <option key={comp} value={comp}>{comp}</option>
                     ))}
                   </select>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="w-full md:w-48">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Статус</label>
+              <motion.div 
+                whileHover={{ y: -2 }}
+                className="w-full md:w-56"
+              >
                 <div className="relative">
-                  <BsClockHistory className="absolute left-3 top-3 text-gray-400" />
+                  <div className="absolute left-3 top-3 text-blue-500">
+                    <BsClockHistory />
+                  </div>
                   <select
                     value={activeStatus}
                     onChange={(e) => setActiveStatus(e.target.value)}
-                    className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="pl-12 pr-6 py-3 w-full border-2 border-blue-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500 appearance-none bg-white"
                   >
                     {matchStatuses.map(status => (
                       <option key={status} value={status}>{status}</option>
                     ))}
                   </select>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
 
           {/* Expanded Filters (Mobile) */}
-          {isFilterOpen && (
-            <motion.div 
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="mt-4 md:hidden space-y-4"
-            >
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Турнир</label>
-                <select
-                  value={activeCompetition}
-                  onChange={(e) => setActiveCompetition(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          <AnimatePresence>
+            {isFilterOpen && (
+              <motion.div 
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mt-4 md:hidden space-y-4 overflow-hidden"
+              >
+                <motion.div
+                  initial={{ x: -20 }}
+                  animate={{ x: 0 }}
                 >
-                  {competitions.map(comp => (
-                    <option key={comp} value={comp}>{comp}</option>
-                  ))}
-                </select>
-              </div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Турнир</label>
+                  <select
+                    value={activeCompetition}
+                    onChange={(e) => setActiveCompetition(e.target.value)}
+                    className="w-full px-4 py-3 border-2 border-blue-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500"
+                  >
+                    {competitions.map(comp => (
+                      <option key={comp} value={comp}>{comp}</option>
+                    ))}
+                  </select>
+                </motion.div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Статус</label>
-                <select
-                  value={activeStatus}
-                  onChange={(e) => setActiveStatus(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                <motion.div
+                  initial={{ x: 20 }}
+                  animate={{ x: 0 }}
                 >
-                  {matchStatuses.map(status => (
-                    <option key={status} value={status}>{status}</option>
-                  ))}
-                </select>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Статус</label>
+                  <select
+                    value={activeStatus}
+                    onChange={(e) => setActiveStatus(e.target.value)}
+                    className="w-full px-4 py-3 border-2 border-blue-100 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-200 focus:border-blue-500"
+                  >
+                    {matchStatuses.map(status => (
+                      <option key={status} value={status}>{status}</option>
+                    ))}
+                  </select>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Stats Cards with Floating Animation */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+        >
+          <motion.div
+            whileHover={{ y: -5 }}
+            className="bg-gradient-to-br from-blue-600 to-blue-800 p-5 rounded-2xl shadow-2xl text-white relative overflow-hidden"
+          >
+            <div className="absolute -right-4 -bottom-4 opacity-20">
+              <GiSoccerBall className="text-6xl" />
+            </div>
+            <div className="flex items-center z-10 relative">
+              <div className="p-3 rounded-xl bg-blue-500 bg-opacity-30 mr-4">
+                <BsGraphUp className="text-2xl" />
               </div>
-            </motion.div>
-          )}
+              <div>
+                <div className="text-sm font-medium opacity-90">Матчей сыграно</div>
+                <div className="text-3xl font-bold">12</div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -5 }}
+            className="bg-gradient-to-br from-green-600 to-green-800 p-5 rounded-2xl shadow-2xl text-white relative overflow-hidden"
+          >
+            <div className="absolute -right-4 -bottom-4 opacity-20">
+              <BsTrophy className="text-6xl" />
+            </div>
+            <div className="flex items-center z-10 relative">
+              <div className="p-3 rounded-xl bg-green-500 bg-opacity-30 mr-4">
+                <BsTrophy className="text-2xl" />
+              </div>
+              <div>
+                <div className="text-sm font-medium opacity-90">Побед</div>
+                <div className="text-3xl font-bold">8</div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -5 }}
+            className="bg-gradient-to-br from-yellow-500 to-yellow-600 p-5 rounded-2xl shadow-2xl text-white relative overflow-hidden"
+          >
+            <div className="absolute -right-4 -bottom-4 opacity-20">
+              <BsClockHistory className="text-6xl" />
+            </div>
+            <div className="flex items-center z-10 relative">
+              <div className="p-3 rounded-xl bg-yellow-500 bg-opacity-30 mr-4">
+                <BsClockHistory className="text-2xl" />
+              </div>
+              <div>
+                <div className="text-sm font-medium opacity-90">Ничьих</div>
+                <div className="text-3xl font-bold">3</div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -5 }}
+            className="bg-gradient-to-br from-red-600 to-red-800 p-5 rounded-2xl shadow-2xl text-white relative overflow-hidden"
+          >
+            <div className="absolute -right-4 -bottom-4 opacity-20">
+              <GiSoccerKick className="text-6xl" />
+            </div>
+            <div className="flex items-center z-10 relative">
+              <div className="p-3 rounded-xl bg-red-500 bg-opacity-30 mr-4">
+                <BsClockHistory className="text-2xl" />
+              </div>
+              <div>
+                <div className="text-sm font-medium opacity-90">Поражений</div>
+                <div className="text-3xl font-bold">1</div>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Matches List */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 1.1 }}
         >
           {(activeTab === "favorites" && favorites.length === 0) ? (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="bg-white rounded-xl shadow-md p-8 text-center"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-white rounded-2xl shadow-xl p-12 text-center border-2 border-dashed border-gray-200"
             >
-              <FaStar className="mx-auto text-4xl text-yellow-400 mb-4" />
-              <h3 className="text-xl font-bold text-gray-700 mb-2">Нет избранных матчей</h3>
-              <p className="text-gray-600">Добавляйте матчи в избранное, чтобы следить за ними</p>
+              <motion.div
+                animate={{ 
+                  rotate: [0, 10, -10, 0],
+                  transition: { duration: 2, repeat: Infinity }
+                }}
+              >
+                <FaStar className="mx-auto text-6xl text-yellow-400 mb-6 opacity-80" />
+              </motion.div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">Нет избранных матчей</h3>
+              <p className="text-gray-600 max-w-md mx-auto">
+                Добавляйте матчи в избранное, чтобы следить за ними. Нажмите на звездочку на карточке матча.
+              </p>
             </motion.div>
           ) : (sortedMatches.length === 0) ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="bg-white rounded-xl shadow-md p-8 text-center"
+              className="bg-white rounded-2xl shadow-xl p-12 text-center border-2 border-dashed border-gray-200"
             >
-              <p className="text-gray-600">Матчи не найдены. Попробуйте изменить параметры поиска.</p>
+              <GiSoccerBall className="mx-auto text-6xl text-gray-400 mb-6" />
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">Матчи не найдены</h3>
+              <p className="text-gray-600 max-w-md mx-auto">
+                Попробуйте изменить параметры поиска или выберите другой турнир.
+              </p>
             </motion.div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-6">
               <AnimatePresence>
                 {sortedMatches
                   .filter(match => activeTab === "matches" || favorites.includes(match.id))
@@ -290,178 +490,261 @@ const MatchesPage = () => {
                     <motion.div
                       key={match.id}
                       initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: 0,
+                        transition: { delay: match.id % 10 * 0.05 }
+                      }}
                       exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.3 }}
-                      className={`bg-white rounded-xl shadow-md overflow-hidden ${match.status === 'completed' ? 'opacity-90' : ''}`}
+                      whileHover={{ y: -3 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`relative ${match.status === 'completed' ? 'opacity-90' : ''}`}
                     >
-                      {/* Match Header */}
+                      {/* Match Card */}
                       <div 
-                        className="p-4 cursor-pointer hover:bg-gray-50 transition-colors"
+                        className={`bg-white rounded-2xl shadow-xl overflow-hidden border-l-4 ${
+                          match.status === 'upcoming' ? 'border-blue-500' :
+                          match.status === 'completed' ? 'border-green-500' :
+                          'border-red-500'
+                        }`}
                         onClick={() => setExpandedMatch(expandedMatch === match.id ? null : match.id)}
                       >
-                        <div className="flex justify-between items-start">
-                          <div className="flex items-center text-gray-500 text-sm">
-                            <FaCalendarAlt className="mr-2" />
-                            <span>{formatDate(match.date)}</span>
-                            <span className="mx-2">•</span>
-                            <span>{match.time}</span>
+                        {/* Match Header */}
+                        <div className="p-5 cursor-pointer hover:bg-gray-50 transition-colors">
+                          <div className="flex justify-between items-start">
+                            <div className="flex items-center text-gray-500 text-sm">
+                              <FaCalendarAlt className="mr-2 text-blue-500" />
+                              <span>{formatDate(match.date)}</span>
+                              <span className="mx-2">•</span>
+                              <span>{match.time}</span>
+                            </div>
+                            
+                            <div className="flex items-center space-x-3">
+                              {getMatchStatusBadge(match.status)}
+                              <motion.button 
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  toggleFavorite(match.id);
+                                }}
+                                whileHover={{ scale: 1.2 }}
+                                whileTap={{ scale: 0.8 }}
+                                className="text-gray-400 hover:text-yellow-500 transition-colors"
+                              >
+                                <FaStar className={favorites.includes(match.id) ? 'text-yellow-400 fill-current' : ''} />
+                              </motion.button>
+                              {expandedMatch === match.id ? (
+                                <FaChevronUp className="text-gray-500" />
+                              ) : (
+                                <FaChevronDown className="text-gray-500" />
+                              )}
+                            </div>
                           </div>
-                          
-                          <div className="flex items-center space-x-2">
-                            {getMatchStatusBadge(match.status)}
-                            <button 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggleFavorite(match.id);
-                              }}
-                              className="text-gray-400 hover:text-yellow-500 transition-colors"
+
+                          {/* Teams and Score */}
+                          <div className="mt-5 flex items-center justify-between">
+                            <div className="text-center flex-1">
+                              <div className="flex items-center justify-center">
+                                <motion.div
+                                  whileHover={{ scale: 1.1 }}
+                                  className="relative"
+                                  onMouseEnter={() => setIsHovered(`home-${match.id}`)}
+                                  onMouseLeave={() => setIsHovered(null)}
+                                >
+                                  <img 
+                                    src={match.homeTeamLogo || 'https://upload.wikimedia.org/wikipedia/ru/0/01/%D0%A4%D0%9A_%D0%94%D0%BE%D1%80%D0%B4%D0%BE%D0%B9.png'} 
+                                    alt={match.homeTeam}
+                                    className="w-12 h-12 mr-3 object-contain"
+                                  />
+                                  {isHovered === `home-${match.id}` && (
+                                    <motion.div
+                                      initial={{ opacity: 0, y: 10 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap"
+                                    >
+                                      {match.homeTeam}
+                                    </motion.div>
+                                  )}
+                                </motion.div>
+                                <p className="font-bold text-gray-900">{match.homeTeam}</p>
+                              </div>
+                              {match.homeScore !== null && (
+                                <motion.p 
+                                  initial={{ scale: 0.5 }}
+                                  animate={{ scale: 1 }}
+                                  className="text-3xl font-bold mt-2 text-gray-900"
+                                >
+                                  {match.homeScore}
+                                </motion.p>
+                              )}
+                            </div>
+                            
+                            <div className="mx-4 text-gray-400 font-bold text-sm relative">
+                              <motion.div
+                                animate={{ 
+                                  scale: [1, 1.2, 1],
+                                  transition: { duration: 2, repeat: Infinity }
+                                }}
+                                className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-3 py-1 rounded-full text-xs"
+                              >
+                                VS
+                              </motion.div>
+                            </div>
+                            
+                            <div className="text-center flex-1">
+                              <div className="flex items-center justify-center">
+                                <p className="font-bold text-gray-900">{match.awayTeam}</p>
+                                <motion.div
+                                  whileHover={{ scale: 1.1 }}
+                                  className="relative"
+                                  onMouseEnter={() => setIsHovered(`away-${match.id}`)}
+                                  onMouseLeave={() => setIsHovered(null)}
+                                >
+                                  <img 
+                                    src={match.awayTeamLogo || 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/FK_Alga_Bishkek_Logo.svg/1200px-FK_Alga_Bishkek_Logo.svg.png'} 
+                                    alt={match.awayTeam}
+                                    className="w-12 h-12 ml-3 object-contain"
+                                  />
+                                  {isHovered === `away-${match.id}` && (
+                                    <motion.div
+                                      initial={{ opacity: 0, y: 10 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap"
+                                    >
+                                      {match.awayTeam}
+                                    </motion.div>
+                                  )}
+                                </motion.div>
+                              </div>
+                              {match.awayScore !== null && (
+                                <motion.p 
+                                  initial={{ scale: 0.5 }}
+                                  animate={{ scale: 1 }}
+                                  className="text-3xl font-bold mt-2 text-gray-900"
+                                >
+                                  {match.awayScore}
+                                </motion.p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="mt-3 text-center text-sm text-gray-500 flex items-center justify-center">
+                            <BsTrophy className="mr-2 text-yellow-500" />
+                            {match.competition}
+                          </div>
+                        </div>
+
+                        {/* Expanded Match Details */}
+                        <AnimatePresence>
+                          {expandedMatch === match.id && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              className="px-5 pb-5 border-t border-gray-100"
                             >
-                              <FaStar className={favorites.includes(match.id) ? 'text-yellow-400 fill-current' : ''} />
-                            </button>
-                            {expandedMatch === match.id ? (
-                              <FaChevronUp className="text-gray-500" />
-                            ) : (
-                              <FaChevronDown className="text-gray-500" />
-                            )}
-                          </div>
-                        </div>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                <motion.div
+                                  initial={{ x: -20 }}
+                                  animate={{ x: 0 }}
+                                  className="bg-blue-50 p-4 rounded-xl border border-blue-100"
+                                >
+                                  <h4 className="font-bold text-gray-700 mb-2 flex items-center">
+                                    <FaMapMarkerAlt className="mr-2 text-blue-600" />
+                                    Место проведения
+                                  </h4>
+                                  <p className="text-gray-600">{match.venue}</p>
+                                  {match.venueAddress && (
+                                    <p className="text-sm text-gray-500 mt-1">{match.venueAddress}</p>
+                                  )}
+                                  {match.venueMap && (
+                                    <motion.a 
+                                      href={match.venueMap} 
+                                      target="_blank" 
+                                      rel="noopener noreferrer"
+                                      whileHover={{ x: 3 }}
+                                      className="text-blue-600 text-sm inline-block mt-2 font-medium flex items-center"
+                                    >
+                                      Посмотреть на карте <FaChevronRight className="ml-1 text-xs" />
+                                    </motion.a>
+                                  )}
+                                </motion.div>
 
-                        {/* Teams and Score */}
-                        <div className="mt-4 flex items-center justify-between">
-                          <div className="text-center flex-1">
-                            <div className="flex items-center justify-center">
-                              <img 
-                                src={match.homeTeamLogo || 'https://via.placeholder.com/40'} 
-                                alt={match.homeTeam}
-                                className="w-8 h-8 mr-2 object-contain"
-                              />
-                              <p className="font-bold text-lg">{match.homeTeam}</p>
-                            </div>
-                            {match.homeScore !== null && (
-                              <p className="text-2xl font-bold mt-2">{match.homeScore}</p>
-                            )}
-                          </div>
-                          
-                          <div className="mx-4 text-gray-500 font-bold text-sm">VS</div>
-                          
-                          <div className="text-center flex-1">
-                            <div className="flex items-center justify-center">
-                              <p className="font-bold text-lg">{match.awayTeam}</p>
-                              <img 
-                                src={match.awayTeamLogo || 'https://via.placeholder.com/40'} 
-                                alt={match.awayTeam}
-                                className="w-8 h-8 ml-2 object-contain"
-                              />
-                            </div>
-                            {match.awayScore !== null && (
-                              <p className="text-2xl font-bold mt-2">{match.awayScore}</p>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="mt-2 text-center text-sm text-gray-500 flex items-center justify-center">
-                          <BsTrophy className="mr-1" />
-                          {match.competition}
-                        </div>
-                      </div>
-
-                      {/* Expanded Match Details */}
-                      <AnimatePresence>
-                        {expandedMatch === match.id && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="px-4 pb-4 border-t border-gray-100"
-                          >
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                              <div className="bg-gray-50 p-4 rounded-lg">
-                                <h4 className="font-bold text-gray-700 mb-2 flex items-center">
-                                  <FaMapMarkerAlt className="mr-2 text-blue-600" />
-                                  Место проведения
-                                </h4>
-                                <p className="text-gray-600">{match.venue}</p>
-                                {match.venueAddress && (
-                                  <p className="text-sm text-gray-500 mt-1">{match.venueAddress}</p>
-                                )}
-                                {match.venueMap && (
-                                  <a 
-                                    href={match.venueMap} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="text-blue-600 text-sm inline-block mt-2"
-                                  >
-                                    Посмотреть на карте →
-                                  </a>
-                                )}
+                                <motion.div
+                                  initial={{ x: 20 }}
+                                  animate={{ x: 0 }}
+                                  className="bg-yellow-50 p-4 rounded-xl border border-yellow-100"
+                                >
+                                  <h4 className="font-bold text-gray-700 mb-2">Дополнительная информация</h4>
+                                  {match.broadcast && (
+                                    <p className="text-gray-600 mb-2">
+                                      <span className="font-medium">Трансляция:</span> {match.broadcast}
+                                    </p>
+                                  )}
+                                  {match.referee && (
+                                    <p className="text-gray-600">
+                                      <span className="font-medium">Судья:</span> {match.referee}
+                                    </p>
+                                  )}
+                                </motion.div>
                               </div>
 
-                              <div className="bg-gray-50 p-4 rounded-lg">
-                                <h4 className="font-bold text-gray-700 mb-2">Дополнительная информация</h4>
-                                {match.broadcast && (
-                                  <p className="text-gray-600 mb-2">
-                                    <span className="font-medium">Трансляция:</span> {match.broadcast}
-                                  </p>
-                                )}
-                                {match.referee && (
-                                  <p className="text-gray-600">
-                                    <span className="font-medium">Судья:</span> {match.referee}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-
-                            <div className="mt-4 flex flex-wrap justify-center gap-3">
-                              {match.ticketAvailable ? (
-                                <>
-                                  <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center"
+                              <div className="mt-5 flex flex-wrap justify-center gap-3">
+                                {match.ticketAvailable ? (
+                                  <>
+                                    <motion.button
+                                      whileHover={{ 
+                                        scale: 1.05,
+                                        boxShadow: "0 5px 15px rgba(59, 130, 246, 0.4)"
+                                      }}
+                                      whileTap={{ scale: 0.98 }}
+                                      className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 py-2.5 rounded-xl shadow-lg flex items-center"
+                                    >
+                                      <FaTicketAlt className="mr-2" />
+                                      Купить билет
+                                    </motion.button>
+                                    
+                                    <motion.button
+                                      onClick={() => toggleNotification(match.id)}
+                                      whileHover={{ y: -2 }}
+                                      className="flex items-center px-5 py-2.5 border-2 border-blue-100 rounded-xl hover:bg-blue-50 transition-colors text-blue-600 font-medium"
+                                    >
+                                      {notifications[match.id] ? (
+                                        <>
+                                          <IoMdNotifications className="text-blue-600 mr-2" />
+                                          Уведомления включены
+                                        </>
+                                      ) : (
+                                        <>
+                                          <IoMdNotificationsOutline className="text-blue-600 mr-2" />
+                                          Включить уведомления
+                                        </>
+                                      )}
+                                    </motion.button>
+                                  </>
+                                ) : (
+                                  <motion.button 
+                                    disabled
+                                    whileHover={{ y: -2 }}
+                                    className="bg-gray-100 text-gray-500 px-6 py-2.5 rounded-xl cursor-not-allowed flex items-center"
                                   >
                                     <FaTicketAlt className="mr-2" />
-                                    Купить билет
+                                    Билеты скоро в продаже
                                   </motion.button>
-                                  
-                                  <button
-                                    onClick={() => toggleNotification(match.id)}
-                                    className="flex items-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors"
-                                  >
-                                    {notifications[match.id] ? (
-                                      <>
-                                        <IoMdNotifications className="text-blue-600 mr-2" />
-                                        Уведомления включены
-                                      </>
-                                    ) : (
-                                      <>
-                                        <IoMdNotificationsOutline className="text-gray-500 mr-2" />
-                                        Включить уведомления
-                                      </>
-                                    )}
-                                  </button>
-                                </>
-                              ) : (
-                                <button 
-                                  disabled
-                                  className="bg-gray-200 text-gray-600 px-6 py-2 rounded-lg cursor-not-allowed flex items-center"
-                                >
-                                  <FaTicketAlt className="mr-2" />
-                                  Билеты скоро в продаже
-                                </button>
-                              )}
+                                )}
 
-                              <button
-                                onClick={() => shareMatch(match)}
-                                className="flex items-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors"
-                              >
-                                <FaShareAlt className="text-gray-500 mr-2" />
-                                Поделиться
-                              </button>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                                <motion.button
+                                  onClick={() => shareMatch(match)}
+                                  whileHover={{ y: -2 }}
+                                  className="flex items-center px-5 py-2.5 border-2 border-gray-200 rounded-xl hover:bg-gray-50 transition-colors text-gray-700 font-medium"
+                                >
+                                  <FaShareAlt className="text-gray-600 mr-2" />
+                                  Поделиться
+                                </motion.button>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
                     </motion.div>
                   ))}
               </AnimatePresence>
@@ -470,30 +753,6 @@ const MatchesPage = () => {
         </motion.div>
       </div>
 
-      {/* Stats Section */}
-      <div className="bg-gray-100 py-8 mt-8">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold text-center mb-6">Статистика сезона</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white p-4 rounded-lg shadow text-center">
-              <div className="text-3xl font-bold text-blue-700">12</div>
-              <div className="text-gray-600">Матчей сыграно</div>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow text-center">
-              <div className="text-3xl font-bold text-green-600">8</div>
-              <div className="text-gray-600">Побед</div>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow text-center">
-              <div className="text-3xl font-bold text-yellow-600">3</div>
-              <div className="text-gray-600">Ничьих</div>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow text-center">
-              <div className="text-3xl font-bold text-red-600">1</div>
-              <div className="text-gray-600">Поражений</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

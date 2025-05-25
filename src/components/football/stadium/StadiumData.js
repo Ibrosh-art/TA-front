@@ -16,35 +16,35 @@ export const stadiumData = {
     images: [
       {
         id: 1,
-        src: "/images/stadium/stadium1.jpg",
+        src: "https://cdnuploads.aa.com.tr/uploads/Contents/2023/01/10/thumbs_b_c_19b541f11b8915b3eb0b69474d4923e8.jpg?v=090638",
         alt: "Общий вид стадиона Дордой",
         width: 1200,
         height: 800
       },
       {
         id: 2,
-        src: "/images/stadium/stadium2.jpg",
+        src: "https://fc-dordoi.kg/image?format=raw&id=15201&type=img",
         alt: "Трибуны стадиона",
         width: 1200,
         height: 800
       },
       {
         id: 3,
-        src: "/images/stadium/stadium3.jpg",
+        src: "https://fc-dordoi.kg/image?format=raw&id=15090&type=img",
         alt: "Поле стадиона",
         width: 1200,
         height: 800
       },
       {
         id: 4,
-        src: "/images/stadium/stadium4.jpg",
+        src: "https://fc-dordoi.kg/image?format=raw&id=15127&type=img",
         alt: "Раздевалка команды",
         width: 1200,
         height: 800
       },
       {
         id: 5,
-        src: "/images/stadium/stadium5.jpg",
+        src: "https://fc-dordoi.kg/image?format=raw&id=12964&type=img",
         alt: "Вход на стадион",
         width: 1200,
         height: 800

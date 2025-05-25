@@ -94,7 +94,7 @@ const Footer = () => {
                         <div className="space-y-4">
                             <div className="mb-4">
                                 <img 
-                                    src="/api/placeholder/120/120" 
+                                    src="https://upload.wikimedia.org/wikipedia/ru/0/01/%D0%A4%D0%9A_%D0%94%D0%BE%D1%80%D0%B4%D0%BE%D0%B9.png" 
                                     alt="FC Dordoi Logo" 
                                     className="h-16 w-auto" 
                                 />

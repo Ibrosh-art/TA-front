@@ -132,68 +132,69 @@ const EpicDordoyTimeline = () => {
       </div>
 
       {/* Модальное окно эпохи */}
-      <AnimatePresence>
-        {activeEra && (
-          <motion.div 
-            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+<AnimatePresence>
+  {activeEra && (
+    <motion.div 
+      className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div 
+        className={`relative max-w-2xl w-full rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br ${activeEra.color} border border-white/20`}
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ type: "spring", damping: 25 }}
+      >
+        <div className="relative h-72">
+          <img 
+            src={activeEra.image} 
+            alt={activeEra.title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 p-6">
+            <h2 className="text-3xl font-bold text-white">{activeEra.year}</h2>
+            <h3 className="text-xl text-white mt-1">{activeEra.title}</h3>
+          </div>
+          <button 
+            className="absolute top-4 right-4 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center text-white text-lg hover:bg-black/80 transition"
+            onClick={() => setActiveEra(null)}
           >
-            <motion.div 
-              className={`relative max-w-4xl w-full rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br ${activeEra.color} border border-white/20`}
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", damping: 25 }}
-            >
-              <div className="relative h-96">
-                <img 
-                  src={activeEra.image} 
-                  alt={activeEra.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h2 className="text-4xl font-bold text-white">{activeEra.year}</h2>
-                  <h3 className="text-2xl text-white mt-2">{activeEra.title}</h3>
+            ✕
+          </button>
+        </div>
+        
+        <div className="bg-white p-6">
+          <p className="text-lg mb-6">{activeEra.description}</p>
+          
+          <h4 className="text-xl font-bold mb-4 text-gray-800">Основные достижения:</h4>
+          <ul className="space-y-3 mb-6">
+            {activeEra.achievements.map((item, index) => (
+              <li key={index} className="flex items-start">
+                <div className={`w-7 h-7 text-sm rounded-full flex-shrink-0 flex items-center justify-center text-white mr-3 ${activeEra.color.includes('blue') ? 'bg-blue-500' : activeEra.color.includes('yellow') ? 'bg-yellow-500' : activeEra.color.includes('green') ? 'bg-green-500' : 'bg-purple-500'}`}>
+                  {index + 1}
                 </div>
-                <button 
-                  className="absolute top-4 right-4 bg-black/50 rounded-full w-12 h-12 flex items-center justify-center text-white text-xl hover:bg-black/80 transition"
-                  onClick={() => setActiveEra(null)}
-                >
-                  ✕
-                </button>
-              </div>
-              
-              <div className="bg-white p-8">
-                <p className="text-xl mb-8">{activeEra.description}</p>
-                
-                <h4 className="text-2xl font-bold mb-6 text-gray-800">Основные достижения:</h4>
-                <ul className="space-y-4 mb-8">
-                  {activeEra.achievements.map((item, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-white mr-4 ${activeEra.color.includes('blue') ? 'bg-blue-500' : activeEra.color.includes('yellow') ? 'bg-yellow-500' : activeEra.color.includes('green') ? 'bg-green-500' : 'bg-purple-500'}`}>
-                        {index + 1}
-                      </div>
-                      <span className="text-lg text-gray-700">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <div className="flex flex-wrap gap-4">
-                  <button className={`px-6 py-3 ${activeEra.color.includes('blue') ? 'bg-blue-600' : activeEra.color.includes('yellow') ? 'bg-yellow-600' : activeEra.color.includes('green') ? 'bg-green-600' : 'bg-purple-600'} text-white rounded-full font-medium hover:opacity-90 transition`}>
-                    Смотреть архивные фото
-                  </button>
-                  <button className="px-6 py-3 border border-gray-300 rounded-full font-medium hover:bg-gray-100 transition">
-                    Поделиться
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <span className="text-base text-gray-700">{item}</span>
+              </li>
+            ))}
+          </ul>
+          
+          <div className="flex flex-wrap gap-3">
+            <button className={`px-5 py-2.5 ${activeEra.color.includes('blue') ? 'bg-blue-600' : activeEra.color.includes('yellow') ? 'bg-yellow-600' : activeEra.color.includes('green') ? 'bg-green-600' : 'bg-purple-600'} text-white rounded-full font-medium hover:opacity-90 transition`}>
+              Смотреть архивные фото
+            </button>
+            <button className="px-5 py-2.5 border border-gray-300 rounded-full font-medium hover:bg-gray-100 transition">
+              Поделиться
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
     </div>
   );
 };

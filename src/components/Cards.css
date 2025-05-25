@@ -127,3 +127,6 @@
         font-size: 0.9rem;
     }
 }
+.card-container .card:active {
+    transform: translateY(10px);
+}

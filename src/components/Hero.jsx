@@ -65,14 +65,14 @@ const Hero = ({ src }) => {
         ))}
       </div>
 
-      <div className="relative  z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between">
         <motion.div
-          className="py-20 lg:w-2/5"
+          className="py-10 md:py-20 lg:w-2/5"
           initial="hidden"
           animate="visible"
         >
           <motion.h1
-            className="mb-10 flex flex-wrap text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight text-white [text-shadow:_0_2px_10px_rgba(0,0,0,0.5)]"
+            className="mb-6 md:mb-10 flex flex-wrap text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight text-white [text-shadow:_0_2px_10px_rgba(0,0,0,0.5)]"
           >
             {letters.map((letter, i) => (
               <motion.span
@@ -87,7 +87,7 @@ const Hero = ({ src }) => {
           </motion.h1>
 
           <motion.p
-            className="mb-12 text-lg sm:text-xl md:text-2xl text-white [text-shadow:_0_2px_8px_rgba(0,0,0,0.4)]"
+            className="mb-8 md:mb-12 text-lg sm:text-xl md:text-2xl text-white [text-shadow:_0_2px_8px_rgba(0,0,0,0.4)]"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
@@ -105,13 +105,13 @@ const Hero = ({ src }) => {
               id="watch-trailer"
               title="Watch Trailer"
               leftIcon={<TiLocationArrow className="text-2xl" />}
-              containerClass="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white font-semibold px-10 py-4 rounded-full transition-all duration-300 hover:scale-110 flex items-center gap-4 shadow-xl hover:shadow-2xl text-lg"
+              containerClass="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white font-semibold px-8 py-3 md:px-10 md:py-4 rounded-full transition-all duration-300 hover:scale-110 flex items-center gap-3 md:gap-4 shadow-xl hover:shadow-2xl text-base md:text-lg"
             />
           </motion.div>
         </motion.div>
 
         <motion.div
-          className="relative mt-16 lg:mt-0 lg:w-3/5"
+          className="relative -mt-0 md:mt-0 lg:w-3/5"
           initial={{ opacity: 0, x: 120 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8, duration: 1.2, ease: "easeOut" }}
@@ -144,7 +144,7 @@ const Hero = ({ src }) => {
             />
 
             <motion.div
-              className="absolute -inset-8 rounded-3xl bg-blue-400/20 blur-3xl pointer-events-none"
+              className="absolute -inset-4 md:-inset-8 rounded-3xl bg-blue-400/20 blur-3xl pointer-events-none"
               animate={{ opacity: [0.4, 0.6, 0.4] }}
               transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
             />
