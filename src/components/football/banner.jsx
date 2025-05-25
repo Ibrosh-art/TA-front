@@ -34,7 +34,7 @@ const Banner = () => {
   return (
     <div className="">
       <section className="relative w-full max-h-[80vh] overflow-hidden">
-        <div className="pt-16">
+        <div className="">
           {banner.length === 0 ? (
             <div className="flex justify-center items-center h-[80vh] text-white text-xl">
               No banners available
