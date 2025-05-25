@@ -197,7 +197,7 @@ const UniversityFooter = () => {
               <li className="flex items-center">
                 <FaPhoneAlt className="text-blue-500 mr-3" />
                 <a href="tel:+996312658538" className="text-gray-600 hover:text-blue-600">
-                  +996 (312) 658-538
+                  +996 (707) 261-196
                 </a>
               </li>
               <li className="flex items-center">

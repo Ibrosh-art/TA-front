@@ -163,7 +163,6 @@ const Hero = ({ src }) => {
           transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
           className="flex flex-col items-center"
         >
-          <span className="mb-3 text-sm font-semibold tracking-widest text-blue-500 [text-shadow:_0_1px_5px_rgba(0,0,0,0.3)]">Исследуй</span>
           <motion.div
             animate={{ y: [0, 20, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

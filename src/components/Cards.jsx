@@ -26,7 +26,7 @@ const Cards = () => {
     {
       id: 2,
       title: "Университет",
-      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSXfrFBx8usjrJX539FzYp-1H1lml9n6Og-Q&s",
+      imageUrl: "https://i.ibb.co/zW1FcC6h/images-1-removebg-preview.png",
       mobileImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSXfrFBx8usjrJX539FzYp-1H1lml9n6Og-Q&s", // Оптимизированная версия
       description: "Университет оснащён передовым оборудованием для качественного образовательного процесса.",
       color: "#FF3E7F"
