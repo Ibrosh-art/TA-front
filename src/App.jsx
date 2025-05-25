@@ -383,7 +383,7 @@ function App() {
         <Navbar />
         
         {/* Hero Section */}
-        <div className="pt-24">
+        <div className="pt-20">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/university" element={<University />} />

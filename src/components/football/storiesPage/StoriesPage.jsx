@@ -4,15 +4,10 @@ import { FaArrowLeft, FaArrowRight, FaTimes, FaShareAlt, FaPlay } from 'react-ic
 import { motion } from 'framer-motion';
 
 const StoryCard = ({ story, onClick }) => (
-  <motion.div
-    className="min-w-[260px] rounded-xl overflow-hidden shadow-lg cursor-pointer relative flex-shrink-0"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-100px" }}
-    transition={{ duration: 0.5 }}
-    whileHover={{ scale: 1.04 }}
-    onClick={onClick}
-  >
+  <div
+  className="min-w-[260px] rounded-xl overflow-hidden shadow-lg cursor-pointer relative flex-shrink-0 transform hover:scale-105 transition-transform"
+  onClick={onClick}
+>
     <div className="relative h-[320px]">
       <img
         src={story.thumbnail || story.media[0]?.url}
@@ -42,7 +37,7 @@ const StoryCard = ({ story, onClick }) => (
         </div>
       )}
     </div>
-  </motion.div>
+  </div>
 );
 
 const StoryModal = ({
@@ -392,7 +387,7 @@ const StoriesPage = () => {
   const handlePause = () => setAutoplay(prev => !prev);
 
   return (
-    <section className="py-10 bg-gradient-to-b from-blue-50 to-yellow-50">
+    <section id='storiesPage' className="py-10 bg-gradient-to-b from-blue-50 to-yellow-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-4xl font-extrabold text-blue-900" style={{ fontFamily: "'Montserrat', sans-serif" }}>
@@ -435,25 +430,7 @@ const StoriesPage = () => {
             />
           ))}
         </div>
-        <div className="flex justify-center mt-4 md:hidden">
-          {Array.from({ length: Math.ceil(storiesData.length / 3) }).map((_, index) => (
-            <button
-              key={index}
-              className={`w-2 h-2 mx-1 rounded-full ${
-                index === Math.floor(visibleRange.start / 3) ? 'bg-blue-900' : 'bg-gray-300'
-              }`}
-              onClick={() => {
-                if (carouselRef.current) {
-                  carouselRef.current.scrollTo({
-                    left: index * (280 * 3),
-                    behavior: 'smooth'
-                  });
-                }
-              }}
-              aria-label={`Перейти к сторисам ${index + 1}`}
-            />
-          ))}
-        </div>
+       
         <AnimatePresence>
           {isModalOpen && (
             <StoryModal

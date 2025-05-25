@@ -6,7 +6,7 @@ import { stadiumData } from './StadiumData';
 
 const StadiumPage = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-blue-50 to-white">
+    <section id='stadium' className="py-16 bg-gradient-to-b from-blue-50 to-white">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-8 text-center" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           Наш стадион
