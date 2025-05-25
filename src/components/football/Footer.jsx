@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Facebook, Twitter, Instagram, Youtube, Linkedin, MapPin, Phone, Mail, ChevronRight } from 'lucide-react';
+import { BsTiktok } from 'react-icons/bs';
+
 
 const Footer = () => {
     const [email, setEmail] = useState('');
@@ -12,6 +14,12 @@ const Footer = () => {
         setEmail('');
     };
 
+    const facebookURL = "https://www.facebook.com/FCDordoi/?locale=ru_RU"
+    const instagramURL = "https://www.instagram.com/fcdordoi/"
+    const youtubeURL = "https://www.youtube.com/@DordoiTV"
+    const tiktokURL = "https://www.tiktok.com/@fcdordoi"
+
+      
     return (
         <div className="footer-wrapper">
             {/* Pre-footer newsletter & social section */}
@@ -46,40 +54,33 @@ const Footer = () => {
                             <h3 className="text-xl font-semibold mb-4">Соцсети</h3>
                             <div className="flex flex-wrap gap-4">
                                 <a
-                                    href="#"
+                                    href={facebookURL} target='_blank'
                                     className="bg-blue-700 hover:bg-blue-800 p-3 rounded-full transition-all duration-200 hover:scale-110"
                                     aria-label="Facebook"
                                 >
                                     <Facebook size={24} />
                                 </a>
                                 <a
-                                    href="#"
-                                    className="bg-blue-500 hover:bg-blue-600 p-3 rounded-full transition-all duration-200 hover:scale-110"
-                                    aria-label="Twitter"
-                                >
-                                    <Twitter size={24} />
-                                </a>
-                                <a
-                                    href="#"
+                                    href={instagramURL} target='_blank'                                    
                                     className="bg-pink-600 hover:bg-pink-700 p-3 rounded-full transition-all duration-200 hover:scale-110"
                                     aria-label="Instagram"
                                 >
                                     <Instagram size={24} />
                                 </a>
                                 <a
-                                    href="#"
+                                href={youtubeURL} target='_blank'
                                     className="bg-red-600 hover:bg-red-700 p-3 rounded-full transition-all duration-200 hover:scale-110"
                                     aria-label="YouTube"
                                 >
                                     <Youtube size={24} />
-                                </a>
+                                </a>   
                                 <a
-                                    href="#"
-                                    className="bg-blue-800 hover:bg-blue-900 p-3 rounded-full transition-all duration-200 hover:scale-110"
-                                    aria-label="LinkedIn"
+                                href={tiktokURL} target='_blank'
+                                    className="bg-black p-3 rounded-full transition-all duration-200 hover:scale-110"
+                                    aria-label="YouTube"
                                 >
-                                    <Linkedin size={24} />
-                                </a>
+                                    <BsTiktok size={24} />
+                                </a>                               
                             </div>
                         </div>
                     </div>
@@ -110,31 +111,31 @@ const Footer = () => {
                             <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-700">О клубе</h3>
                             <ul className="space-y-3">
                                 <li>
-                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                    <a href="#storiesPage" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
                                         <ChevronRight size={16} className="mr-2" />
-                                        <span>История</span>
+                                        <span>Сторисы</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                    <a href="#team" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
                                         <ChevronRight size={16} className="mr-2" />
                                         <span>Команда</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                    <a href="#matches" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
                                         <ChevronRight size={16} className="mr-2" />
                                         <span>Расписание матчей</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                    <a href="#newsfootball" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
                                         <ChevronRight size={16} className="mr-2" />
                                         <span>Новости</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                    <a href="#stadium" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
                                         <ChevronRight size={16} className="mr-2" />
                                         <span>Стадион</span>
                                     </a>
@@ -147,7 +148,7 @@ const Footer = () => {
                             <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-700">Болельщикам</h3>
                             <ul className="space-y-3">
                                 <li>
-                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
+                                    <a href="https://kassir.kg/ru/category/sport" target='blank' className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
                                         <ChevronRight size={16} className="mr-2" />
                                         <span>Билеты</span>
                                     </a>
@@ -156,12 +157,6 @@ const Footer = () => {
                                     <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
                                         <ChevronRight size={16} className="mr-2" />
                                         <span>Фан-шоп</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
-                                        <ChevronRight size={16} className="mr-2" />
-                                        <span>Членство</span>
                                     </a>
                                 </li>
                                 <li>

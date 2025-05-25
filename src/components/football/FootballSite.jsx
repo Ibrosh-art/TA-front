@@ -228,7 +228,7 @@ export default function DordoiEpicNews() {
   }, [autoPlay]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white p-4 md:p-8 lg:p-12 font-sans relative overflow-hidden">
+    <div id="newsfootball" className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white p-4 md:p-8 lg:p-12 font-sans relative overflow-hidden">
       {/* Фоновые элементы */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-stripes.png')] opacity-10"></div>

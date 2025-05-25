@@ -392,7 +392,7 @@ const StoriesPage = () => {
   const handlePause = () => setAutoplay(prev => !prev);
 
   return (
-    <section className="py-10 bg-gradient-to-b from-blue-50 to-yellow-50">
+    <section id='storiesPage' className="py-10 bg-gradient-to-b from-blue-50 to-yellow-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-4xl font-extrabold text-blue-900" style={{ fontFamily: "'Montserrat', sans-serif" }}>

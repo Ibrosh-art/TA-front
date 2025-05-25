@@ -110,7 +110,7 @@ const MatchesPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div id='matches' className="min-h-screen bg-gray-50">
       {/* Hero Header */}
       <header className="bg-gradient-to-r from-blue-800 to-blue-600 text-white shadow-lg relative overflow-hidden">
         <div className="absolute inset-0 bg-stadium-pattern opacity-10"></div>
