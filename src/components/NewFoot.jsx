@@ -4,24 +4,40 @@ import { motion } from 'framer-motion';
 
 const Footer = () => {
   const socialLinks = [
-    { icon: <FaFacebookF />, color: 'bg-blue-600' },
-    { icon: <FaInstagram />, color: 'bg-pink-600' },
-    { icon: <FaYoutube />, color: 'bg-red-600' },
-    { icon: <FaTelegramPlane />, color: 'bg-blue-500' }
+    { icon: <FaFacebookF />, color: 'bg-blue-600', href: 'https://www.facebook.com/' },
+    { icon: <FaInstagram />, color: 'bg-pink-600', href: 'https://www.instagram.com/' },
+    { icon: <FaYoutube />, color: 'bg-red-600', href: 'https://www.youtube.com/' },
+    { icon: <FaTelegramPlane />, color: 'bg-blue-500', href: 'https://t.me/' }
   ];
 
   const footerLinks = [
     {
       title: "Компания",
-      links: ["О нас", "История", "Команда", "Карьера", "Новости"]
+      links: [
+        { label: "О нас", href: "/About" },
+        { label: "История", href: "./About" },
+        { label: "Команда", href: "/team" },
+        { label: "Карьера", href: "/careers" },
+        { label: "Новости", href: "/news" }
+      ]
     },
     {
       title: "Проекты",
-      links: ["Дордой Плаза", "Университет", "ФК Дордой", "Инновации", "Партнеры"]
+      links: [
+        { label: "Дордой Плаза", href: "./Plaza" },
+        { label: "Университет", href: "./University" },
+        { label: "ФК Дордой", href: "./Football" }
+      ]
     },
     {
       title: "Ресурсы",
-      links: ["Блог", "Документы", "FAQ", "Мероприятия", "Контакты"]
+      links: [
+        { label: "Блог", href: "/blog" },
+        { label: "Документы", href: "/docs" },
+        { label: "FAQ", href: "/faq" },
+        { label: "Мероприятия", href: "/events" },
+        { label: "Контакты", href: "/contacts" }
+      ]
     }
   ];
 
@@ -40,7 +56,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
           {/* Лого и описание */}
           <div className="space-y-6">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -75,7 +91,9 @@ const Footer = () => {
               {socialLinks.map((item, index) => (
                 <motion.a
                   key={index}
-                  href="#"
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className={`w-10 h-10 rounded-full ${item.color} flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all`}
@@ -98,14 +116,14 @@ const Footer = () => {
             >
               <h3 className="text-xl font-bold text-yellow-400">{section.title}</h3>
               <ul className="space-y-3">
-                {section.links.map((link, linkIndex) => (
+                {section.links.map((linkItem, linkIndex) => (
                   <motion.li
                     key={linkIndex}
                     whileHover={{ x: 5 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    <a href="#" className="text-gray-300 hover:text-yellow-400 transition-colors">
-                      {link}
+                    <a href={linkItem.href} className="text-gray-300 hover:text-yellow-400 transition-colors">
+                      {linkItem.label}
                     </a>
                   </motion.li>
                 ))}
@@ -173,9 +191,9 @@ const Footer = () => {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-            <a href="#" className="text-gray-400 hover:text-yellow-400 text-sm transition-colors">Политика конфиденциальности</a>
-            <a href="#" className="text-gray-400 hover:text-yellow-400 text-sm transition-colors">Условия использования</a>
-            <a href="#" className="text-gray-400 hover:text-yellow-400 text-sm transition-colors">Карта сайта</a>
+            <a href="/privacy" className="text-gray-400 hover:text-yellow-400 text-sm transition-colors">Политика конфиденциальности</a>
+            <a href="/terms" className="text-gray-400 hover:text-yellow-400 text-sm transition-colors">Условия использования</a>
+            <a href="/sitemap" className="text-gray-400 hover:text-yellow-400 text-sm transition-colors">Карта сайта</a>
           </div>
         </motion.div>
       </div>
