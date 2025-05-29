@@ -143,30 +143,7 @@ const Footer = () => {
                             </ul>
                         </div>
                         
-                        {/* Fan Zone */}
-                        <div>
-                            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-700">Болельщикам</h3>
-                            <ul className="space-y-3">
-                                <li>
-                                    <a href="https://kassir.kg/ru/category/sport" target='blank' className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
-                                        <ChevronRight size={16} className="mr-2" />
-                                        <span>Билеты</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
-                                        <ChevronRight size={16} className="mr-2" />
-                                        <span>Фан-шоп</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center text-gray-400 hover:text-white transition-colors duration-200">
-                                        <ChevronRight size={16} className="mr-2" />
-                                        <span>Фотогалерея</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        
                         
                         {/* Contact Info */}
                         <div>
