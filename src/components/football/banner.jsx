@@ -1,20 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import banner1 from './assets/banner1.jpeg';
-import banner2 from './assets/banner2.jpeg' // Adjust the import path as necessary
+import banner1 from './assets/banner1.jpg';
+import banner2 from './assets/banner2.png' // Adjust the import path as necessary
+import banner3 from './assets/banner3.png' // Adjust the import path as necessary
+import banner1Mobile from './assets/banner1Mobile.jpg'; // Добавьте мобильные версии изображений
+import banner2Mobile from './assets/banner2Mobile.jpg';
+import banner3Mobile from './assets/banner3Mobile.jpg';
 
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Определяем, мобильный ли экран
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 640); // 640px — tailwind sm
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Static banner data
   const banner = [
     {
-      image: banner1, // Replace with your actual image path
-
+      image: isMobile ? banner1Mobile : banner1,
+      title: 'Расторжение контракта с Лукой'
     },
     {
-      image: banner2, // Replace with your actual image path
-        }
+      image: isMobile ? banner2Mobile : banner2,
+      title: 'Матч 11 тура КПЛ: Мурас Юнайтед - ФК Дордой'
+    },
+    {
+      image: isMobile ? banner3Mobile : banner3,
+      title: 'Дордой победил Илбирс в Матче 10 тура КПЛ: Илбирс - ФК Дордой'
+    }
     // Add more banners as needed
   ];
 
@@ -63,6 +83,18 @@ const Banner = () => {
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
               >
                
+              </motion.div>
+
+              <motion.div
+                className="absolute bottom-0 left-0 w-full z-10 flex flex-col items-center justify-end h-full text-center px-4 md:px-8 pb-14"
+                key={banner[currentIndex]?.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+              >
+                <h2 className="text-2xl md:text-4xl font-extrabold text-yellow-400 drop-shadow-lg bg-black/60 rounded-lg px-4 py-2 mb-0 max-w-3xl mx-auto">
+                  {banner[currentIndex]?.title}
+                </h2>
               </motion.div>
             </>
           )}
