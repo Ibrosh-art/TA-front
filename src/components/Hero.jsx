@@ -1,11 +1,21 @@
-import { TiLocationArrow, TiStar, TiHeart } from "react-icons/ti";
+import { TiLocationArrow, TiStar, TiHeart, TiVolume, TiVolumeMute } from "react-icons/ti";
 import { motion, useTransform, useViewportScroll } from 'framer-motion';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from "./Button";
 
 const Hero = ({ src }) => {
   const sectionRef = useRef();
+  const videoRef = useRef();
   const { scrollYProgress } = useViewportScroll();
+  const [isMuted, setIsMuted] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 250]);
@@ -29,14 +39,27 @@ const Hero = ({ src }) => {
 
   const icons = [<TiLocationArrow />, <TiStar />, <TiHeart />];
 
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const Section = isMobile ? 'section' : motion.section;
+  const AnimatedDiv = isMobile ? 'div' : motion.div;
+  const AnimatedH1 = isMobile ? 'h1' : motion.h1;
+  const AnimatedSpan = isMobile ? 'span' : motion.span;
+  const AnimatedP = isMobile ? 'p' : motion.p;
+
   return (
-    <motion.section
+    <Section
       ref={sectionRef}
       className="relative flex h-[90vh] w-full items-center justify-center overflow-hidden px-6 sm:px-10 md:px-16 lg:px-20"
-      style={{ scale, opacity }}
+      style={!isMobile ? { scale, opacity } : {}}
     >
       <div className="absolute inset-0 -z-10">
-        {[...Array(25)].map((_, i) => (
+        {!isMobile && [...Array(25)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute text-blue-500 opacity-25"
@@ -66,117 +89,129 @@ const Hero = ({ src }) => {
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between">
-        <motion.div
+        <AnimatedDiv
           className="py-10 md:py-20 lg:w-2/5"
-          initial="hidden"
-          animate="visible"
+          {...(!isMobile && { initial: "hidden", animate: "visible" })}
         >
-          <motion.h1
-            className="mb-6 md:mb-10 flex flex-wrap text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight text-white [text-shadow:_0_2px_10px_rgba(0,0,0,0.5)]"
-          >
-            {letters.map((letter, i) => (
-              <motion.span
-                key={i}
-                custom={i}
-                variants={letterVariants}
-                className={`${i >= 3 ? 'text-blue-500' : 'text-white'}`}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </motion.h1>
+          <AnimatedH1 className="mb-6 md:mb-10 flex flex-wrap text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight text-white [text-shadow:_0_2px_10px_rgba(0,0,0,0.5)]">
+            {letters.map((letter, i) =>
+              isMobile ? (
+                <span key={i} className={`${i >= 3 ? 'text-blue-500' : 'text-white'}`}>
+                  {letter}
+                </span>
+              ) : (
+                <motion.span
+                  key={i}
+                  custom={i}
+                  variants={letterVariants}
+                  className={`${i >= 3 ? 'text-blue-500' : 'text-white'}`}
+                >
+                  {letter}
+                </motion.span>
+              )
+            )}
+          </AnimatedH1>
 
-          <motion.p
+          <AnimatedP
             className="mb-8 md:mb-12 text-lg sm:text-xl md:text-2xl text-white [text-shadow:_0_2px_8px_rgba(0,0,0,0.4)]"
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
+            {...(!isMobile && {
+              initial: { opacity: 0, x: -30 },
+              animate: { opacity: 1, x: 0 },
+              transition: { delay: 1, duration: 0.8, ease: "easeOut" }
+            })}
           >
             Откройте для себя будущее с <span className="font-bold text-blue-500">Ассоциацией «Дордой»</span> - 
             где образование, торговля и спорт гармонично сочетаются
-          </motion.p>
+          </AnimatedP>
+        </AnimatedDiv>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.7 }}
-          >
-            <Button
-              id="watch-trailer"
-              title="Watch Trailer"
-              leftIcon={<TiLocationArrow className="text-2xl" />}
-              containerClass="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white font-semibold px-8 py-3 md:px-10 md:py-4 rounded-full transition-all duration-300 hover:scale-110 flex items-center gap-3 md:gap-4 shadow-xl hover:shadow-2xl text-base md:text-lg"
-            />
-          </motion.div>
-        </motion.div>
-
-        <motion.div
+        <AnimatedDiv
           className="relative -mt-0 md:mt-0 lg:w-3/5"
-          initial={{ opacity: 0, x: 120 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.8, duration: 1.2, ease: "easeOut" }}
+          {...(!isMobile && {
+            initial: { opacity: 0, x: 120 },
+            animate: { opacity: 1, x: 0 },
+            transition: { delay: 0.8, duration: 1.2, ease: "easeOut" }
+          })}
         >
           <div className="relative max-w-4xl mx-auto">
             <video
+              ref={videoRef}
               autoPlay
               loop
-              muted
+              muted={isMuted}
               playsInline
               className="w-full rounded-3xl border-4 border-blue-300/40 shadow-[0_0_60px_rgba(59,130,246,0.5)]"
             >
               <source src={src} type="video/mp4" />
             </video>
 
-            <motion.div
-              className="absolute inset-0 rounded-3xl pointer-events-none"
-              animate={{
-                background: [
-                  'linear-gradient(45deg, rgba(59,130,246,0.2) 0%, transparent 50%, rgba(59,130,246,0.2) 100%)',
-                  'linear-gradient(135deg, rgba(59,130,246,0.2) 0%, transparent 50%, rgba(59,130,246,0.2) 100%)'
-                ]
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "linear"
-              }}
-            />
+            <button
+              onClick={toggleMute}
+              className="absolute bottom-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-300 z-20"
+              aria-label={isMuted ? "Unmute video" : "Mute video"}
+            >
+              {isMuted ? (
+                <TiVolumeMute className="text-2xl" />
+              ) : (
+                <TiVolume className="text-2xl" />
+              )}
+            </button>
 
-            <motion.div
-              className="absolute -inset-4 md:-inset-8 rounded-3xl bg-blue-400/20 blur-3xl pointer-events-none"
-              animate={{ opacity: [0.4, 0.6, 0.4] }}
-              transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
-            />
+            {!isMobile && (
+              <>
+                <motion.div
+                  className="absolute inset-0 rounded-3xl pointer-events-none"
+                  animate={{
+                    background: [
+                      'linear-gradient(45deg, rgba(59,130,246,0.2) 0%, transparent 50%, rgba(59,130,246,0.2) 100%)',
+                      'linear-gradient(135deg, rgba(59,130,246,0.2) 0%, transparent 50%, rgba(59,130,246,0.2) 100%)'
+                    ]
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "linear"
+                  }}
+                />
+                <motion.div
+                  className="absolute -inset-4 md:-inset-8 rounded-3xl bg-blue-400/20 blur-3xl pointer-events-none"
+                  animate={{ opacity: [0.4, 0.6, 0.4] }}
+                  transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
+                />
+              </>
+            )}
           </div>
-        </motion.div>
+        </AnimatedDiv>
       </div>
 
-      <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 1 }}
-      >
+      {!isMobile && (
         <motion.div
-          animate={{ y: [0, 15, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2, duration: 1 }}
         >
           <motion.div
-            animate={{ y: [0, 20, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="h-10 w-6 rounded-full border-2 border-blue-500/50 flex justify-center pt-2"
+            animate={{ y: [0, 15, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center"
           >
             <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              className="h-2 w-1.5 rounded-full bg-blue-500"
-            />
+              animate={{ y: [0, 20, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="h-10 w-6 rounded-full border-2 border-blue-500/50 flex justify-center pt-2"
+            >
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                className="h-2 w-1.5 rounded-full bg-blue-500"
+              />
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
-    </motion.section>
+      )}
+    </Section>
   );
 };
 

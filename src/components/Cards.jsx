@@ -20,12 +20,14 @@ const Cards = () => {
       title: "Дордой Плаза",
       imageUrl: "https://static.tildacdn.one/tild6263-3832-4239-a137-323934346431/__.png",
       mobileImageUrl: "https://static.tildacdn.one/tild6263-3832-4239-a137-323934346431/__.png", // Оптимизированная версия
+      link: "./plaza",
       description: "Магазины, рестораны, кафе и офисные помещения — важное место для шопинга и отдыха в городе.",
       color: "#009688"
     },
     {
       id: 2,
       title: "Университет",
+      link: "./university",
       imageUrl: "https://i.ibb.co/zW1FcC6h/images-1-removebg-preview.png",
       mobileImageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSXfrFBx8usjrJX539FzYp-1H1lml9n6Og-Q&s", // Оптимизированная версия
       description: "Университет оснащён передовым оборудованием для качественного образовательного процесса.",
@@ -34,6 +36,7 @@ const Cards = () => {
     {
       id: 3,
       title: "Футбольный клуб «Дордой»",
+      link: "./football",
       imageUrl: "https://upload.wikimedia.org/wikipedia/ru/0/01/%D0%A4%D0%9A_%D0%94%D0%BE%D1%80%D0%B4%D0%BE%D0%B9.png",
       mobileImageUrl: "https://upload.wikimedia.org/wikipedia/ru/0/01/%D0%A4%D0%9A_%D0%94%D0%BE%D1%80%D0%B4%D0%BE%D0%B9.png", // Оптимизированная версия
       description: "Многократный чемпион и обладатель национального кубка, регулярно участвует в международных турнирах.",
@@ -56,7 +59,7 @@ const Cards = () => {
           <div className="content">
             <h2>{card.title}</h2>
             <p>{card.description}</p>
-            <a href="#" className="read-more-btn">Подробнее</a>
+            <a href={card.link} className="read-more-btn">Подробнее</a>
           </div>
         </div>
       ))}

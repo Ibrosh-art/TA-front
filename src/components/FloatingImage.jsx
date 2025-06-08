@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import Button from "./Button";
 import AnimatedTitle from "./AnimatedTitle";
@@ -45,8 +45,11 @@ const FloatingImage = () => {
     }
   };
 
+  
+
   return (
     <div id="story" className="min-h-dvh w-screen bg-black text-blue-50">
+
       <div className="flex size-full flex-col items-center py-10 pb-24">
         <p className="font-general text-sm uppercase md:text-[10px]">
           welcome to IT world
@@ -106,14 +109,9 @@ const FloatingImage = () => {
         <div className="-mt-80 flex w-full justify-center md:-mt-64 md:me-44 md:justify-end">
           <div className="flex h-full w-fit flex-col items-center md:items-start">
             <p className="mt-3 max-w-sm text-center font-circular-web text-violet-50 md:text-start">
-            Новый IT-кампус Университета Салымбекова оснащен современными лабораториями и технологиями для обучения в области информационных технологий.
+              Новый IT-кампус Университета Салымбекова оснащен современными лабораториями и технологиями для обучения в области информационных технологий.
             </p>
 
-            <Button
-              id="realm-btn"
-              title="узнать больше"
-              containerClass="mt-5"
-            />
           </div>
         </div>
       </div>

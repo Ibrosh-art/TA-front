@@ -40,11 +40,11 @@ const Contact = () => {
         <div className="flex flex-col items-center text-center">
 
           <AnimatedTitle
-            title="Построй т<b>в</b>ое <br /> будущее <br /> с нами"
+            title="Построй с<b>в</b>ое <br /> будущее <br /> с нами"
             className="special-font !md:text-[6.2rem] w-full font-zentry !text-5xl !font-black !leading-[.9]"
           />
-
-          <Button title="contact us" containerClass="mt-10 cursor-pointer" />
+            <a href="https://wa.me/996707261196"><Button title="contact us" containerClass="mt-10 cursor-pointer" /></a>
+          
         </div>
       </div>
     </div>

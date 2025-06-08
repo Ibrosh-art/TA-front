@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import banner1 from './assets/banner1.jpeg';
+import banner2 from './assets/banner2.jpeg' // Adjust the import path as necessary
 
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   // Static banner data
   const banner = [
     {
-      image: '/path/to/image1.jpg', // Replace with your actual image path
-      title: 'Static Banner Title 1',
-      description: 'This is a static banner description 1'
+      image: banner1, // Replace with your actual image path
+
     },
     {
-      image: '/path/to/image2.jpg', // Replace with your actual image path
-      title: 'Static Banner Title 2',
-      description: 'This is a static banner description 2'
-    }
+      image: banner2, // Replace with your actual image path
+        }
     // Add more banners as needed
   ];
 
@@ -63,14 +62,7 @@ const Banner = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
               >
-                <div className="bg-black bg-opacity-50 p-6 rounded-lg max-w-2xl">
-                  <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 tracking-wide uppercase sm:text-5xl md:text-6xl lg:text-7xl">
-                    {banner[currentIndex]?.title}
-                  </h2>
-                  <p className="mt-3 text-white text-base font-medium sm:text-lg md:text-xl lg:text-2xl">
-                    {banner[currentIndex]?.description}
-                  </p>
-                </div>
+               
               </motion.div>
             </>
           )}

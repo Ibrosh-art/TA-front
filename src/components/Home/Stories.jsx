@@ -8,13 +8,11 @@ const EpicStoryPage = () => {
     target: containerRef,
     offset: ["start start", "end end"]
   });
-  
-  // Параллакс эффекты без react-scroll-parallax
+
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [1, 1, 0.5, 0]);
 
-  // Данные для временной шкалы
   const timelineData = [
     {
       year: "1995",
@@ -58,7 +56,6 @@ const EpicStoryPage = () => {
     }
   ];
 
-  // Анимация счетчиков
   useEffect(() => {
     const animateCounters = () => {
       const counters = [
@@ -75,7 +72,7 @@ const EpicStoryPage = () => {
           const start = 0;
           const increment = counter.target / (duration / 16);
           let current = start;
-          
+
           const timer = setInterval(() => {
             current += increment;
             if (current >= counter.target) {
@@ -104,7 +101,6 @@ const EpicStoryPage = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Автоматическое перелистывание таймлайна
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveYear(prev => (prev + 1) % timelineData.length);
@@ -114,12 +110,7 @@ const EpicStoryPage = () => {
 
   return (
     <div className="bg-gray-50 text-gray-800 font-sans overflow-hidden" ref={containerRef}>
-      {/* Эпичный герой-баннер */}
-
-
-      {/* Основной контент */}
       <div className="container mx-auto px-4 py-16 relative">
-        {/* Анимированный фон */}
         <motion.div 
           className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none"
           style={{ y: y2 }}
@@ -127,7 +118,6 @@ const EpicStoryPage = () => {
           <div className="pattern-dots pattern-blue-500 pattern-bg-white pattern-size-6 pattern-opacity-20 w-full h-full"></div>
         </motion.div>
 
-        {/* Интерактивная временная шкала */}
         <div className="my-24 relative z-10">
           <motion.h2 
             className="text-4xl md:text-5xl font-bold text-center mb-16 text-blue-900"
@@ -138,10 +128,9 @@ const EpicStoryPage = () => {
           >
             Наш <span className="text-yellow-500">путь</span>
           </motion.h2>
-          
+
           <div className="relative flex flex-wrap justify-between items-center mb-20">
             <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0 hidden md:block"></div>
-            
             {timelineData.map((item, index) => (
               <motion.div
                 key={index}
@@ -169,7 +158,6 @@ const EpicStoryPage = () => {
             ))}
           </div>
 
-          {/* Контент для выбранного года */}
           <AnimatePresence mode='wait'>
             <motion.div
               key={activeYear}
@@ -188,7 +176,6 @@ const EpicStoryPage = () => {
                 >
                   {timelineData[activeYear].title}
                 </motion.h2>
-                
                 <motion.p 
                   className="text-lg md:text-xl mb-8 leading-relaxed"
                   initial={{ x: -50, opacity: 0 }}
@@ -197,7 +184,6 @@ const EpicStoryPage = () => {
                 >
                   {timelineData[activeYear].description}
                 </motion.p>
-                
                 <ul className="space-y-4">
                   {timelineData[activeYear].achievements.map((achievement, i) => (
                     <motion.li
@@ -213,7 +199,6 @@ const EpicStoryPage = () => {
                   ))}
                 </ul>
               </div>
-              
               <div className="lg:w-1/2 relative">
                 <motion.img
                   src={timelineData[activeYear].image}
@@ -234,7 +219,6 @@ const EpicStoryPage = () => {
           </AnimatePresence>
         </div>
 
-        {/* Статистика */}
         <motion.div 
           className="stats-section my-32 py-20 px-6 rounded-3xl bg-gradient-to-r from-blue-900 to-blue-700 text-white relative overflow-hidden"
           initial={{ opacity: 0, y: 100 }}
@@ -245,12 +229,10 @@ const EpicStoryPage = () => {
           <div className="absolute inset-0 opacity-20">
             <div className="pattern-grid pattern-blue-400 pattern-bg-transparent pattern-size-20 pattern-opacity-100 w-full h-full"></div>
           </div>
-          
           <div className="relative z-10">
             <h2 className="text-3xl md:text-5xl font-bold mb-16 text-center">
               Дордой <span className="text-yellow-400">в цифрах</span>
             </h2>
-            
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { id: 'years-counter', value: '0', label: 'Лет на рынке', icon: '🕰️' },
@@ -275,8 +257,6 @@ const EpicStoryPage = () => {
             </div>
           </div>
         </motion.div>
-
-       
       </div>
     </div>
   );

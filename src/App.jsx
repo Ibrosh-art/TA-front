@@ -7,6 +7,7 @@ import University from "./pages/University";
 import Plaza from "./pages/Plaza";
 import '../src/components/Nav.css';
 import NotFound from "./NotFound";
+import ScrollToTop from "./components/Home/ScrollToTop";
 
 
 const Navbar = () => {
@@ -380,6 +381,7 @@ function App() {
 </div>
 
       <Router>
+                <ScrollToTop /> 
         <Navbar />
         
         {/* Hero Section */}

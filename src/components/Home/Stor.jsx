@@ -22,7 +22,7 @@ const stories = [
   {
     id: 3,
     title: 'Образование',
-    content: 'В 2012 году открылся Университет Дордой - современное образовательное учреждение, готовящее специалистов международного уровня.',
+    content: 'В 2019 году открылся Университет Дордой - современное образовательное учреждение, готовящее специалистов международного уровня.',
     duration: 8000,
     image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop',
     color: 'from-emerald-600/80 to-cyan-600/80'
@@ -32,7 +32,7 @@ const stories = [
     title: 'Спорт',
     content: 'Футбольный клуб "Дордой" - многократный чемпион страны, представляющий Кыргызстан на международной арене.',
     duration: 8000,
-    image: 'https://images.unsplash.com/photo-1543357486-c2505d99b4d9?q=80&w=2070&auto=format&fit=crop',
+    image: 'https://diesel.elcat.kg/uploads/monthly_03_2014/post-292147-1395219822.jpg',
     color: 'from-green-600/80 to-lime-600/80'
   },
 ];

@@ -12,33 +12,13 @@ const Footer = () => {
 
   const footerLinks = [
     {
-      title: "Компания",
-      links: [
-        { label: "О нас", href: "/About" },
-        { label: "История", href: "./About" },
-        { label: "Команда", href: "/team" },
-        { label: "Карьера", href: "/careers" },
-        { label: "Новости", href: "/news" }
-      ]
-    },
-    {
       title: "Проекты",
       links: [
-        { label: "Дордой Плаза", href: "./Plaza" },
-        { label: "Университет", href: "./University" },
-        { label: "ФК Дордой", href: "./Football" }
+        { label: "Дордой Плаза", href: "./plaza" },
+        { label: "Университет", href: "./university" },
+        { label: "ФК Дордой", href: "./football" }
       ]
     },
-    {
-      title: "Ресурсы",
-      links: [
-        { label: "Блог", href: "/blog" },
-        { label: "Документы", href: "/docs" },
-        { label: "FAQ", href: "/faq" },
-        { label: "Мероприятия", href: "/events" },
-        { label: "Контакты", href: "/contacts" }
-      ]
-    }
   ];
 
   return (

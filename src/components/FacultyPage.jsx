@@ -315,12 +315,12 @@ const ProgramsPage = () => {
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 rounded-full bg-purple-500 mr-4"></div>
                 <div>
-                  <h4 className="font-bold">Адил</h4>
-                  <p className="text-gray-500">Студент, Кибербезопасность</p>
+                  <h4 className="font-bold">Виктор</h4>
+                  <p className="text-gray-500">Студент, Computer Science</p>
                 </div>
               </div>
               <p className="text-gray-700">
-                "Преподаватели - практики из топовых компаний. Лаборатории оборудованы по последнему слову техники. Уже на 2 курсе начал работать в отделе информационной безопасности банка."
+                "Преподаватели - практики из топовых компаний. Лаборатории оборудованы по последнему слову техники. Уже на 2 курсе начал работать в отделе информационных технологий банка."
               </p>
             </motion.div>
           </div>
