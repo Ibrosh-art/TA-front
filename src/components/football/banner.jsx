@@ -3,38 +3,24 @@ import { motion } from 'framer-motion';
 import banner1 from './assets/banner1.jpg';
 import banner2 from './assets/banner2.png' // Adjust the import path as necessary
 import banner3 from './assets/banner3.png' // Adjust the import path as necessary
-import banner1Mobile from './assets/banner1Mobile.jpg'; // Добавьте мобильные версии изображений
-import banner2Mobile from './assets/banner2Mobile.jpg';
-import banner3Mobile from './assets/banner3Mobile.jpg';
 
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Определяем, мобильный ли экран
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 640); // 640px — tailwind sm
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   // Static banner data
   const banner = [
     {
-      image: isMobile ? banner1Mobile : banner1,
+      image: banner1, // Replace with your actual image path
       title: 'Расторжение контракта с Лукой'
     },
     {
-      image: isMobile ? banner2Mobile : banner2,
-      title: 'Матч 11 тура КПЛ: Мурас Юнайтед - ФК Дордой'
-    },
+      image: banner2,
+      title: 'Матч 11 тура КПЛ: Мурас Юнайтед - ФК Дордой' // Replace with your actual image path
+        },
     {
-      image: isMobile ? banner3Mobile : banner3,
-      title: 'Дордой победил Илбирс в Матче 10 тура КПЛ: Илбирс - ФК Дордой'
-    }
+      image: banner3,
+      title: 'Дордой победил Илбирс в Матче 10 тура КПЛ: Илбирс - ФК Дордой' // Replace with your actual image path
+        }
     // Add more banners as needed
   ];
 
@@ -86,7 +72,7 @@ const Banner = () => {
               </motion.div>
 
               <motion.div
-                className="absolute bottom-0 left-0 w-full z-10 flex flex-col items-center justify-end h-full text-center px-4 md:px-8 pb-14"
+                className="absolute bottom-0 left-0 w-full z-10 flex flex-col items-center justify-end h-full text-center pb-14 px-4 md:px-8 pb-14A"
                 key={banner[currentIndex]?.title}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
