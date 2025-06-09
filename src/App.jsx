@@ -15,12 +15,12 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navItems = [
-    { path: "/", name: "Home", icon: "🏠" },
-    { path: "/football", name: "Football", icon: "⚽" },
-    { path: "/university", name: "University", icon: "🎓" },
-    { path: "/plaza", name: "Plaza", icon: "🛍️" }
-  ];
+const navItems = [
+  { path: "/", name: "Home", iconUrl: "https://static-00.iconduck.com/assets.00/home-icon-512x512-oxfgvghl.png" },
+  { path: "/football", name: "Football", iconUrl: "https://cdn-icons-png.flaticon.com/512/4498/4498011.png" },
+  { path: "/university", name: "University", iconUrl: "https://images.freeimages.com/fic/images/icons/2770/ios_7_icons/512/university.png" },
+  { path: "/plaza", name: "Plaza", iconUrl: "https://icon-library.com/images/shopping-icon-png/shopping-icon-png-0.jpg" }
+];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,7 +72,8 @@ const Navbar = () => {
                 to={item.path} 
                 className="relative px-5 py-3 font-medium flex items-center group"
               >
-                <span className="mr-2 text-lg">{item.icon}</span>
+                <span  className="w-5 h-5 bg-no-repeat bg-center bg-contain inline-block mr-[6px] mb-[3px]" style={{ backgroundImage: `url(${item.iconUrl})` }} />
+   
                 <span className={`transition-colors ${
                   location.pathname === item.path 
                     ? 'text-blue-600 font-semibold' 
@@ -126,7 +127,7 @@ const Navbar = () => {
                       className="flex items-center px-6 text-xl rounded-lg transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <span className="mr-4 text-2xl">{item.icon}</span>
+                      <span  className="w-5 h-5 bg-no-repeat bg-center bg-contain inline-block mr-[6px] mb-[3px]" style={{ backgroundImage: `url(${item.iconUrl})` }} />
                       <span className={`font-medium ${
                         location.pathname === item.path 
                           ? 'text-blue-600' 
