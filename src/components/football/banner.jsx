@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import banner1 from './assets/banner1.jpeg';
-import banner2 from './assets/banner2.jpeg' // Adjust the import path as necessary
+import banner1 from './assets/banner1.jpg';
+import banner2 from './assets/banner2.png' // Adjust the import path as necessary
+import banner3 from './assets/banner3.png' // Adjust the import path as necessary
 
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,10 +11,15 @@ const Banner = () => {
   const banner = [
     {
       image: banner1, // Replace with your actual image path
-
+      title: 'Расторжение контракта с Лукой'
     },
     {
-      image: banner2, // Replace with your actual image path
+      image: banner2,
+      title: 'Матч 11 тура КПЛ: Мурас Юнайтед - ФК Дордой' // Replace with your actual image path
+        },
+    {
+      image: banner3,
+      title: 'Дордой победил Илбирс в Матче 10 тура КПЛ: Илбирс - ФК Дордой' // Replace with your actual image path
         }
     // Add more banners as needed
   ];
@@ -63,6 +69,18 @@ const Banner = () => {
                 transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
               >
                
+              </motion.div>
+
+              <motion.div
+                className="absolute bottom-0 left-0 w-full z-10 flex flex-col items-center justify-end h-full text-center pb-14 px-4 md:px-8 pb-14A"
+                key={banner[currentIndex]?.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+              >
+                <h2 className="text-2xl md:text-4xl font-extrabold text-yellow-400 drop-shadow-lg bg-black/60 rounded-lg px-4 py-2 mb-0 max-w-3xl mx-auto">
+                  {banner[currentIndex]?.title}
+                </h2>
               </motion.div>
             </>
           )}

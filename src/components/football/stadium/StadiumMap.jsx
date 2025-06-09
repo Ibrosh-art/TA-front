@@ -1,36 +1,33 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 const StadiumMap = () => {
-  const mapRef = useRef(null);
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://maps.api.2gis.ru/2.0/loader.js?pkg=full';
-    script.onload = () => {
-      window.DG.then(function () {
-        const map = window.DG.map(mapRef.current, {
-          center: [42.888217, 74.609938],
-          zoom: 16,
-        });
-
-        window.DG.marker([42.888217, 74.609938])
-          .addTo(map)
-          .bindPopup(`
-            <strong>Футбольный клуб Дордой</strong><br/>
-            <a href="https://2gis.kg/bishkek/firm/70000001020312413/74.609925,42.888217?m=74.609938,42.888217/15.99" 
-               target="_blank" 
-               rel="noopener noreferrer">
-              Открыть в 2GIS
-            </a>
-          `);
-      });
-    };
-    document.body.appendChild(script);
-  }, []);
-
   return (
-    <div className="h-80 bg-gray-200 rounded-lg overflow-hidden shadow-md">
-      <div ref={mapRef} className="h-full w-full" />
+    <div className="relative h-96 rounded-2xl overflow-hidden shadow-xl mb-16">
+      {/* Карта Google Maps */}
+      <iframe
+        className="absolute inset-0 w-full h-full border-0"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2921.9239614172545!2d74.6074429!3d42.8890317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb7dcf16c9f47%3A0x551d157049dfe2a1!2sFC%20Dordoi%20Bishkek!5e0!3m2!1sen!2skg!4v1717720000000!5m2!1sen!2skg"
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
+
+      {/* Блок с адресом и кнопкой (поверх карты) */}
+      <div className="absolute bottom-6 left-6 right-6 sm:left-auto sm:right-6 sm:bottom-auto sm:top-6 bg-white bg-opacity-90 rounded-xl p-6 max-w-md shadow-lg">
+        <h3 className="text-2xl font-bold text-blue-900 mb-4">Стадион «Дордой»</h3>
+        <p className="text-gray-700 mb-4">
+          ул. Ахунбаева, Бишкек, Кыргызстан
+        </p>
+        <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105">
+          <a
+            href="https://2gis.kg/bishkek/geo/70000001028435341"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Построить маршрут
+          </a>
+        </button>
+      </div>
     </div>
   );
 };
