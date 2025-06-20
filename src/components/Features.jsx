@@ -198,7 +198,7 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
             >
               <TiLocationArrow className="relative z-20 text-sm md:text-base" />
             </motion.div>
-            <p className="relative z-20 text-xs md:text-sm">Скоро</p>
+            <p className="relative z-20 text-xs md:text-sm">Смотреть</p>
           </div>
         )}
       </div>
@@ -226,7 +226,7 @@ const Features = () => {
       id: 1,
       src: "videos/feature-22.mp4",
       title: <>F<b>oo</b>tball</>,
-      description: "Инновационные технологии для футбольных клубов",
+      description: "Инновационный этап развитие футбольного клуба ",
       className: "bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2",
       intensity: 15
     },
