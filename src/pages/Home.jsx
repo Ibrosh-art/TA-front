@@ -18,7 +18,6 @@ const Home = () => {
         <Hero src={video} />
         <Cards />
         <Stories />
-
         <About /> 
         <History />
         <Stor />  

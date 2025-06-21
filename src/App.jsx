@@ -16,10 +16,10 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 const navItems = [
-  { path: "/", name: "Home", iconUrl: "https://static-00.iconduck.com/assets.00/home-icon-512x512-oxfgvghl.png" },
-  { path: "/football", name: "Football", iconUrl: "https://cdn-icons-png.flaticon.com/512/4498/4498011.png" },
-  { path: "/university", name: "University", iconUrl: "https://images.freeimages.com/fic/images/icons/2770/ios_7_icons/512/university.png" },
-  { path: "/plaza", name: "Plaza", iconUrl: "https://icon-library.com/images/shopping-icon-png/shopping-icon-png-0.jpg" }
+  { path: "/", name: "Главная", iconUrl: "https://static-00.iconduck.com/assets.00/home-icon-512x512-oxfgvghl.png" },
+  { path: "/football", name: "Футбол", iconUrl: "https://cdn-icons-png.flaticon.com/512/4498/4498011.png" },
+  { path: "/university", name: "Университет", iconUrl: "https://images.freeimages.com/fic/images/icons/2770/ios_7_icons/512/university.png" },
+  { path: "/plaza", name: "Плаза", iconUrl: "https://icon-library.com/images/shopping-icon-png/shopping-icon-png-0.jpg" }
 ];
 
   useEffect(() => {
@@ -155,8 +155,6 @@ const navItems = [
       transition={{ duration: 0.3 }}
       className="fixed inset-0 z-50 md:hidden"
     >
-      {/* Темный полупрозрачный фон */}
-      <div className="absolute inset-0 bg-gray-900/90 backdrop-blur-sm" />
       
       {/* Контейнер меню с прокруткой */}
       <motion.div
@@ -242,145 +240,6 @@ const navItems = [
 function App() {
   return (
     <main className="overflow-x-hidden min-h-screen relative">
-      {/* Animated Background */}
-      {/* Professional Dordoi Background */}
-<div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none bg-gradient-to-br from-gray-50 to-gray-100">
-  {/* Abstract Building Silhouettes */}
-  <div className="absolute bottom-0 left-0 right-0 h-1/3">
-    {/* University Building */}
-    <motion.div 
-      className="absolute left-5% bottom-0 w-20 h-2/3 bg-gradient-to-t from-blue-800 to-blue-600 opacity-10"
-      initial={{ height: 0 }}
-      animate={{ height: "60%" }}
-      transition={{ duration: 1.5, delay: 0.3 }}
-    />
-    
-    {/* Shopping Center */}
-    <motion.div 
-      className="absolute left-30% bottom-0 w-25 h-3/4 bg-gradient-to-t from-amber-700 to-amber-600 opacity-10"
-      initial={{ height: 0 }}
-      animate={{ height: "75%" }}
-      transition={{ duration: 1.5, delay: 0.5 }}
-    />
-    
-    {/* Stadium */}
-    <motion.div 
-      className="absolute left-55% bottom-0 w-30 h-1/2 rounded-t-full bg-gradient-to-t from-emerald-700 to-emerald-600 opacity-10"
-      initial={{ height: 0 }}
-      animate={{ height: "50%" }}
-      transition={{ duration: 1.5, delay: 0.7 }}
-    />
-    
-    {/* Market */}
-    <motion.div 
-      className="absolute left-80% bottom-0 w-25 h-4/5 bg-gradient-to-t from-red-700 to-red-600 opacity-10"
-      initial={{ height: 0 }}
-      animate={{ height: "80%" }}
-      transition={{ duration: 1.5, delay: 0.9 }}
-    />
-  </div>
-
-  {/* Floating Activity Icons */}
-  {[
-    { icon: "🎓", color: "text-blue-600", size: "text-3xl", delay: 0.2 }, // University
-    { icon: "🛒", color: "text-amber-600", size: "text-4xl", delay: 0.4 }, // Plaza
-    { icon: "⚽", color: "text-emerald-600", size: "text-5xl", delay: 0.6 }, // Football
-    { icon: "🏪", color: "text-red-600", size: "text-3xl", delay: 0.8 }, // Market
-    { icon: "📚", color: "text-blue-500", size: "text-2xl", delay: 1.0 },
-    { icon: "👔", color: "text-gray-600", size: "text-3xl", delay: 1.2 }, // Business
-  ].map((item, i) => (
-    <motion.div
-      key={i}
-      className={`absolute ${item.color} ${item.size} opacity-30`}
-      style={{
-        left: `${15 + (i * 12)}%`,
-        top: `${20 + (i * 10)}%`,
-      }}
-      animate={{
-        y: [0, -20, 0],
-        rotate: [0, 10, -10, 0]
-      }}
-      transition={{
-        duration: 8 + i,
-        delay: item.delay,
-        repeat: Infinity,
-        repeatType: "reverse",
-        ease: "easeInOut"
-      }}
-    >
-      {item.icon}
-    </motion.div>
-  ))}
-
-  {/* Subtle Grid */}
-  <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-
-  {/* Pulsing Business Dots */}
-  {[...Array(30)].map((_, i) => {
-    const size = Math.random() * 6 + 2;
-    const duration = Math.random() * 5 + 3;
-    const delay = Math.random() * 2;
-    const xPos = Math.random() * 100;
-    const yPos = Math.random() * 100;
-    const colors = ["bg-blue-400", "bg-amber-400", "bg-emerald-400", "bg-red-400"];
-    const color = colors[i % colors.length];
-    
-    return (
-      <motion.div
-        key={i}
-        className={`absolute rounded-full ${color} opacity-30`}
-        style={{
-          width: `${size}px`,
-          height: `${size}px`,
-          left: `${xPos}%`,
-          top: `${yPos}%`,
-        }}
-        animate={{
-          scale: [1, 1.5, 1],
-          opacity: [0.3, 0.7, 0.3]
-        }}
-        transition={{
-          duration: duration,
-          delay: delay,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-    );
-  })}
-
-  {/* Connection Lines (Animated) */}
-  <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-    {[...Array(8)].map((_, i) => {
-      const x1 = 10 + (i * 10);
-      const y1 = 30 + (i * 5);
-      const x2 = 50 + (i * 5);
-      const y2 = 70 - (i * 5);
-      
-      return (
-        <motion.line
-          key={i}
-          x1={`${x1}%`}
-          y1={`${y1}%`}
-          x2={`${x2}%`}
-          y2={`${y2}%`}
-          stroke="rgba(59, 130, 246, 0.1)"
-          strokeWidth="1"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{
-            duration: 2,
-            delay: i * 0.2,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-          }}
-        />
-      );
-    })}
-  </svg>
-</div>
-
       <Router>
                 <ScrollToTop /> 
         <Navbar />

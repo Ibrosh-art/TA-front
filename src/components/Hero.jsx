@@ -17,8 +17,6 @@ const Hero = ({ src }) => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, 250]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
 
@@ -36,8 +34,6 @@ const Hero = ({ src }) => {
       }
     })
   };
-
-  const icons = [<TiLocationArrow />, <TiStar />, <TiHeart />];
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -58,36 +54,6 @@ const Hero = ({ src }) => {
       className="relative flex h-[90vh] w-full items-center justify-center overflow-hidden px-6 sm:px-10 md:px-16 lg:px-20"
       style={!isMobile ? { scale, opacity } : {}}
     >
-      <div className="absolute inset-0 -z-10">
-        {!isMobile && [...Array(25)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-blue-500 opacity-25"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              y: i % 2 === 0 ? y1 : y2,
-              fontSize: `${Math.random() * 28 + 18}px`
-            }}
-            animate={{
-              x: [0, Math.random() * 120 - 60],
-              y: [0, Math.random() * 120 - 60],
-              opacity: [0.15, 0.35, 0.15],
-              rotate: [0, Math.random() * 360],
-              scale: [1, 1.4, 1]
-            }}
-            transition={{
-              duration: Math.random() * 15 + 12,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }}
-          >
-            {icons[Math.floor(Math.random() * icons.length)]}
-          </motion.div>
-        ))}
-      </div>
-
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between">
         <AnimatedDiv
           className="py-10 md:py-20 lg:w-2/5"
@@ -156,31 +122,6 @@ const Hero = ({ src }) => {
                 <TiVolume className="text-2xl" />
               )}
             </button>
-
-            {!isMobile && (
-              <>
-                <motion.div
-                  className="absolute inset-0 rounded-3xl pointer-events-none"
-                  animate={{
-                    background: [
-                      'linear-gradient(45deg, rgba(59,130,246,0.2) 0%, transparent 50%, rgba(59,130,246,0.2) 100%)',
-                      'linear-gradient(135deg, rgba(59,130,246,0.2) 0%, transparent 50%, rgba(59,130,246,0.2) 100%)'
-                    ]
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    ease: "linear"
-                  }}
-                />
-                <motion.div
-                  className="absolute -inset-4 md:-inset-8 rounded-3xl bg-blue-400/20 blur-3xl pointer-events-none"
-                  animate={{ opacity: [0.4, 0.6, 0.4] }}
-                  transition={{ duration: 4, repeat: Infinity, repeatType: "reverse" }}
-                />
-              </>
-            )}
           </div>
         </AnimatedDiv>
       </div>
