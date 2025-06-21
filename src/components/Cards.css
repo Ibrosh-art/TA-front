@@ -7,7 +7,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-
 .card-container {
     position: relative;
     display: flex;
@@ -94,7 +93,7 @@
     display: inline-block;
     padding: 12px 25px;
     text-decoration: none;
-    background: #ffc400 ;
+    background: #ffc400;
     color: #FFF;
     font-weight: 500;
     border-radius: 5px;
@@ -104,29 +103,94 @@
     opacity: 0.8;
 }
 
-@media (max-width: 480px) {
-    .card-container .card {
-        width: 230px;
-        border-radius: 15px;
-    }
-    .card-container .card .img-box img {
-        width: 90%;
-        height: 90%;
-        margin: 0 0 0 10px;
-    }
-    .card-container .card .img-box {
-        width: 220px;
-        border-radius: 10px;
-    }
+/* Горизонтальный скролл для мобильных */
+/* ... предыдущие стили остаются без изменений ... */
 
-    .card-container .card .content p {
-        font-size: 0.8rem;
-    }
+/* Модифицируем стили для мобильных устройств */
+@media (max-width: 768px) {
+  .card-container.mobile {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding:70px 10px 20px 10px;
+    gap: 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
 
-    .card-container .card .content a {
-        font-size: 0.9rem;
-    }
+  .card-container.mobile::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card-container.mobile .card {
+    flex-shrink: 0;
+    width: 280px;
+    height: 300px;
+  }
+
+  /* Стандартное состояние (без hover/active) */
+  .card-container.mobile .card .content {
+    top: 252px;
+    height: 35px;
+    overflow: hidden;
+  }
+
+  .card-container.mobile .card .content p,
+  .card-container.mobile .card .content a {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Активное состояние (при нажатии) */
+  .card-container.mobile .card.mobile-active {
+    height: 400px;
+  }
+
+  .card-container.mobile .card.mobile-active .img-box {
+    top: -100px;
+    scale: 0.75;
+  }
+
+  .card-container.mobile .card.mobile-active .content {
+    top: 130px;
+    height: 250px;
+  }
+
+  .card-container.mobile .card.mobile-active .content p,
+  .card-container.mobile .card.mobile-active .content a {
+    opacity: 1;
+  }
 }
+
+/* ... остальные стили остаются без изменений ... */
+
+/* Оптимизация для маленьких экранов */
+@media (max-width: 480px) {
+  .card-container.mobile .card {
+    width: 85vw;
+    max-width: 300px;
+  }
+  
+  .card-container .card .img-box img {
+    width: 90%;
+    height: 90%;
+    margin: 0 0 0 10px;
+  }
+  
+  .card-container .card .img-box {
+    width: 220px;
+    border-radius: 10px;
+  }
+
+  .card-container .card .content p {
+    font-size: 0.8rem;
+  }
+
+  .card-container .card .content a {
+    font-size: 0.9rem;
+  }
+}
+
 .card-container .card:active {
     transform: translateY(10px);
 }

@@ -166,7 +166,6 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
           >
             {title}
           </motion.h1>
-          {description && (
             <motion.p 
               className="mt-2 md:mt-3 max-w-64 text-xs md:text-base font-medium"
               initial={{ opacity: isMobile ? 1 : 0.7 }}
@@ -175,32 +174,9 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
             >
               {description}
             </motion.p>
-          )}
+          
         </div>
 
-        {isComingSoon && (
-          <div
-            ref={hoverButtonRef}
-            className="border-hsla relative flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full bg-black/80 px-4 py-1 md:px-5 md:py-2 text-white uppercase backdrop-blur-sm transition-all duration-300 hover:bg-black hover:shadow-lg hover:shadow-blue-500/20"
-          >
-            {!prefersReducedMotion && (
-              <div
-                className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
-                style={{
-                  opacity: hoverOpacity,
-                  background: `radial-gradient(100px circle at ${cursorPosition.x}px ${cursorPosition.y}px, #656fe288, rgba(255, 255, 255, 0.15))`,
-                }}
-              />
-            )}
-            <motion.div
-              animate={{ rotate: (isHovered && !isMobile) ? 45 : 0 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <TiLocationArrow className="relative z-20 text-sm md:text-base" />
-            </motion.div>
-            <p className="relative z-20 text-xs md:text-sm">Скоро</p>
-          </div>
-        )}
       </div>
     </div>
   );
@@ -226,7 +202,7 @@ const Features = () => {
       id: 1,
       src: "videos/feature-22.mp4",
       title: <>F<b>oo</b>tball</>,
-      description: "Инновационные технологии для футбольных клубов",
+      description: "Инновационный этап развитие футбольного клуба ",
       className: "bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2",
       intensity: 15
     },
