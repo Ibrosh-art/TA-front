@@ -73,7 +73,7 @@ const stores = [
     description: 'Спортивная одежда и инвентарь для профессиональных атлетов и любителей',
     hours: '10:00 - 22:00',
     location: '3 этаж, секция D7',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+    image: 'https://images.pexels.com/photos/209969/pexels-photo-209969.jpeg',
     logo: 'https://i.ibb.co/0jF9LqS/techworld.jpg',
     rating: 4.6,
     promo: 'Скидка 20% на кроссовки'
