@@ -1,0 +1,303 @@
+{
+  "company": {
+    "title": "QuantumEdge",
+    "premium": "PRO",
+    "subtitle": "Bror",
+    "name": "QuantumEdge Analytics",
+    "country": "Switzerland",
+    "regulator": "FINMA",
+    "tabs": {
+      "about": "About Us",
+      "philosophy": "Our Philosophy",
+      "compliance": "Compliance"
+    },
+    "about": {
+      "title": "About Company",
+      "description": "TradesAdvisor is a fintech company bringing together the expertise of traders, analysts and developers. We build tools for those seeking precision, flexibility and automation in financial markets.",
+      "team": {
+        "title": "Our Team",
+        "description": "We are a team of traders, analysts and developers using machine learning and algorithms to identify market opportunities."
+      },
+      "tech": {
+        "title": "Our Technology",
+        "description": "We don’t try to guess the market—we model its behavior based on objective data, statistical methods and algorithmic analysis. Our goal is to provide users with structured information and tools to make independent decisions in a fast-changing market environment."
+      }
+    },
+    "philosophy": {
+      "slogan": "We don’t guess the market—we model it",
+      "sloganSub": "— our slogan",
+      "empowerment": {
+        "title": "Client Empowerment",
+        "points": [
+          "Our goal is to provide you with the best ideas and a systematic approach—you make the decisions.",
+          "You manage the account—we provide analytical scenarios based on models and statistics."
+        ]
+      },
+      "approach": {
+        "title": "Our Approach",
+        "points": [
+          "All ideas are based on many years of experience in trading, investing, machine learning and market statistics.",
+          "You can disable the service at any time—we offer a proven path."
+        ]
+      },
+      "control": {
+        "client": "You control the capital.",
+        "we": "We provide data, models and calculations.",
+        "you": "You make the decisions."
+      }
+    },
+    "compliance": {
+      "title": "Regulatory Compliance",
+      "registered": "Registered in {country}",
+      "regulation": "Fully compliant with {regulator} regulations",
+      "notice": {
+        "title": "Important Notice",
+        "description": "Our services are not offered to U.S. persons or residents of the U.S. By accessing this site or using our services, you confirm that you are not a “U.S. person” under Regulation S of the Securities Act of 1933."
+      }
+    },
+    "rights": "All rights reserved."
+  },
+  "subscription": {
+    "title": "Choose a Plan",
+    "description": "Select the plan that fits your trading level.",
+    "subtitle": "Pick a subscription based on your trading needs",
+    "month": "mo",
+    "popular": "Most Popular",
+    "cta": "Start Now",
+    "note": "All plans include 24/7 support and can be cancelled at any time.",
+    "features": {
+      "1_idea_week": "1 idea per week",
+      "telegram_access": "Access to Telegram channel",
+      "3_ideas_week": "3 ideas per week",
+      "charts": "Chart access",
+      "video_analysis": "Market video analysis",
+      "personalized_scenarios": "Personalized scenarios",
+      "analytical_support": "Analytical support",
+      "priority_access": "Priority access to new strategies",
+      "starter": {
+        "1": "1 trading idea per week",
+        "2": "Telegram notifications"
+      },
+      "pro": {
+        "1": "3 ideas per week",
+        "2": "Detailed chart analysis",
+        "3": "Weekly video updates"
+      },
+      "elite": {
+        "1": "Personalized trading scenarios",
+        "2": "Priority analytical support"
+      }
+    },
+    "choose_plan": "Choose Plan",
+    "disclaimer": "Prices are in USD. Payments are processed through secure systems. You can cancel anytime."
+  },
+  "stats": {
+    "title": "Strategy Performance Metrics",
+    "subtitle": "Complete statistics and analysis of our trading strategy",
+    "tabs": {
+      "performance": "Performance",
+      "behavior": "Behavior",
+      "risk": "Risk"
+    },
+    "metricsTitle": "Key Metrics",
+    "performance": "Performance Chart",
+    "metric": "Metric",
+    "value": "Value",
+    "disclaimer": "Historical model performance (backtests) is provided for informational purposes only. Past results do not guarantee future performance. These are simulations, not live trades.",
+    "metrics": {
+      "cagr": "Annualized Return (important for long term)",
+      "volatility": "Return Standard Deviation",
+      "sharpe": "Risk-adjusted Return (higher is better)",
+      "sortino": "Downside-adjusted Risk Return",
+      "calmar": "CAGR / Max Drawdown (purity of return)",
+      "drawdown": "Maximum decline from peak to trough",
+      "winrate": "Percent of profitable trades",
+      "positiveDays": "Percent of days with positive return",
+      "avgWinLoss": "Ratio of average win to average loss",
+      "profitFactor": "Gross profit / gross loss",
+      "expectancy": "Expected return per trade",
+      "alpha": "Excess return vs index",
+      "beta": "Sensitivity to index movement",
+      "skewness": "Return distribution skewness",
+      "kurtosis": "Return distribution kurtosis",
+      "exposure": "Percent of time in open positions",
+      "kelly": "Optimal position size (%)"
+    }
+  },
+  "comparison": {
+    "title": "Strategy vs Benchmark Performance",
+    "disclaimer": "Historical model performance (backtests) for educational overview. Past results do not guarantee future performance. These are illustrative simulations, not actual trades.",
+    "strategy": "Strategy",
+    "date": "Date",
+    "returns": "Returns",
+    "timeRanges": {
+      "1m": "1 mo",
+      "3m": "3 mo",
+      "6m": "6 mo",
+      "1y": "1 yr",
+      "all": "All time"
+    },
+    "tabs": {
+      "chart": "Chart",
+      "table": "Table"
+    },
+    "benchmarks": {
+      "spy": "SPY (S&P 500)",
+      "qqq": "QQQ (Nasdaq 100)",
+      "dia": "DIA (Dow Jones)",
+      "iwm": "IWM (Russell 2000)"
+    }
+  },
+  "telegram": {
+    "title": "Join Our Telegram Channel",
+    "description": "🔔 Stay updated with daily news—join our free Telegram channel for educational content, market updates, and strategy ideas",
+    "button": "Join Now"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "subscription": "Pricing",
+    "statistics": "Statistics",
+    "contacts": "Contacts",
+    "join_telegram": "Telegram"
+  },
+  "footer": {
+    "contacts": {
+      "title": "Contacts",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms of Use",
+      "privacy": "Privacy Policy",
+      "client_agreement": "Client Agreement"
+    },
+    "social": {
+      "title": "Social Media"
+    },
+    "disclaimer": {
+      "text": "The company is not a registered investment advisor. All materials are for educational purposes only. Trading in financial markets involves risk.",
+      "rights": "All rights reserved."
+    }
+  },
+  "header": {
+    "home": "Home",
+    "subscription": "Pricing",
+    "statistics": "Statistics",
+    "title": "Trading Ideas",
+    "description": "Fresh trading ideas and market analysis",
+    "join_telegram": "Join us"
+  },
+  "home": {
+    "title": "Welcome to TradesAdvisor Group",
+    "subtitle": "Market Research. Educational Analysis. Decision Support.",
+    "cta_button": "Join Now"
+  },
+  "languageSwitcher": {
+    "changeLanguage": "Change Language",
+    "switchTo": "Switch to"
+  },
+  "prof": {
+    "title1": "Professional Consulting",
+    "title2": "and Trading Strategies",
+    "description": "We offer advanced consulting services and algorithmic trading strategies, specializing in U.S. equities and options markets.",
+    "button1": "Get a Consultation",
+    "button2": "Our Strategies",
+    "important": "Important:",
+    "disclaimer": "We provide analytical reviews and strategy ideas, as well as personalized trading approaches. We do not give individual investment advice, manage client funds, or hold RIA status.",
+    "metric1": "Trading Strategies",
+    "metric2": "Market Analysis",
+    "videoFallback": "Your browser does not support video."
+  },
+  "services": {
+    "title": {
+      "part1": "Our",
+      "part2": "Services"
+    },
+    "tabs": {
+      "consulting": "Investment Consulting",
+      "trading": "Algorithmic Trading"
+    },
+    "consulting": {
+      "title": "Personalized Analytical Reviews",
+      "items": [
+        "Strategy ideas for trading equities and options",
+        "Market analysis using cutting‑edge technology",
+        "AI‑driven strategies",
+        "Regular updates and position monitoring"
+      ],
+      "note": {
+        "title": "Important Info",
+        "content": "Our company is not a registered investment advisor (RIA) and does not provide personal financial advice. All information is for educational and informational purposes only."
+      }
+    },
+    "trading": {
+      "title": "Automated Trading Solutions",
+      "items": [
+        "Support with automated trading tools",
+        "Portfolio risk management",
+        "Strategy optimization",
+        "Integration with popular trading platforms"
+      ],
+      "note": {
+        "title": "Technology‑Driven",
+        "content": "We use modern machine learning algorithms to analyze market data and uncover potential opportunities, helping you make informed decisions."
+      }
+    }
+  },
+  "legal": {
+    "title": "Legal Information",
+    "companyNameLabel": "Company Name:",
+    "companyName": "QuantumEdge Analytics",
+    "registrationNumberLabel": "Registration Number:",
+    "registrationNumber": "123456782727",
+    "addressLabel": "Address:",
+    "address": "To be provided...",
+    "contactEmailLabel": "Contact Email:",
+    "contactEmail": "contact@quantumedge.com",
+    "termsLabel": "Terms of Service & Privacy Policy:",
+    "termsLink": "/legal/terms",
+    "termsLinkText": "link to documents or webpage",
+    "clientAgreementLabel": "Client Agreement:",
+    "clientAgreementText": "Clients sign a detailed consultation agreement before service begins.",
+    "premiumBadge": "Premium"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to the most popular questions about our services",
+    "items": [
+      {
+        "question": "Do you provide investment management or discretionary trading?",
+        "answer": "No, we only offer consulting services. All trading decisions and operations are made by the client."
+      },
+      {
+        "question": "How do you charge for your services?",
+        "answer": "Our fee structure is performance‑based and disclosed individually in the consultation agreement. We do not charge asset management fees nor access client funds."
+      },
+      {
+        "question": "Where are the funds held?",
+        "answer": "All client funds remain in the client’s brokerage accounts; we have no access or control."
+      }
+    ],
+    "premium": {
+      "title": "Premium Consultations",
+      "description": "For personalized recommendations, consider our premium services"
+    }
+  },
+  "admin": {
+    "statsEditor": "Stats Editor",
+    "save": "Save Changes",
+    "saving": "Saving...",
+    "reset": "Reset to Default",
+    "resetConfirm": "Are you sure you want to reset all metrics to default values?",
+    "resetSuccess": "Metrics reset to default values",
+    "saveSuccess": "Metrics saved successfully!",
+    "saveError": "Failed to save metrics",
+    "loadSuccess": "Metrics loaded successfully",
+    "loadError": "Failed to load metrics",
+    "editorHint": "Edit values and click “Save Changes” to update statistics."
+  },
+  "backToHome": "Back to Home"
+}

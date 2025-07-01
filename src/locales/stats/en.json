@@ -1,0 +1,137 @@
+{
+  "title": "Strategy Performance Dashboard",
+  "lastUpdated": "Last updated: {{date}}",
+
+  "sections": {
+    "performance": {
+      "title": "📈 Performance",
+      "metrics": {
+        "cagr": {
+          "name": "CAGR",
+          "value": "+23.4%",
+          "description": "Compound Annual Growth Rate"
+        },
+        "volatility": {
+          "name": "Volatility",
+          "value": "13.8%",
+          "description": "Annual standard deviation"
+        },
+        "sharpeRatio": {
+          "name": "Sharpe Ratio",
+          "value": "1.42",
+          "description": "Risk-adjusted return"
+        },
+        "sortinoRatio": {
+          "name": "Sortino Ratio",
+          "value": "2.01",
+          "description": "Adjusted for downside risk"
+        },
+        "calmarRatio": {
+          "name": "Calmar Ratio",
+          "value": "0.83",
+          "description": "CAGR to max drawdown ratio"
+        },
+        "maxDrawdown": {
+          "name": "Max Drawdown",
+          "value": "-6.5%",
+          "description": "Largest peak-to-trough decline"
+        },
+        "totalReturn": {
+          "name": "Total Return",
+          "value": "+125.4%",
+          "description": "Cumulative return"
+        },
+        "recoveryFactor": {
+          "name": "Recovery Factor",
+          "value": "3.2",
+          "description": "Profit to max drawdown"
+        }
+      }
+    },
+    "behavior": {
+      "title": "🔍 Strategy Behavior",
+      "metrics": {
+        "winRate": {
+          "name": "Win Rate",
+          "value": "69%",
+          "description": "Percentage of profitable trades"
+        },
+        "positiveDays": {
+          "name": "% Positive Days",
+          "value": "56%",
+          "description": "Percentage of profitable days"
+        },
+        "avgWinLoss": {
+          "name": "Avg Win/Loss",
+          "value": "1.7 : 1",
+          "description": "Average profit to loss ratio"
+        },
+        "profitFactor": {
+          "name": "Profit Factor",
+          "value": "2.4",
+          "description": "Gross profit to loss ratio"
+        },
+        "expectancy": {
+          "name": "Expectancy",
+          "value": "0.8%",
+          "description": "Average profit per trade"
+        },
+        "gainToPain": {
+          "name": "Gain to Pain Ratio",
+          "value": "1.9",
+          "description": "Total return to total risk"
+        },
+        "winLossStreak": {
+          "name": "Win/Loss Streaks",
+          "value": "8 / 3",
+          "description": "Longest winning/losing streaks"
+        },
+        "kellyPercent": {
+          "name": "Kelly % Criterion",
+          "value": "12%",
+          "description": "Optimal position size"
+        }
+      }
+    },
+    "risk": {
+      "title": "⚠️ Risk Metrics",
+      "metrics": {
+        "alpha": {
+          "name": "Alpha (SPY)",
+          "value": "+2.1%",
+          "description": "Excess return over benchmark"
+        },
+        "beta": {
+          "name": "Beta (SPY)",
+          "value": "0.72",
+          "description": "Correlation with market index"
+        },
+        "skewnessKurtosis": {
+          "name": "Skewness/Kurtosis",
+          "value": "0.5 / 2.1",
+          "description": "Return distribution characteristics"
+        },
+        "drawdownCurve": {
+          "name": "Drawdown Curve",
+          "value": "Smooth",
+          "description": "Recovery pattern after drawdowns"
+        },
+        "stdDeviation": {
+          "name": "Standard Deviation",
+          "value": "1.2%",
+          "description": "Return volatility"
+        },
+        "exposureTime": {
+          "name": "Exposure Time",
+          "value": "78%",
+          "description": "Time with open positions"
+        },
+        "timeInMarket": {
+          "name": "Time in Market",
+          "value": "65%",
+          "description": "Trading activity level"
+        }
+      }
+    }
+  }
+}
