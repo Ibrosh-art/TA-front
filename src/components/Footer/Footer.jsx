@@ -1,9 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+
 import './Footer.css';
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t, ready } = useTranslation();
+  
+  if (!ready) return <div>Loading...</div>;
+
   const footerRef = useRef(null);
   const currentYear = new Date().getFullYear();
 
@@ -84,16 +89,16 @@ const Footer = () => {
           </h3>
           <ul className="legal-list">
             <li className="legal-item">
-              <a href="/terms" className="legal-link">
+              <Link to="/terms" className="legal-link">
                 <span className="link-hover">{t('footer.legal.terms')}</span>
                 <span className="link-underline"></span>
-              </a>
+              </Link>
             </li>
             <li className="legal-item">
-              <a href="/privacy" className="legal-link">
+              <Link to="/privacy" className="legal-link">
                 <span className="link-hover">{t('footer.legal.privacy')}</span>
                 <span className="link-underline"></span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -155,7 +160,7 @@ const Footer = () => {
           or sell any financial instrument.
         </p>
         <p className="copyright">
-          <span className="copyright-symbol">©</span> {currentYear} {t('company.name')}. {t('footer.disclaimer.rights')}
+          <span className="copyright-symbol">©</span> {currentYear} {t('company.title')}. {t('footer.disclaimer.rights')}
         </p>
       </div>
       

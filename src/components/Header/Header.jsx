@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
+import './HeaderBackground.css'
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -12,7 +13,6 @@ const Header = () => {
   const isRTL = i18n.dir() === 'rtl';
   const location = useLocation();
 
-  // Прокрутка вверх при изменении маршрута
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -69,7 +69,6 @@ const Header = () => {
       dir={isRTL ? 'rtl' : 'ltr'}
     >
       <div className="header-bg"></div>
-      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link 
@@ -118,7 +117,7 @@ const Header = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-600 transition-all duration-500 group-hover:w-full"></span>
             </Link>
             
-            <Link 
+            {/* <Link 
               to="/statistics" 
               className="relative text-white hover:text-yellow-300 font-medium transition-all group"
             >
@@ -129,7 +128,7 @@ const Header = () => {
                 </svg>
               </span>
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-yellow-600 transition-all duration-500 group-hover:w-full"></span>
-            </Link>
+            </Link> */}
           </nav>
 
           <div className="hidden md:flex items-center z-10">
@@ -140,7 +139,7 @@ const Header = () => {
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-300 focus:outline-none transition-all"
-              aria-expanded={isMenuOpen}
+              aria-expanded={isMenuOpen ? "true" : "false"}
             >
               <span className="sr-only">Open main menu</span>
               {!isMenuOpen ? (
@@ -199,7 +198,7 @@ const Header = () => {
               <span className={`absolute bottom-2 ${isRTL ? 'right-4' : 'left-4'} w-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 transition-all duration-500 group-hover:w-[calc(100%-2rem)]`}></span>
             </Link>
             
-            <Link
+            {/* <Link
               to="/statistics"
               className="relative text-white text-2xl font-medium py-3 px-4 rounded-lg hover:bg-blue-900/30 transition-all group"
               onClick={closeMenu}
@@ -211,32 +210,14 @@ const Header = () => {
                 </svg>
               </span>
               <span className={`absolute bottom-2 ${isRTL ? 'right-4' : 'left-4'} w-0 h-0.5 bg-gradient-to-r from-blue-400 to-blue-600 transition-all duration-500 group-hover:w-[calc(100%-2rem)]`}></span>
-            </Link>
+            </Link> */}
           </div>
           
           <div className="pt-8 mt-8 border-t border-blue-900/30">
-            <LanguageSwitcher mobile />
+            <LanguageSwitcher mobile="true" />
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .header-bg {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: radial-gradient(
-            circle at calc(var(--mouse-x) * 100%) calc(var(--mouse-y) * 100%),
-            rgba(0, 191, 255, 0.15) 0%,
-            transparent 70%
-          );
-          transition: background 0.3s ease-out;
-          z-index: 0;
-          pointer-events: none;
-        }
-      `}</style>
     </header>
   );
 };

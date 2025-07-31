@@ -12,7 +12,7 @@ export default function Auth({ onLogin }) {
     loginRef.current?.focus();
   }, []);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!login.trim() || !password.trim()) {
@@ -23,16 +23,29 @@ export default function Auth({ onLogin }) {
     setIsLoading(true);
     setError('');
 
-    setTimeout(() => {
-      // Пример простейшей проверки (заменить на реальную)
-      if (login === 'TRadmin' && password === '123') {
-        onLogin();
-      } else {
-        setError('Неверный логин или пароль');
-        setIsLoading(false);
-        loginRef.current?.focus();
+    try {
+      const response = await fetch('https://ta-server.onrender.com/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: login, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Ошибка входа');
       }
-    }, 800);
+
+      const data = await response.json();
+
+      localStorage.setItem('token', data.token); // JWT токен
+      onLogin(); // Успешный вход
+
+    } catch (err) {
+      setError(err.message || 'Ошибка сервера');
+      loginRef.current?.focus();
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -81,16 +94,12 @@ export default function Auth({ onLogin }) {
 
           {error && <div className="error-message">{error}</div>}
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="login-button"
             disabled={isLoading || !login.trim() || !password.trim()}
           >
-            {isLoading ? (
-              <span className="spinner"></span>
-            ) : (
-              'Войти'
-            )}
+            {isLoading ? <span className="spinner"></span> : 'Войти'}
           </button>
         </form>
 

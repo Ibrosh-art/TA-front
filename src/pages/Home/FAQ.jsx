@@ -1,112 +1,114 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
-const FAQItem = ({ question, answer, index }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.1 }}
-      className="border-b border-[#6C757D]/20 last:border-b-0 overflow-hidden bg-white"
-    >
-      <motion.button
-        whileHover={{ backgroundColor: '#F8F9FA' }}
-        className="flex justify-between items-center w-full py-5 px-6 text-left rounded-lg transition-all"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-expanded={isOpen}
-        aria-controls={`faq-answer-${index}`}
-        id={`faq-question-${index}`}
-      >
-        <span className="text-[#0A1F44] font-medium text-lg">{question}</span>
-        <motion.span
-          animate={{ rotate: isOpen ? 45 : 0 }}
-          className="text-[#00BFFF] text-2xl font-light"
-          aria-hidden="true"
-        >
-          +
-        </motion.span>
-      </motion.button>
-      
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="px-6"
-            id={`faq-answer-${index}`}
-            role="region"
-            aria-labelledby={`faq-question-${index}`}
-          >
-            <div className="pb-5 text-[#6C757D] leading-relaxed">
-              {answer}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-};
-
 const FAQ = () => {
-  const { t } = useTranslation();
+  const { t, ready } = useTranslation();
+  
+  if (!ready) return <div>Loading...</div>;
 
-  // Массив вопросов и ответов из i18n (ожидается, что они будут массивами в переводах)
-  const faqs = t('faq.items', { returnObjects: true });
+  const [activeQuestion, setActiveQuestion] = useState(null);
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
+  const questions = ['q1', 'q2', 'q3'];
+
+  const toggleQuestion = (id) => {
+    setActiveQuestion(activeQuestion === id ? null : id);
+  };
 
   return (
-    <div className="bg-white">
-      <div className="max-w-3xl mx-auto p-8 bg-white">
+    <div className="bg-[#0A1F44] text-white py-16 px-4 sm:px-6">
+      <div className="max-w-2xl mx-auto"> {/* Уменьшил максимальную ширину */}
+        {/* Header */}
         <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-gradient-to-r from-[#0A1F44] to-[#0A1F44]/90 text-white p-6 rounded-xl mb-8 shadow-lg"
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold mb-2">
+          <h1 className="text-3xl font-bold mb-4 text-white"> {/* Убрал градиент для более чистого вида */}
             {t('faq.title')}
-          </h2>
-          <p className="text-[#00BFFF] font-light">
+          </h1>
+          <p className="text-lg text-[#6C757D]">
             {t('faq.subtitle')}
           </p>
         </motion.div>
-        
-        <motion.div 
-          className="bg-white rounded-xl shadow-lg overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
+
+        {/* Questions */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="space-y-3" 
         >
-          {faqs.map((faq, index) => (
-            <FAQItem 
-              key={index} 
-              question={faq.question} 
-              answer={faq.answer} 
-              index={index} 
-            />
+          {questions.map((q) => (
+            <motion.div
+              key={q}
+              whileHover={{ scale: 1.01 }}
+              className="bg-[#0A1F44]/90 rounded-lg p-5 border border-[#00BFFF]/20 cursor-pointer"
+              onClick={() => toggleQuestion(q)}
+            >
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-semibold text-[#00BFFF]">
+                  {t(`faq.questions.${q}.question`)}
+                </h3>
+                <motion.div
+                  animate={{ rotate: activeQuestion === q ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <svg 
+                    className="w-5 h-5 text-[#00BFFF]" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M19 9l-7 7-7-7" 
+                    />
+                  </svg>
+                </motion.div>
+              </div>
+              
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ 
+                  height: activeQuestion === q ? 'auto' : 0,
+                  opacity: activeQuestion === q ? 1 : 0
+                }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="pt-3 text-gray-300 text-base">
+                  {t(`faq.questions.${q}.answer`)}
+                </div>
+              </motion.div>
+            </motion.div>
           ))}
         </motion.div>
 
+        {/* Contact CTA */}
         <motion.div
-          className="mt-8 p-6 border border-[#FFD700] bg-[#FFD700]/10 rounded-xl flex items-start"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn}
+          className="mt-8 text-center"
         >
-          <div className="bg-[#FFD700] text-[#0A1F44] p-2 rounded-lg mr-4">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <div>
-            <h3 className="text-[#0A1F44] font-bold mb-2">{t('faq.premium.title')}</h3>
-            <p className="text-[#6C757D]">{t('faq.premium.description')}</p>
-          </div>
+          <p className="text-[#6C757D]">
+            {t('faq.moreQuestions')}{' '}
+            <a href="https://t.me/saletradesadvisor">
+            <button className="text-[#FFD700] font-medium hover:underline">
+              {t('faq.contactUs')}
+            </button>
+            </a>
+            
+          </p>
         </motion.div>
       </div>
     </div>

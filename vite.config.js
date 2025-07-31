@@ -11,7 +11,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',  // Ваш сервер
+        target: 'https://ta-backend-9c7h.onrender.com',  // Ваш сервер
         changeOrigin: true,
       }
     }

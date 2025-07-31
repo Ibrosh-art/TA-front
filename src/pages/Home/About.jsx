@@ -3,7 +3,10 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 const CompanyOverview = () => {
-  const { t } = useTranslation();
+  const { t, ready } = useTranslation();
+  
+  if (!ready) return <div>Loading...</div>;
+
   const [activeTab, setActiveTab] = useState('about');
 
   const fadeIn = {
@@ -121,39 +124,10 @@ const CompanyOverview = () => {
                 >
                   "{t('company.philosophy.slogan')}"
                 </motion.h2>
-                <p className="mt-2 text-[#6C757D]">{t('company.philosophy.sloganSub')}</p>
+                
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                {['empowerment', 'approach'].map((section) => {
-                  const items = t(`company.philosophy.${section}.points`, {
-                    returnObjects: true
-                  }) || [];
-
-                  return (
-                    <motion.div
-                      key={section}
-                      whileHover={{ scale: 1.02 }}
-                      className="bg-[#0A1F44] p-5 rounded-lg border border-[#00BFFF]/20 shadow-lg"
-                    >
-                      <h4 className="font-semibold text-lg mb-3 text-[#00BFFF]">
-                        {t(`company.philosophy.${section}.title`)}
-                      </h4>
-                      <ul className="space-y-3 text-gray-300">
-                        {items.map((point, index) => (
-                          <li key={index} className="flex items-start">
-                            <svg className="flex-shrink-0 h-5 w-5 text-[#00BFFF] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
-                            <span className="ml-2">{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
+              
               <motion.div
                 whileHover={{ scale: 1.01 }}
                 className="mt-8 p-5 bg-[#00BFFF]/10 rounded-lg border border-[#00BFFF]/30"

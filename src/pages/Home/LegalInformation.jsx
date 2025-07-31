@@ -2,7 +2,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const LegalInformation = () => {
-  const { t } = useTranslation();
+  const { t, ready } = useTranslation();
+  
+  if (!ready) return <div>Loading...</div>;
+
 
   return (
     <div className="bg-white min-h-screen flex items-center justify-center px-4">
@@ -16,7 +19,7 @@ const LegalInformation = () => {
             <span className="w-full md:w-1/3 font-semibold text-[#6C757D]">
               {t("legal.companyNameLabel")}
             </span>
-            <span className="w-full md:w-2/3">{t("legal.companyName")}</span>
+            <span className="w-full md:w-2/3">{t("company.title")}</span>
           </div>
 
           <div className="flex flex-wrap border-b border-[#6C757D]/20 pb-4">

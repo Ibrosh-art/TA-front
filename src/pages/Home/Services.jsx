@@ -2,8 +2,13 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
+
 const ServicesSection = () => {
-  const { t } = useTranslation();
+  const { t, ready } = useTranslation();
+  
+  if (!ready) return <div>Loading...</div>;
+
+
   const [activeTab, setActiveTab] = useState('consulting');
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -36,7 +41,7 @@ const ServicesSection = () => {
     },
     trading: {
       title: t('services.trading.title'),
-      items: Array.from({ length: 4 }, (_, i) => t(`services.trading.items.${i}`)),
+      items: Array.from({ length: 3 }, (_, i) => t(`services.trading.items.${i}`)),
       note: {
         title: t('services.trading.note.title'),
         content: t('services.trading.note.content'),

@@ -1,9 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
+import './Prof.css'; // Импорт стилей
 
-const ProfTrade = () => {
-  const { t } = useTranslation();
+const   ProfTrade = () => {
+  const { t, ready } = useTranslation();
+  
+  if (!ready) return <div>Loading...</div>;
+
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: false
@@ -65,12 +69,12 @@ const ProfTrade = () => {
                 >
                   {t('prof.button1')}
                 </a>
-                <a
+                {/* <a
                   href="statistics"
                   className="px-8 py-4 border-2 border-blue-500 text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-all duration-300 hover:-translate-y-1 text-center"
                 >
                   {t('prof.button2')}
-                </a>
+                </a> */}
               </div>
 
               {/* Disclaimer */}
@@ -86,17 +90,8 @@ const ProfTrade = () => {
         {/* Видео и метрики */}
         <div className="lg:w-1/2 relative">
           <div className="relative rounded-xl overflow-hidden shadow-2xl transform transition-all duration-700 hover:shadow-3xl hover:-translate-y-2">
-            <video
-              ref={videoRef}
-              className="w-full h-auto"
-              poster="https://www.adventum.ru/articles/wp-content/uploads/2023/09/strategiya-razvitiya-kompanii-01-min.jpg"
-              muted
-              loop
-              playsInline
-            >
-              <source src="/assets/market-analysis.mp4" type="video/mp4" />
-              {t('prof.videoFallback')}
-            </video>
+              <img src="https://img.freepik.com/free-vector/financial-chart-globe-background-forex-trading-stock-market_1017-44838.jpg?semt=ais_hybrid&w=740" alt="" />
+        
 
             <div className="absolute inset-0 pointer-events-none" style={{
               boxShadow: 'inset 0 0 80px rgba(59, 130, 246, 0.2)'
@@ -121,19 +116,7 @@ const ProfTrade = () => {
       </div>
 
       {/* Анимации */}
-      <style jsx global>{`
-        @keyframes float {
-          0% { transform: translateY(0) translateX(0); }
-          50% { transform: translateY(-20px) translateX(10px); }
-          100% { transform: translateY(0) translateX(0); }
-        }
-        @keyframes shine {
-          0% { transform: translateX(-100%) skewX(-15deg); }
-          100% { transform: translateX(100%) skewX(-15deg); }
-        }
-        .animate-float { animation: float linear infinite; }
-        .animate-shine { animation: shine 3s infinite; }
-      `}</style>
+      
     </section>
   );
 };

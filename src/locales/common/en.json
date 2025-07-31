@@ -1,9 +1,9 @@
 {
   "company": {
-    "title": "QuantumEdge",
+    "title": "TradesAdvisor Holdings LLC",
     "premium": "PRO",
     "subtitle": "Bror",
-    "name": "QuantumEdge Analytics",
+    "name": "TradesAdvisor Holdings LLC Analytics",
     "country": "Switzerland",
     "regulator": "FINMA",
     "tabs": {
@@ -249,8 +249,8 @@
   },
   "legal": {
     "title": "Legal Information",
-    "companyNameLabel": "Company Name:",
-    "companyName": "QuantumEdge Analytics",
+    "companyNameLabel": "TradesAdvisor Holdings LLC",
+    "companyName": "TradesAdvisor Holdings LLC Analytics",
     "registrationNumberLabel": "Registration Number:",
     "registrationNumber": "123456782727",
     "addressLabel": "Address:",

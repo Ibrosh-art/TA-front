@@ -3,7 +3,10 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 const SubscriptionHero = () => {
-  const { t } = useTranslation();
+  const { t, ready } = useTranslation();
+  
+  if (!ready) return <div>Loading...</div>;
+
   
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -137,9 +140,6 @@ const SubscriptionHero = () => {
           animate={{ opacity: 1, transition: { delay: 0.5 } }}
           className="mt-16 text-center"
         >
-          <p className="text-[#6C757D] text-sm">
-            {t('subscription.note')}
-          </p>
         </motion.div>
       </div>
     </div>

@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import styles from './LegalPages.module.css';
 
 const LegalPages = ({ type = 'terms' }) => {
-  const { t } = useTranslation(['legal', 'common']);
+  const { t, ready } = useTranslation();
+  
+  if (!ready) return <div>Loading...</div>;
+
   const isTerms = type === 'terms';
   const title = isTerms ? t('legal:termsTitle') : t('legal:privacyTitle');
   const lastUpdated = t('legal:lastUpdated', { date: 'June 2025' });
