@@ -66,12 +66,12 @@ const Footer = () => {
             <li className="contact-item">
               <div className="contact-icon">✉️</div>
               <span>{t('footer.contacts.email')}: </span>
-              <a href="mailto:info@example.com" className="contact-link">info@example.com</a>
+              <a href="mailto:info@example.com" className="contact-link">info@tradesadvisor.ai</a>
             </li>
             <li className="contact-item">
               <div className="contact-icon">📱</div>
               <span>{t('footer.contacts.phone')}: </span>
-              <a href="tel:+7XXXXXXXXXX" className="contact-link">+7 (XXX) XXX-XXXX</a>
+              <a href="tel:+14242532197" className="contact-link">+14242532197</a>
             </li>
             <li className="contact-item">
               <div className="contact-icon">📍</div>

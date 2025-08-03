@@ -49,7 +49,7 @@ const LegalInformation = () => {
             </span>
             <span className="w-full md:w-2/3">
               <a
-                href={t("legal.termsLink")}
+                href="/terms"
                 className="text-[#00BFFF] hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"

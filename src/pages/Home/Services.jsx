@@ -32,7 +32,7 @@ const ServicesSection = () => {
   const services = useMemo(() => ({
     consulting: {
       title: t('services.consulting.title'),
-      items: Array.from({ length: 4 }, (_, i) => t(`services.consulting.items.${i}`)),
+      items: Array.from({ length: 3}, (_, i) => t(`services.consulting.items.${i}`)),
       note: {
         title: t('services.consulting.note.title'),
         content: t('services.consulting.note.content'),
@@ -41,7 +41,7 @@ const ServicesSection = () => {
     },
     trading: {
       title: t('services.trading.title'),
-      items: Array.from({ length: 3 }, (_, i) => t(`services.trading.items.${i}`)),
+      items: Array.from({ length: 2 }, (_, i) => t(`services.trading.items.${i}`)),
       note: {
         title: t('services.trading.note.title'),
         content: t('services.trading.note.content'),
@@ -168,9 +168,9 @@ const ServicesSection = () => {
                 transition={{ duration: 0.4 }}
                 className="relative p-8 md:p-12 bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100"
               >
-                <div className="flex flex-col lg:flex-row gap-10">
+                <div className="flex flex-col gap-10">
                   {/* Левый блок: список */}
-                  <div className="lg:w-2/3">
+                  <div className="">
                     <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
                       {services[activeTab].title}
                     </h3>
@@ -178,7 +178,7 @@ const ServicesSection = () => {
                       {services[activeTab].items.map((item, index) => (
                         <motion.li
                           key={`item-${index}`}
-                          className="flex items-start"
+                          className="flex items-start "
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: 0.1 + index * 0.1 }}
@@ -190,14 +190,14 @@ const ServicesSection = () => {
                               </svg>
                             </div>
                           </div>
-                          <span className="text-lg text-gray-700">{item}</span>
+                          <span className=" text-lg text-gray-700">{item}</span>
                         </motion.li>
                       ))}
                     </ul>
                   </div>
 
                   {/* Правый блок: заметка */}
-                  <div className="lg:w-1/3">
+                  <div className="">
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}

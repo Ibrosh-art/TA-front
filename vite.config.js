@@ -11,7 +11,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://ta-backend-9c7h.onrender.com',  // Ваш сервер
+        target: 'https://ta-backend-087e.onrender.com',  // Ваш сервер
         changeOrigin: true,
       }
     }

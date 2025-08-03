@@ -1,20 +1,24 @@
+// i18n.js
+
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-const API_BASE_URL = 'https://ta-backend-9c7h.onrender.com';
-const CACHE_VERSION = 'v2'; // Увеличивайте при изменениях структуры
+const API_BASE_URL = 'https://ta-backend-087e.onrender.com/api';
 
-// 1. Улучшенное кэширование с версионированием
+const CACHE_VERSION = 'v4';
+
+// Генерация ключа кэша
 const getCacheKey = (lang) => `translations_${CACHE_VERSION}_${lang}`;
 
+// Получение кэшированных переводов
 const getCachedTranslations = (lang) => {
   const cached = localStorage.getItem(getCacheKey(lang));
   if (!cached) return null;
   
   try {
     const { data, timestamp } = JSON.parse(cached);
-    // Кэш действителен 1 час (можно настроить)
-    if (Date.now() - timestamp < 3600 * 1000) {
+    // Кэш актуален 24 часа
+    if (Date.now() - timestamp < 86400 * 1000) {
       return data;
     }
   } catch (e) {
@@ -23,6 +27,7 @@ const getCachedTranslations = (lang) => {
   return null;
 };
 
+// Сохранение переводов в кэш
 const saveTranslationsToCache = (lang, data) => {
   localStorage.setItem(
     getCacheKey(lang),
@@ -33,35 +38,30 @@ const saveTranslationsToCache = (lang, data) => {
   );
 };
 
-// 2. Загрузка с проверкой свежести данных
+// Загрузка переводов с сервера
 const loadTranslations = async (lang) => {
-  const cacheKey = getCacheKey(lang);
-  const cached = getCachedTranslations(lang);
-  
   try {
-    const response = await fetch(`${API_BASE_URL}/api/translations/${lang}/`, {
+    const response = await fetch(`${API_BASE_URL}/translations/by_language/${lang}/`, {
+      method: 'GET',
       headers: {
-        'Cache-Control': 'no-cache',
-        ...(cached ? { 'If-None-Match': cacheKey } : {})
-      }
+        'Accept': 'application/json',
+      },
     });
 
-    if (response.status === 304 && cached) {
-      return cached; // Данные не изменились
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    
     const data = await response.json();
     saveTranslationsToCache(lang, data);
     return data;
   } catch (error) {
     console.error(`Error loading ${lang} translations:`, error);
-    return cached || {};
+    return getCachedTranslations(lang) || {};
   }
 };
 
-// 3. Инициализация i18n
+// Инициализация i18n
 const initializeI18n = async () => {
   const defaultLang = localStorage.getItem('appLanguage') || 'ru';
   const translations = await loadTranslations(defaultLang);
@@ -70,7 +70,9 @@ const initializeI18n = async () => {
     lng: defaultLang,
     fallbackLng: 'ru',
     resources: {
-      [defaultLang]: translations
+      [defaultLang]: {
+        translation: translations
+      }
     },
     interpolation: {
       escapeValue: false,
@@ -81,16 +83,15 @@ const initializeI18n = async () => {
   });
 
   // Предзагрузка других языков
-  ['en', 'kz', 'ar'].forEach(lang => {
+  ['en', 'kz', 'ar'].forEach(async lang => {
     if (lang !== defaultLang) {
-      loadTranslations(lang).then(data => {
-        i18n.addResourceBundle(lang, 'translation', data);
-      });
+      const data = await loadTranslations(lang);
+      i18n.addResourceBundle(lang, 'translation', data);
     }
   });
 };
 
-// 4. Обновлённая функция смены языка
+// Экспортируемые функции
 export const changeLanguage = async (lang) => {
   try {
     const translations = await loadTranslations(lang);
@@ -99,7 +100,6 @@ export const changeLanguage = async (lang) => {
     await i18n.changeLanguage(lang);
     localStorage.setItem('appLanguage', lang);
     
-    // Обновляем direction для RTL
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
     
@@ -110,7 +110,6 @@ export const changeLanguage = async (lang) => {
   }
 };
 
-// 5. Функция для принудительного обновления переводов
 export const refreshTranslations = async (lang = i18n.language) => {
   const cacheKey = getCacheKey(lang);
   localStorage.removeItem(cacheKey);

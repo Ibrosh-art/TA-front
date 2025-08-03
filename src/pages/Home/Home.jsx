@@ -150,7 +150,7 @@ const Home = () => {
               animate={{ y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              {t('common:home.title').split('\n').map((line, index) => (
+              {t('home.title').split('\n').map((line, index) => (
                 <motion.span
                   key={index}
                   className="block"

@@ -1,136 +1,52 @@
 {
-  "title": "Strategy Performance ",
-  "lastUpdated": "Last updated: {{date}}",
-  "sections": {
-    "performance": {
-      "title": "📈 Performance",
-      "metrics": {
-        "cagr": {
-          "name": "CAGR",
-          "value": "+23.4%",
-          "description": "Compound Annual Growth Rate"
-        },
-        "volatility": {
-          "name": "Volatility",
-          "value": "13.8%",
-          "description": "Annual standard deviation"
-        },
-        "sharpeRatio": {
-          "name": "Sharpe Ratio",
-          "value": "1.42",
-          "description": "Risk-adjusted return"
-        },
-        "sortinoRatio": {
-          "name": "Sortino Ratio",
-          "value": "2.01",
-          "description": "Adjusted for downside risk"
-        },
-        "calmarRatio": {
-          "name": "Calmar Ratio",
-          "value": "0.83",
-          "description": "CAGR to max drawdown ratio"
-        },
-        "maxDrawdown": {
-          "name": "Max Drawdown",
-          "value": "-6.5%",
-          "description": "Largest peak-to-trough decline"
-        },
-        "totalReturn": {
-          "name": "Total Return",
-          "value": "+125.4%",
-          "description": "Cumulative return"
-        },
-        "recoveryFactor": {
-          "name": "Recovery Factor",
-          "value": "3.2",
-          "description": "Profit to max drawdown"
-        }
-      }
-    },
-    "behavior": {
-      "title": "🔍 Strategy Behavior",
-      "metrics": {
-        "winRate": {
-          "name": "Win Rate",
-          "value": "69%",
-          "description": "Percentage of profitable trades"
-        },
-        "positiveDays": {
-          "name": "% Positive Days",
-          "value": "56%",
-          "description": "Percentage of profitable days"
-        },
-        "avgWinLoss": {
-          "name": "Avg Win/Loss",
-          "value": "1.7 : 1",
-          "description": "Average profit to loss ratio"
-        },
-        "profitFactor": {
-          "name": "Profit Factor",
-          "value": "2.4",
-          "description": "Gross profit to loss ratio"
-        },
-        "expectancy": {
-          "name": "Expectancy",
-          "value": "0.8%",
-          "description": "Average profit per trade"
-        },
-        "gainToPain": {
-          "name": "Gain to Pain Ratio",
-          "value": "1.9",
-          "description": "Total return to total risk"
-        },
-        "winLossStreak": {
-          "name": "Win/Loss Streaks",
-          "value": "8 / 3",
-          "description": "Longest winning/losing streaks"
-        },
-        "kellyPercent": {
-          "name": "Kelly % Criterion",
-          "value": "12%",
-          "description": "Optimal position size"
-        }
-      }
-    },
-    "risk": {
-      "title": "⚠️ Risk Metrics",
-      "metrics": {
-        "alpha": {
-          "name": "Alpha (SPY)",
-          "value": "+2.1%",
-          "description": "Excess return over benchmark"
-        },
-        "beta": {
-          "name": "Beta (SPY)",
-          "value": "0.72",
-          "description": "Correlation with market index"
-        },
-        "skewnessKurtosis": {
-          "name": "Skewness/Kurtosis",
-          "value": "0.5 / 2.1",
-          "description": "Return distribution characteristics"
-        },
-        "drawdownCurve": {
-          "name": "Drawdown Curve",
-          "value": "Smooth",
-          "description": "Recovery pattern after drawdowns"
-        },
-        "stdDeviation": {
-          "name": "Standard Deviation",
-          "value": "1.2%",
-          "description": "Return volatility"
-        },
-        "exposureTime": {
-          "name": "Exposure Time",
-          "value": "78%",
-          "description": "Time with open positions"
-        },
-        "timeInMarket": {
-          "name": "Time in Market",
-          "value": "65%",
-          "description": "Trading activity level"
-        }
-      }
-    }
-  }
+  "privacy.title": "Privacy Policy",
+  "privacy.updated": "Last updated: June 2025",
+
+  "privacy.sections.1.title": "1. General Provisions",
+  "privacy.sections.1.content": "TradesAdvisor Group LLC (\"Company\") respects the privacy of its clients. This policy describes how we collect, use, and protect your data.",
+
+  "privacy.sections.2.title": "2. Information Collection and Use",
+  "privacy.sections.2.content": "We collect only the information necessary to provide consulting and analytical services. We do not share, sell, or rent personal data to third parties.",
+
+  "privacy.sections.3.title": "3. Data Storage",
+  "privacy.sections.3.content": "All data is stored in a secure environment with restricted access. We implement organizational and technical measures to protect data from unauthorized access.",
+
+  "privacy.sections.4.title": "4. Cookies and Analytics",
+  "privacy.sections.4.content": "We may use cookies and analytics tools to improve website performance. Users can disable cookies in their browser settings.",
+
+  "privacy.sections.5.title": "5. International Data Transfer",
+  "privacy.sections.5.content": "We do not transfer personal data to the USA or other third countries that do not provide adequate protection.",
+
+  "privacy.sections.6.title": "6. User Rights",
+  "privacy.sections.6.content": "You have the right to access, correct, or delete your data upon request.",
+
+  "privacy.sections.7.title": "7. Governing Law",
+  "privacy.sections.7.content": "This policy is governed by the laws of the Republic of Kazakhstan.",
+
+  "terms.title": "Terms of Use",
+
+  "terms.sections.1.title": "1. Acceptance of Terms",
+  "terms.sections.1.content": "By accessing and using TradesAdvisor's services, you agree to these Terms of Use.",
+
+  "terms.sections.2.title": "2. Provided Services",
+  "terms.sections.2.content": "TradesAdvisor offers investment consulting services, including speculative and investment trading ideas.",
+
+  "terms.sections.3.title": "3. User Responsibilities",
+  "terms.sections.3.content": "Users agree to use the services responsibly and not engage in any illegal activities.",
+
+  "terms.sections.4.title": "4. Intellectual Property",
+  "terms.sections.4.content": "All content provided by TradesAdvisor is the intellectual property of the company and may not be reproduced without permission.",
+
+  "terms.sections.5.title": "5. Limitation of Liability",
+  "terms.sections.5.content": "TradesAdvisor is not liable for any losses incurred as a result of using its services.",
+
+  "terms.sections.6.title": "6. User Liability",
+  "terms.sections.6.content": "The user bears sole responsibility for all investment decisions and assumes full responsibility for the results of any trades based on educational material.",
+
+  "terms.disclaimer.title": "Disclaimer",
+  "terms.disclaimer.items.0": "TradesAdvisor is not a registered investment advisor. All provided information is for educational purposes only and is not financial advice.",
+  "terms.disclaimer.items.1": "Users should consult a qualified financial advisor before making investment decisions.",
+  "terms.disclaimer.items.2": "We do not manage client assets and are not investment advisors.",
+  "terms.disclaimer.items.3": "All trading actions are executed on the client's account automatically based on an algorithm configured by the client.",
+  "terms.disclaimer.items.4": "Past performance does not guarantee future results."
 }

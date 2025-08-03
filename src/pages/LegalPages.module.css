@@ -1,0 +1,160 @@
+.container {
+  position: relative;
+  max-width: 1200px;
+  margin: 70px auto 0 auto;
+  padding: 2rem;
+  color: #FFFFFF; /* Белый текст */
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #00BFFF 0%, #FFFFFF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
+}
+
+.lastUpdated {
+  color: #6C757D; /* Серый графит */
+  font-size: 0.9rem;
+}
+
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 1.5rem;
+  margin-top: 1.5rem;
+  background: rgba(0, 191, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 50px;
+  color: #00BFFF; /* Электрик голубой */
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.downloadButton:hover {
+  background: rgba(0, 191, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.downloadIcon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  margin-left: 0.5rem;
+}
+
+.content {
+  background: rgba(10, 31, 68, 0.7); /* Тёмно-синий с прозрачностью */
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 191, 255, 0.1);
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #00BFFF; /* Электрик голубой */
+  position: relative;
+  padding-left: 1rem;
+}
+
+.sectionTitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: #00BFFF; /* Электрик голубой */
+  border-radius: 2px;
+}
+
+.sectionText {
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+}
+
+.disclaimer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(108, 117, 125, 0.3); /* Серый графит */
+}
+
+.disclaimerTitle {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #ff0000; /* Золото (опционально) */
+}
+
+.disclaimerText {
+  margin-bottom: 0.8rem;
+  color: #6C757D; /* Серый графит */
+  font-size: 0.95rem;
+}
+
+.footer {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  color: #6C757D; /* Серый графит */
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.backLink:hover {
+  color: #00BFFF; /* Электрик голубой */
+  transform: translateX(-5px);
+}
+
+.backIcon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  margin-right: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .title {
+    font-size: 2.2rem;
+  }
+  
+  .content {
+    padding: 1.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.3rem;
+  }
+}

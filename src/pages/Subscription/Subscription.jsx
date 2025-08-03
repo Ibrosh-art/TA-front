@@ -71,7 +71,7 @@ const SubscriptionHero = () => {
               {t('subscription.title')}
             </span>
           </h1>
-          <p className="text-xl text-[#6C757D] max-w-3xl mx-auto">
+          <p className="text-xl text-[#7d7d6c] max-w-3xl mx-auto">
             {t('subscription.subtitle')}
           </p>
         </motion.div>
@@ -100,7 +100,7 @@ const SubscriptionHero = () => {
                 <h3 className="text-2xl font-bold">{plan.name}</h3>
                 <div className="my-4">
                   <span className="text-4xl font-bold">{plan.price}</span>
-                  <span className="text-[#6C757D]">/{t('subscription.month')}</span>
+                  <span className="text-[#ffffff]">/{t('subscription.month')}</span>
                 </div>
               </div>
               

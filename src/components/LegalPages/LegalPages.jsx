@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './LegalPages.module.css';
 
 const LegalPages = ({ type = 'terms' }) => {
-  const { t, ready } = useTranslation();
+  const { t, ready } = useTranslation("legal");
   
   if (!ready) return <div>Loading...</div>;
 
