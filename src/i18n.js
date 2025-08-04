@@ -1,77 +1,65 @@
 // i18n.js
-
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-const API_BASE_URL = 'https://ta-backend-087e.onrender.com/api';
-
-const CACHE_VERSION = 'v4';
-
-// Генерация ключа кэша
-const getCacheKey = (lang) => `translations_${CACHE_VERSION}_${lang}`;
-
-// Получение кэшированных переводов
-const getCachedTranslations = (lang) => {
-  const cached = localStorage.getItem(getCacheKey(lang));
-  if (!cached) return null;
-  
+// Динамические импорты для каждого языка и категории
+const importLocale = async (lang, category) => {
   try {
-    const { data, timestamp } = JSON.parse(cached);
-    // Кэш актуален 24 часа
-    if (Date.now() - timestamp < 86400 * 1000) {
-      return data;
+    // Для Vite (использует import.meta.glob)
+    if (import.meta.glob) {
+      const modules = import.meta.glob('../locales/**/*.json');
+      const path = `../locales/${category}/${lang}.json`;
+      return (await modules[path]()).default;
     }
-  } catch (e) {
-    console.error('Failed to parse cached translations', e);
-  }
-  return null;
-};
-
-// Сохранение переводов в кэш
-const saveTranslationsToCache = (lang, data) => {
-  localStorage.setItem(
-    getCacheKey(lang),
-    JSON.stringify({
-      data,
-      timestamp: Date.now()
-    })
-  );
-};
-
-// Загрузка переводов с сервера
-const loadTranslations = async (lang) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/translations/by_language/${lang}/`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    // Для Webpack (использует require.context или динамический import)
+    else {
+      return (await import(`./locales/${category}/${lang}.json`)).default;
     }
-
-    const data = await response.json();
-    saveTranslationsToCache(lang, data);
-    return data;
   } catch (error) {
-    console.error(`Error loading ${lang} translations:`, error);
-    return getCachedTranslations(lang) || {};
+    console.error(`Failed to load ${lang} ${category} translations:`, error);
+    return {};
   }
+};
+
+// Загрузка всех переводов для языка
+const loadLanguageResources = async (lang) => {
+  const [common, legal, stats] = await Promise.all([
+    importLocale(lang, 'common'),
+    importLocale(lang, 'legal'),
+    importLocale(lang, 'stats'),
+  ]);
+
+  return {
+    common,
+    legal,
+    stats,
+    // Добавьте другие категории по необходимости
+  };
+};
+
+// Функция для объединения переводов из разных категорий
+const mergeTranslations = (resources) => {
+  return {
+    ...resources.common,
+    ...resources.legal,
+    ...resources.stats,
+    // Добавьте другие категории по необходимости
+  };
 };
 
 // Инициализация i18n
 const initializeI18n = async () => {
   const defaultLang = localStorage.getItem('appLanguage') || 'ru';
-  const translations = await loadTranslations(defaultLang);
+  
+  // Предзагрузка ресурсов для языка по умолчанию
+  const defaultResources = await loadLanguageResources(defaultLang);
 
   await i18n.use(initReactI18next).init({
     lng: defaultLang,
     fallbackLng: 'ru',
     resources: {
       [defaultLang]: {
-        translation: translations
+        translation: mergeTranslations(defaultResources)
       }
     },
     interpolation: {
@@ -82,20 +70,27 @@ const initializeI18n = async () => {
     }
   });
 
-  // Предзагрузка других языков
-  ['en', 'kz', 'ar'].forEach(async lang => {
+  // Предзагрузка других языков в фоне
+  ['en', 'kz', 'ar'].forEach(async (lang) => {
     if (lang !== defaultLang) {
-      const data = await loadTranslations(lang);
-      i18n.addResourceBundle(lang, 'translation', data);
+      const resources = await loadLanguageResources(lang);
+      i18n.addResourceBundle(lang, 'translation', mergeTranslations(resources));
     }
   });
+
+  // Установка направления текста и языка для HTML
+  document.documentElement.dir = defaultLang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = defaultLang;
 };
 
 // Экспортируемые функции
 export const changeLanguage = async (lang) => {
   try {
-    const translations = await loadTranslations(lang);
-    i18n.addResourceBundle(lang, 'translation', translations);
+    // Если ресурсы для языка еще не загружены
+    if (!i18n.hasResourceBundle(lang, 'translation')) {
+      const resources = await loadLanguageResources(lang);
+      i18n.addResourceBundle(lang, 'translation', mergeTranslations(resources));
+    }
     
     await i18n.changeLanguage(lang);
     localStorage.setItem('appLanguage', lang);
@@ -110,15 +105,19 @@ export const changeLanguage = async (lang) => {
   }
 };
 
+// В этой версии refresh просто перезагружает текущий язык
 export const refreshTranslations = async (lang = i18n.language) => {
-  const cacheKey = getCacheKey(lang);
-  localStorage.removeItem(cacheKey);
-  
-  const translations = await loadTranslations(lang);
-  i18n.addResourceBundle(lang, 'translation', translations, true, true);
-  
-  if (i18n.language === lang) {
-    i18n.emit('languageChanged');
+  try {
+    const resources = await loadLanguageResources(lang);
+    i18n.addResourceBundle(lang, 'translation', mergeTranslations(resources), true, true);
+    
+    if (i18n.language === lang) {
+      i18n.emit('languageChanged');
+    }
+    return true;
+  } catch (error) {
+    console.error('Failed to refresh translations:', error);
+    return false;
   }
 };
 
