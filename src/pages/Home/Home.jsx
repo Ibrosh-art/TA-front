@@ -285,7 +285,7 @@ const Home = () => {
       <ProfTrade />
       <Services />
       <About />
-      <LegalInformation />
+      {/* <LegalInformation /> */}
       <FAQ />
     </div>
   )

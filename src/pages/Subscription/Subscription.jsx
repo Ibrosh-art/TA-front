@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 const SubscriptionHero = () => {
-  const { t, ready } = useTranslation();
+  const { t, ready, i18n } = useTranslation();
   
   if (!ready) return <div>Loading...</div>;
 
@@ -21,43 +21,65 @@ const SubscriptionHero = () => {
     }
   };
 
+  const isEnglish = (i18n.resolvedLanguage || i18n.language || '').toLowerCase().startsWith('en');
+
   const subscriptionPlans = [
     {
       name: 'Starter',
-      price: '$15',
-      features: [
-        t('subscription.features.starter.1'),
-        t('subscription.features.starter.2')
-      ],
+      price: isEnglish ? '$3000' : '$1500',
+      features: isEnglish
+        ? [
+            '1 AI-powered market insight per week',
+            'Telegram notifications',
+            'Basic market analysis'
+          ]
+        : [
+            t('subscription.features.starter.1'),
+            t('subscription.features.starter.2')
+          ],
       color: 'from-[#00BFFF] to-[#0077B6]',
       popular: false
 
     },
     {
       name: 'Pro',
-      price: '$30',
-      features: [
-        t('subscription.features.pro.1'),
-        t('subscription.features.pro.2'),
-        t('subscription.features.pro.3')
-      ],
+      price: '$3000',
+      features: isEnglish
+        ? [
+            '3 AI-powered market insights per week',
+            'Advanced chart analysis',
+            'Weekly video updates',
+            'Enhanced analytics dashboard'
+          ]
+        : [
+            t('subscription.features.pro.1'),
+            t('subscription.features.pro.2'),
+            t('subscription.features.pro.3')
+          ],
       color: 'from-[#00BFFF] to-[#0096FF]',
       popular: true
     },
     {
       name: 'Elite',
-      price: '$50',
-      features: [
-        t('subscription.features.elite.1'),
-        t('subscription.features.elite.2')
-      ],
+      price: '$5000',
+      features: isEnglish
+        ? [
+            'Advanced AI market insights',
+            'Scenario-based analytics',
+            'Priority analytical support',
+            'Premium research access'
+          ]
+        : [
+            t('subscription.features.elite.1'),
+            t('subscription.features.elite.2')
+          ],
       color: 'from-[#FFD700] to-[#FFA500]',
       popular: false
     }
   ];
 
   return (
-    <div className="bg-[#0A1F44] text-white pt-40 pb-10 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#0A1F44] text-white pt-40 pb-28 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Header */}
         <motion.div 
@@ -128,6 +150,11 @@ const SubscriptionHero = () => {
                   {t('subscription.cta')}
                 </motion.button>
                 </a>
+                {isEnglish && (
+                  <p className="mt-4 text-xs text-gray-400 text-center">
+                    For educational and informational purposes only
+                  </p>
+                )}
                 
               </div>
             </motion.div>

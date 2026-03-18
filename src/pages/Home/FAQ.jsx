@@ -14,7 +14,7 @@ const FAQ = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
-  const questions = ['q1', 'q2', 'q3'];
+  const questions = ['q1', 'q3'];
 
   const toggleQuestion = (id) => {
     setActiveQuestion(activeQuestion === id ? null : id);
