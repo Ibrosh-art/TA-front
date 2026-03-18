@@ -79,7 +79,7 @@ const Header = () => {
           >
             <div className="relative">
               <img 
-                src="/public/logo_3.png" 
+                src="/logo_3.png" 
                 alt="TradesAdvisor Logo" 
                 className="w-12 h-12 rounded-xl transform transition-all duration-500 hover:rotate-6 hover:scale-105"
               />
