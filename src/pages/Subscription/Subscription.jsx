@@ -26,7 +26,7 @@ const SubscriptionHero = () => {
   const subscriptionPlans = [
     {
       name: 'Starter',
-      price: isEnglish ? '$3000' : '$1500',
+      price: isEnglish ? '$1500' : '$1500',
       features: isEnglish
         ? [
             '1 AI-powered market insight per week',
