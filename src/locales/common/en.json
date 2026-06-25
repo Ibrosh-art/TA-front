@@ -61,10 +61,11 @@
   "subscription": {
     "title": "Choose a Plan",
     "description": "Select a plan that matches your trading level.",
-    "subtitle": "Choose a subscription level based on your trading needs",
+    "subtitle": "Choose a subscription level based on your research / analytical needs",
     "month": "month",
     "popular": "Most Popular",
     "cta": "Get Started",
+    "custom_price": "Contact us",
     "note": "All plans include 24/7 support and the ability to cancel anytime.",
     "features": {
       "1_idea_week": "1 idea per week",

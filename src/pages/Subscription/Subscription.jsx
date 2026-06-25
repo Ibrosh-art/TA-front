@@ -26,7 +26,7 @@ const SubscriptionHero = () => {
   const subscriptionPlans = [
     {
       name: 'Starter',
-      price: isEnglish ? '$1500' : '$1500',
+      price: '$99',
       features: isEnglish
         ? [
             '1 AI-powered market insight per week',
@@ -43,7 +43,7 @@ const SubscriptionHero = () => {
     },
     {
       name: 'Pro',
-      price: '$3000',
+      price: '$299',
       features: isEnglish
         ? [
             '3 AI-powered market insights per week',
@@ -60,8 +60,8 @@ const SubscriptionHero = () => {
       popular: true
     },
     {
-      name: 'Elite',
-      price: '$5000',
+      name: 'Advanced Algorithmic Research',
+      price: null,
       features: isEnglish
         ? [
             'Advanced AI market insights',
@@ -121,8 +121,14 @@ const SubscriptionHero = () => {
               <div className={`bg-gradient-to-br ${plan.color} p-6 text-center`}>
                 <h3 className="text-2xl font-bold">{plan.name}</h3>
                 <div className="my-4">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  <span className="text-[#ffffff]">/{t('subscription.month')}</span>
+                  {plan.price ? (
+                    <>
+                      <span className="text-4xl font-bold">{plan.price}</span>
+                      <span className="text-[#ffffff]">/{t('subscription.month')}</span>
+                    </>
+                  ) : (
+                    <span className="text-2xl font-bold">{t('subscription.custom_price')}</span>
+                  )}
                 </div>
               </div>
               
